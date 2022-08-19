@@ -1,4 +1,4 @@
-package com.example.movieapp.di.module.retrofit
+package com.example.movieapp.di.retrofit
 
 import com.example.movieapp.models.Genre
 import com.example.movieapp.models.Movie
@@ -22,7 +22,6 @@ interface RetrofitServiceInstance {
 
     @GET("3/movie/{id}/videos?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     fun  getTrailerTeasers(@Path("id") id: Int) : Call<Trailer>
-
 
 
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")

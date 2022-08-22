@@ -1,19 +1,22 @@
 package com.example.movieapp.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.databinding.PopularMovieItemBinding
 import com.example.movieapp.models.Result
 import kotlinx.android.synthetic.main.popular_movie_item.view.*
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val isFirstScreen: Boolean = true): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     var liveData: List<Result>? = null
-    val test = "test"
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<Result>){
@@ -21,13 +24,16 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         notifyDataSetChanged()
     }
 
-     class MovieViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    class MovieViewHolder(val view: View): RecyclerView.ViewHolder(view){
 
-         val txtTitle = view.findViewById<TextView>(R.id.title)
+        val txtTitle = view.findViewById<TextView>(R.id.tvTitle)
+        val txtGenre = view.findViewById<TextView>(R.id.tvGenre)
+        val imgMovie = view.findViewById<ImageView>(R.id.imgMovie)
 
-
-         fun bind(data: Result){
+        fun bind(data: Result){
             txtTitle.text = data.title
+            txtGenre.text = "asasas"
+            Glide.with(imgMovie).load("https://image.tmdb.org/t/p/w500/" + data.poster_path).into(imgMovie)
 
         }
     }
@@ -39,13 +45,19 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(liveData!!.get(position))
+
+        Log.d("PopularMovies","asasas")
     }
 
     override fun getItemCount(): Int {
         if (liveData == null){
             return 0
         }
-        else {
+        else if(isFirstScreen){
+
+            return 4
+
+        } else{
             return liveData!!.size
         }
     }

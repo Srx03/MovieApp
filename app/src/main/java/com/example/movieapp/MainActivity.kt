@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.adapter.MovieAdapter
+import com.example.movieapp.databinding.ActivityMainBinding
 import com.example.movieapp.models.Movie
 import com.example.movieapp.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +26,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val lmHorizontal = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+        val lmVertical = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.popularRecyclerView)
+        recyclerView.layoutManager =lmHorizontal
 
         movieAdapter = MovieAdapter()
         recyclerView.adapter = MovieAdapter()
@@ -42,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.loadPopularData("1")
 
     }
+
 
 
 

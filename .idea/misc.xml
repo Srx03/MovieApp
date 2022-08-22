@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.2953125" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_movie_item.xml" value="0.2953125" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_movie_item.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/recent_movie_item.xml" value="0.6395833333333333" />
       </map>
     </option>
   </component>

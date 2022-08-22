@@ -14,11 +14,7 @@ class HomeViewModel @Inject constructor(
     private val retrofitRepostory: RetrofitRepostory
 ): ViewModel() {
 
-   var popularMovieList: MutableLiveData<Movie>
-
-    init {
-         popularMovieList = MutableLiveData<Movie>()
-    }
+   var popularMovieList: MutableLiveData<Movie> = MutableLiveData<Movie>()
 
     fun getObserverLiveData(): MutableLiveData<Movie>{
         return popularMovieList

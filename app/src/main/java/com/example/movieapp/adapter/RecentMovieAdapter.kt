@@ -1,7 +1,8 @@
 package com.example.movieapp.adapter
 
+
 import android.annotation.SuppressLint
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
-import com.example.movieapp.databinding.PopularMovieItemBinding
 import com.example.movieapp.models.Result
-import kotlinx.android.synthetic.main.popular_movie_item.view.*
 
-class MovieAdapter(private val isFirstScreen: Boolean = true): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class RecentMovieAdapter(private val isFirstScreen: Boolean = true): RecyclerView.Adapter<RecentMovieAdapter.MovieViewHolder>() {
 
     var liveData: List<Result>? = null
 
@@ -29,21 +28,27 @@ class MovieAdapter(private val isFirstScreen: Boolean = true): RecyclerView.Adap
         val txtTitle = view.findViewById<TextView>(R.id.tvTitle)
         val txtGenre = view.findViewById<TextView>(R.id.tvGenre)
         val imgMovie = view.findViewById<ImageView>(R.id.imgMovie)
+        val txtReleaseDate = view.findViewById<TextView>(R.id.tvReleaseDate)
+        val txtVoteAverage =  view.findViewById<TextView>(R.id.tvVoteAverege)
 
         fun bind(data: Result){
             txtTitle.text = data.title
-            txtGenre.text = "asasas"
-            Glide.with(imgMovie).load("https://image.tmdb.org/t/p/w500/" + data.poster_path).into(imgMovie)
+            txtGenre.text = "Daneme, Daneme, Daneme"
+            txtReleaseDate.text = data.release_date
+            txtVoteAverage.text =  data.vote_average.toString() + " / 10"
+            Glide.with(imgMovie)
+                .load("https://image.tmdb.org/t/p/w500/" + data.poster_path)
+                .into(imgMovie)
 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.popular_movie_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentMovieAdapter.MovieViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_movie_item, parent, false)
         return MovieViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecentMovieAdapter.MovieViewHolder, position: Int) {
         holder.bind(liveData!!.get(position))
 
     }

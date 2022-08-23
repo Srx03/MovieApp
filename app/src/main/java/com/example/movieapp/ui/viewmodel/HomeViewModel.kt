@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,14 +15,28 @@ class HomeViewModel @Inject constructor(
     private val retrofitRepostory: RetrofitRepostory
 ): ViewModel() {
 
-   var popularMovieList: MutableLiveData<Movie> = MutableLiveData<Movie>()
+   var popularMovieList: MutableLiveData<Movie>
+   var recentMovieList: MutableLiveData<Movie>
 
-    fun getObserverLiveData(): MutableLiveData<Movie>{
-        return popularMovieList
+    init {
+        popularMovieList = MutableLiveData()
+        recentMovieList = MutableLiveData()
     }
 
-    fun loadPopularData(page: String){
-        retrofitRepostory.getPopularMovies(page, popularMovieList)
+    fun getObserverLiveData(isPopular: Boolean): MutableLiveData<Movie>{
+        if (isPopular){
+            return popularMovieList
+        }
+        else
+            return recentMovieList
+    }
+
+
+    fun loadData(page: String, isPopular: Boolean){
+        if (isPopular)
+            retrofitRepostory.getPopularMovies(page, popularMovieList)
+        else
+            retrofitRepostory.getRecentMovies(page, recentMovieList)
     }
 
 

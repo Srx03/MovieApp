@@ -11,58 +11,40 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.databinding.PopularMovieItemBinding
+import com.example.movieapp.databinding.RecentMovieItemBinding
 import com.example.movieapp.models.Result
 
-class RecentMovieAdapter(private val isFirstScreen: Boolean = true): RecyclerView.Adapter<RecentMovieAdapter.MovieViewHolder>() {
+class RecentMovieAdapter(): RecyclerView.Adapter<RecentMovieAdapter.MovieViewHolder>() {
 
-    var liveData: List<Result>? = null
+    private var liveData = ArrayList<Result>()
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<Result>){
-        this.liveData = liveData
+        this.liveData = liveData as ArrayList<Result>
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    class MovieViewHolder(val binding: RecentMovieItemBinding): RecyclerView.ViewHolder(binding.root)
 
-        val txtTitle = view.findViewById<TextView>(R.id.tvTitle)
-        val txtGenre = view.findViewById<TextView>(R.id.tvGenre)
-        val imgMovie = view.findViewById<ImageView>(R.id.imgMovie)
-        val txtReleaseDate = view.findViewById<TextView>(R.id.tvReleaseDate)
-        val txtVoteAverage =  view.findViewById<TextView>(R.id.tvVoteAverege)
 
-        fun bind(data: Result){
-            txtTitle.text = data.title
-            txtGenre.text = "Daneme, Daneme, Daneme"
-            txtReleaseDate.text = data.release_date
-            txtVoteAverage.text =  data.vote_average.toString() + " / 10"
-            Glide.with(imgMovie)
-                .load("https://image.tmdb.org/t/p/w500/" + data.poster_path)
-                .into(imgMovie)
-
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentMovieAdapter.MovieViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_movie_item, parent, false)
-        return MovieViewHolder(view)
+        return MovieViewHolder(RecentMovieItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: RecentMovieAdapter.MovieViewHolder, position: Int) {
-        holder.bind(liveData!!.get(position))
+        holder.binding.tvTitle.text = liveData[position].title
+        holder.binding.tvGenre.text = "danme, danme, danme"
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
+        holder.binding.tvReleaseDate.text = liveData[position].release_date
+        holder.binding.tvVoteAverege.text = liveData[position].vote_average.toString() + " / 10"
 
     }
 
     override fun getItemCount(): Int {
-        if (liveData == null){
-            return 0
-        }
-        else if(isFirstScreen){
+        return liveData.size
 
-            return 4
-
-        } else{
-            return liveData!!.size
-        }
     }
 }

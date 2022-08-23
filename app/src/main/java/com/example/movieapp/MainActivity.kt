@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var recentMovieAdapter: RecentMovieAdapter
+    private lateinit var binding: ActivityMainBinding
 
     val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelProviderFactory).get(HomeViewModel::class.java)
@@ -28,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
        setupRecyclerView()
 
@@ -60,22 +62,18 @@ class MainActivity : AppCompatActivity() {
 
     fun setupRecyclerView(){
 
-        val lmHorizontal = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
-        val lmVertical = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-
-        val recyclerView = findViewById<RecyclerView>(R.id.popularRecyclerView)
-        val recentRecyclerView = findViewById<RecyclerView>(R.id.recentRecyclerView)
-
-
-
-        recyclerView.layoutManager =lmHorizontal
-        recentRecyclerView.layoutManager = lmVertical
-
         movieAdapter = MovieAdapter()
-        recyclerView.adapter = MovieAdapter()
+        binding.popularRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context,  LinearLayoutManager.HORIZONTAL, false)
+            adapter = movieAdapter
+        }
 
         recentMovieAdapter = RecentMovieAdapter()
-        recentRecyclerView.adapter = RecentMovieAdapter()
+        binding.recentRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context,  LinearLayoutManager.VERTICAL, false)
+            adapter = recentMovieAdapter
+        }
+
     }
 
     fun fetchMovies(){

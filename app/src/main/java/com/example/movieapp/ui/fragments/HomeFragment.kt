@@ -1,56 +1,74 @@
-package com.example.movieapp
+package com.example.movieapp.ui.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.adapter.MovieAdapter
 import com.example.movieapp.adapter.RecentMovieAdapter
 import com.example.movieapp.databinding.ActivityMainBinding
+import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.models.Movie
 import com.example.movieapp.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import retrofit2.Call
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class HomeFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var recentMovieAdapter: RecentMovieAdapter
-    private lateinit var binding: ActivityMainBinding
 
     val viewModel by lazy {
-        ViewModelProvider(this, defaultViewModelProviderFactory).get(HomeViewModel::class.java)
+        ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-       setupRecyclerView()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
 
-        viewModel.getObserverLiveData(true).observe(this, object : Observer<Movie> {
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        setupRecyclerView()
+
+        viewModel.getObserverLiveData(true).observe(viewLifecycleOwner, object : Observer<Movie> {
             override fun onChanged(t: Movie?) {
                 if (t !=null)
                 {
                     movieAdapter.setList(t.results)
-                    Log.d("Moviespop", t.results.toString())
+
 
                 }
             }
         })
 
-        viewModel.getObserverLiveData(false).observe(this, object : Observer<Movie> {
+        viewModel.getObserverLiveData(false).observe(viewLifecycleOwner, object : Observer<Movie> {
             override fun onChanged(t: Movie?) {
                 if (t !=null)
                 {
                     recentMovieAdapter.setList(t.results)
-                    Log.d("Moviesrec", t.results.toString())
+
 
                 }
             }
@@ -90,7 +108,6 @@ class MainActivity : AppCompatActivity() {
             job2.await()
         }
     }
-
 
 
 

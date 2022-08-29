@@ -3,12 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/font/hind.xml" value="0.28229166666666666" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.1716485507246377" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_login.xml" value="0.13903985507246377" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.13903985507246377" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_register.xml" value="0.13903985507246377" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_search.xml" value="0.13903985507246377" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_watch_list.xml" value="0.13903985507246377" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_movie_item.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/recent_movie_item.xml" value="0.6395833333333333" />

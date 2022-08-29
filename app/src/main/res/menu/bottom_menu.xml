@@ -14,6 +14,12 @@
         app:cnb_iconColor="@color/search" />
 
     <item
+    android:id="@+id/comingSoon"
+    android:icon="@drawable/ic_comingsoon"
+    android:title="Coming Soon"
+    app:cnb_iconColor="@color/red" />
+
+    <item
         android:id="@+id/watchlist"
         android:icon="@drawable/ic_list"
         android:title="Watchlist"

@@ -2,4 +2,13 @@
     <string name="app_name">MovieApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_coming_soon">Coming Soon</string>
+    <string name="title_account">Account</string>
+    <string name="title_imdb">IMDB</string>
+    <string name="title_youtube">YouTube</string>
+    <string name="tmdb_credits_note">MovieLand is powered by <a href="https://www.themoviedb.org">TMDb (The Movie Database)</a> but it is not endorsed or certified by TMDb.</string>
+
 </resources>

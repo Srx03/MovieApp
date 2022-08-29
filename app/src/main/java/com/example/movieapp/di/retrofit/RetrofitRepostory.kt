@@ -1,41 +1,11 @@
 package com.example.movieapp.di.retrofit
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.example.movieapp.models.Movie
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import javax.inject.Inject
 
-class RetrofitRepostory @Inject constructor(
-    private val retrofitServiceInstance: RetrofitServiceInstance
-) {
-    fun getPopularMovies(page: String, liveData: MutableLiveData<Movie>){
-        retrofitServiceInstance.getPopularVideos(page).enqueue(object : Callback<Movie>{
-            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-                liveData.postValue(response.body())
-                Log.d("PopularMovies", response.body().toString())
-            }
 
-            override fun onFailure(call: Call<Movie>, t: Throwable) {
-                liveData.postValue(null)
-            }
-        })
-    }
-
-    fun getRecentMovies(page: String, liveData: MutableLiveData<Movie>){
-        retrofitServiceInstance.getRecentVideos(page).enqueue(object : Callback<Movie>{
-            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-                liveData.postValue(response.body())
-                Log.d("PopularMoviesRecent", response.body().toString())
-            }
-
-            override fun onFailure(call: Call<Movie>, t: Throwable) {
-                liveData.postValue(null)
-            }
-        })
-    }
+interface RetrofitRepostory
+ {
+    fun getPopularMovies()
+    fun getRecentMovies
 
 
 

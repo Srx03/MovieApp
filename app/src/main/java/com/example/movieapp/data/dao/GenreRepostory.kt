@@ -6,13 +6,14 @@ import javax.inject.Inject
 class GenreRepostory @Inject constructor(
     val genreDao: GenreDao
 ) {
-    val readAllData: LiveData<List<GenreData>>  =  genreDao.readAllData()
 
-    fun addGenre(genreData: GenreData){
+    suspend fun readAllData(): LiveData<List<GenreData>> = genreDao.readAllData()
+
+    suspend fun addGenre(genreData: GenreData){
         genreDao.addGenre(genreData)
     }
 
-    fun addAllGenres(genreList: List<GenreData>){
+    suspend fun addAllGenres(genreList: List<GenreData>){
         genreDao.addAllGenres(genreList)
     }
 }

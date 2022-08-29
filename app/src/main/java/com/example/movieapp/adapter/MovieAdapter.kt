@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.PopularMovieItemBinding
-import com.example.movieapp.models.Result
+import com.example.movieapp.models.MovieResult
 
 
 class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<Result>()
+    private var liveData = ArrayList<MovieResult>()
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(liveData: List<Result>){
-        this.liveData = liveData as ArrayList<Result>
+    fun setList(liveData: List<MovieResult>){
+        this.liveData = liveData as ArrayList<MovieResult>
         notifyDataSetChanged()
     }
 

@@ -11,13 +11,13 @@ import java.util.*
 interface GenreDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addGenre(genre: GenreData)
+    suspend fun addGenre(genre: GenreData)
 
     @Insert
-    fun addAllGenres(objects: List<GenreData>)
+    suspend fun addAllGenres(objects: List<GenreData>)
 
-    @Query("SELECT * FROM genres")
-    fun readAllData(): LiveData<List<GenreData>>
+    @Query("SELECT * FROM genres_table")
+    suspend fun readAllData(): LiveData<List<GenreData>>
 
 
 }

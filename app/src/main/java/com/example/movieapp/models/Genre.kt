@@ -1,5 +1,6 @@
 package com.example.movieapp.models
 
 data class Genre(
-    val genres: List<GenreX>
+    val id: Int,
+    val name: String
 )

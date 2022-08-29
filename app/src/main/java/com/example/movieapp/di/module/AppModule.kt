@@ -1,11 +1,11 @@
 package com.example.movieapp.di.module
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.movieapp.data.dao.GenreDao
-import com.example.movieapp.data.dao.GenreDatabase
+import com.example.movieapp.data.dao.LocalDatabase
 import com.example.movieapp.di.retrofit.RetrofitServiceInstance
+import com.example.movieapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,15 +15,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-var baseURL = "https://api.themoviedb.org/"
+
 
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-  /*  fun getappDB(context: Application):  GenreDatabase{
-        return GenreDatabase.c
-    }*/
+
+    @Singleton
+    @Provides
+  fun providesGenreDao(localDatabase: LocalDatabase): GenreDao = localDatabase.genreDao()
 
 
     @Singleton
@@ -36,24 +37,17 @@ class AppModule {
     @Provides
     fun getRetofitInstance(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl(baseURL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext appContext:  Context): GenreDatabase = Room.databaseBuilder(
+    fun provideAppDatabase(@ApplicationContext appContext:  Context): LocalDatabase = Room.databaseBuilder(
         appContext,
-        GenreDatabase::class.java,
-        "genre.db"
+        LocalDatabase::class.java,
+        "movie.db"
     ).fallbackToDestructiveMigration().build()
-
-
-    @Singleton
-    @Provides
-    fun getDao(appDB: GenreDatabase): GenreDao{
-        return appDB.genreDao()
-    }
 
 }

@@ -4,25 +4,20 @@ package com.example.movieapp.adapter
 import android.annotation.SuppressLint
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movieapp.R
-import com.example.movieapp.databinding.PopularMovieItemBinding
 import com.example.movieapp.databinding.RecentMovieItemBinding
-import com.example.movieapp.models.Result
+import com.example.movieapp.models.MovieResult
 
 class RecentMovieAdapter(): RecyclerView.Adapter<RecentMovieAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<Result>()
+    private var liveData = ArrayList<MovieResult>()
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(liveData: List<Result>){
-        this.liveData = liveData as ArrayList<Result>
+    fun setList(liveData: List<MovieResult>){
+        this.liveData = liveData as ArrayList<MovieResult>
         notifyDataSetChanged()
     }
 

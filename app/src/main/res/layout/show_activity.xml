@@ -235,7 +235,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_12sdp"
                             android:orientation="horizontal"
-                            android:visibility="visible"
+                            tools:listitem="@layout/actor_show_item"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 

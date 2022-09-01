@@ -119,6 +119,7 @@ class HomeFragment : Fragment() {
             intent.putExtra("vote",movie.vote_average.toString())
             intent.putExtra("overview",movie.overview)
             intent.putExtra("image",movie.poster_path)
+            intent.putExtra("id",movie.id.toString())
             Log.d("PopularShowpass", "${movie.popularity}")
             startActivity(intent)
         }

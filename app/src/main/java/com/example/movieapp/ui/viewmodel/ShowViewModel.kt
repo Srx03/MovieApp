@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.MovieCredits
+import com.example.movieapp.models.MovieResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class ShowViewModel@Inject constructor(
 ): ViewModel() {
 
     val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
+    val similarMovieList: MutableLiveData<Movie> = MutableLiveData()
 
 
 
@@ -28,6 +30,17 @@ class ShowViewModel@Inject constructor(
                 movieCreditsList.postValue(response.body())
             }else{
                 Log.d("MovieCredits", "getMovieCredits Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getSimilarMovie(movieId: String) = viewModelScope.launch {
+        retrofitRepostory.getSimilarMovies(movieId).let { response ->
+
+            if (response.isSuccessful){
+                similarMovieList.postValue(response.body())
+            }else{
+                Log.d("SimilarMovie", "getSimilarMovie Error: ${response.code()}")
             }
         }
     }

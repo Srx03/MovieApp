@@ -15,6 +15,7 @@ class RetrofitRepostory @Inject constructor(
      suspend fun getUpcomingMovies() = apiService.getUpcomingMovies()
      suspend fun getTopRatedMovies() = apiService.getTopRatedMovies()
      suspend fun getMovieCredits(movieId: String)  = apiService.getMovieCredits(movieId)
+     suspend fun getSimilarMovies(movieId: String)  = apiService.getSimilarMovies(movieId)
      suspend fun getSearchMovieData(query: String) = apiService.getSearchMovieData(query)
      suspend fun getPopularTv() = apiService.getPopularTv()
      suspend fun getRecentTv() = apiService.getRecentTv()

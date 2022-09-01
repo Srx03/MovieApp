@@ -22,10 +22,13 @@ interface ApiService {
     @GET("3/movie/upcoming?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getUpcomingMovies() : Response<Movie>
 
-    @GET("3/movie/top_rated?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/movie/top_rated?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTopRatedMovies() : Response<Movie>
 
-    @GET("3/movie/{movieId}/credits?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/movie/{movieId}/similar?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getSimilarMovies(@Path("movieId") movieId: String) : Response<Movie>
+
+    @GET("3/movie/{movieId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getMovieCredits(@Path("movieId") movieId: String) : Response<MovieCredits>
 
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")
@@ -44,10 +47,10 @@ interface ApiService {
     @GET("3/tv/upcoming?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getUpcomingTv() : Response<Tv>
 
-    @GET("3/tv/top_rated?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/tv/top_rated?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTopRatedTv() : Response<Tv>
 
-    @GET("3/tv/{tvId}/credits?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/tv/{tvId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
 
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")

@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapp.adapter.ActorShowAdapter
+import com.example.movieapp.adapter.SimilarAdapter
 import com.example.movieapp.adapter.TopRatedTvAdapter
 import com.example.movieapp.databinding.ShowActivityBinding
 import com.example.movieapp.ui.viewmodel.HomeViewModel
@@ -19,6 +20,7 @@ class ShowActivity: AppCompatActivity() {
 
     private lateinit var binding: ShowActivityBinding
     private lateinit var actorShowAdapter: ActorShowAdapter
+    private lateinit var similarAdapter: SimilarAdapter
     private val  viewModel: ShowViewModel by viewModels()
 
     private lateinit var title: String
@@ -39,10 +41,15 @@ class ShowActivity: AppCompatActivity() {
         setUpInformations()
 
         viewModel.getMovieCredits(id)
-        Log.d("PopularShowId", "$id")
+        viewModel.getSimilarMovie(id)
+
 
         viewModel.movieCreditsList.observe(this,{
             actorShowAdapter.setList(it.cast)
+        })
+
+        viewModel.similarMovieList.observe(this,{
+            similarAdapter.setList(it.results)
         })
 
         setUpRecyclerView()
@@ -75,11 +82,16 @@ class ShowActivity: AppCompatActivity() {
 
     private fun setUpRecyclerView(){
         actorShowAdapter = ActorShowAdapter()
-
+        similarAdapter = SimilarAdapter()
 
         binding.actorsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context,  LinearLayoutManager.HORIZONTAL, false)
             adapter = actorShowAdapter
+        }
+
+        binding.similarRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context,  LinearLayoutManager.HORIZONTAL, false)
+            adapter = similarAdapter
         }
 
     }

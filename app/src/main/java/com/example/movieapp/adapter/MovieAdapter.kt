@@ -2,17 +2,22 @@ package com.example.movieapp.adapter
 
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.PopularMovieItemBinding
+import com.example.movieapp.models.Movie
 import com.example.movieapp.models.MovieResult
 
 
 class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var liveData = ArrayList<MovieResult>()
+    var onItemClick: ((MovieResult) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -24,18 +29,25 @@ class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     class MovieViewHolder(val binding: PopularMovieItemBinding): RecyclerView.ViewHolder(binding.root)
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(PopularMovieItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.binding.tvTitle.text = liveData[position].title
-        holder.binding.tvGenre.text = "danme, danme, dasasasasasase"
+
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
+        holder.itemView.setOnClickListener {
+            onItemClick!!.invoke(liveData[position])
+        }
 
     }
 
     override fun getItemCount(): Int {
         return liveData.size
+    }
+
+    fun setOnPopularMovieItemClick(movie: (MovieResult) -> Unit) {
+        onItemClick = movie
     }
 }

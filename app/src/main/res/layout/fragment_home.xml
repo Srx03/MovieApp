@@ -5,241 +5,248 @@
      android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.fragments.HomeFragment">
 
-    <LinearLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="1dp"
-        android:background="@color/white">
+        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_434sdp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgBanner"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/red"/>
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:elevation="1dp"
+                android:gravity="center">
 
-        <RelativeLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:elevation="1dp"
-            android:layout_gravity="start">
+                <ImageView
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@color/black" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@color/red" />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center"
+                    android:text="Popular Movies"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_30sdp" />
 
-            <TextView
+
+            </RelativeLayout>
+
+
+            <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                android:id="@+id/popularMovieRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_318sdp"
+                android:layout_gravity="center"
+                android:background="@color/black"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                tools:listitem="@layout/popular_movie_item" />
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bold"
-                android:gravity="center"
-                android:text="Popular Movies"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_30sdp" />
+                android:layout_marginVertical="10dp"
+                android:background="@color/black"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
 
 
-        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/bold"
+                    android:text="Recent Movies"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:layout_marginVertical="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recent Movies"
-            android:textSize="15sp"
-            android:layout_weight="1"
-            android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/bold"
+                        android:text="See all"
+                        android:textColor="@color/red" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
 
-            <TextView
-                android:layout_width="wrap_content"
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recentRecyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="See all"
-                android:layout_marginRight="4dp"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:src="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@color/black"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/bold"
+                    android:text="Popular Tv Shows"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/bold"
+                        android:text="See all"
+                        android:textColor="@color/red" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popularTvRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@color/black"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/bold"
+                    android:text="Top Rated Movies"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/bold"
+                        android:text="See all"
+                        android:textColor="@color/red" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topRatedMoviesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@color/black"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/bold"
+                    android:text="Recent Movies"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/bold"
+                        android:text="See all"
+                        android:textColor="@color/red" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topRatedTvRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/recentRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Popular TV Shows"
-            android:textSize="15sp"
-            android:layout_weight="1"
-            android:textStyle="bold"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="See all"
-                android:layout_marginRight="4dp"/>
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:src="@color/black"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/popularRecyclerView"
-        android:paddingStart="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Top Rated Movies"
-            android:textSize="15sp"
-            android:layout_weight="1"
-            android:textStyle="bold"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="See all"
-                android:layout_marginRight="4dp"/>
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:src="@color/black"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/topRatedMoviesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Top Rated TV Shows"
-            android:textSize="15sp"
-            android:layout_weight="1"
-            android:textStyle="bold"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="See all"
-                android:layout_marginRight="4dp"/>
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:src="@color/black"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/topRatedShowsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-
-
-
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

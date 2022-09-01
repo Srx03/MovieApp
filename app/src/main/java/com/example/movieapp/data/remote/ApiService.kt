@@ -1,4 +1,4 @@
-package com.example.movieapp.di.retrofit
+package com.example.movieapp.data.remote
 
 import com.example.movieapp.models.Genre
 import com.example.movieapp.models.Movie
@@ -10,56 +10,51 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RetrofitServiceInstance {
+interface ApiService {
 
 
     @GET("3/movie/popular?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getPopularMovies(@Query("page") query: String) : Response<Movie>
+    suspend fun getPopularMovies() : Response<Movie>
 
     @GET("3/movie/now_playing?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getRecentMovies(@Query("page") query: String) : Response<Movie>
+    suspend fun getRecentMovies() : Response<Movie>
 
     @GET("3/movie/upcoming?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getUpcomingMovies(@Query("page") query: String) : Response<Movie>
+    suspend fun getUpcomingMovies() : Response<Movie>
 
     @GET("3/movie/top_rated?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getTopRatedMovies(@Query("page") query: String) : Response<Movie>
+    suspend fun getTopRatedMovies() : Response<Movie>
 
     @GET("3/movie/{movieId}/credits?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getMovieCredits(@Path("movieId") movieId: String) : Response<MovieCredits>
 
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")
-    suspend fun getSearchMovieData(@Query("query") query: String) : Call<Movie>
+    suspend fun getSearchMovieData(@Query("query") query: String) : Response<Movie>
 
 
     @GET("3/tv/popular?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getPopularTv(@Query("page") query: String) : Response<Tv>
+    suspend fun getPopularTv() : Response<Tv>
 
     @GET("3/tv/now_playing?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getRecentTv(@Query("page") query: String) : Response<Tv>
+    suspend fun getRecentTv() : Response<Tv>
 
     @GET("3/tv/upcoming?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getUpcomingTv(@Query("page") query: String) : Response<Tv>
+    suspend fun getUpcomingTv() : Response<Tv>
 
     @GET("3/tv/top_rated?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getTopRatedTv(@Query("page") query: String) : Response<Tv>
+    suspend fun getTopRatedTv() : Response<Tv>
 
     @GET("3/tv/{tvId}/credits?api_key=3D0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
 
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")
-    suspend fun getSearchTvData(@Query("query") query: String) : Call<Tv>
-
-
-
-
-
+    suspend fun getSearchTvData(@Query("query") query: String) : Response<Tv>
 
 
 
 
     @GET("3/genre/movie/list?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    fun getGeners() : Call<Genre>
+    fun getGeners() : Response<Genre>
 
 
 }

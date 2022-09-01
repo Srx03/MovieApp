@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.RecentMovieItemBinding
 import com.example.movieapp.models.MovieResult
 
-class RecentMovieAdapter(): RecyclerView.Adapter<RecentMovieAdapter.MovieViewHolder>() {
+class RecentMovieAdapter: RecyclerView.Adapter<RecentMovieAdapter.MovieViewHolder>() {
 
     private var liveData = ArrayList<MovieResult>()
 
@@ -30,11 +30,8 @@ class RecentMovieAdapter(): RecyclerView.Adapter<RecentMovieAdapter.MovieViewHol
     }
 
     override fun onBindViewHolder(holder: RecentMovieAdapter.MovieViewHolder, position: Int) {
-        holder.binding.tvTitle.text = liveData[position].title
-        holder.binding.tvGenre.text = "danme, danme, danme"
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
-        holder.binding.tvReleaseDate.text = liveData[position].release_date
-        holder.binding.tvVoteAverege.text = liveData[position].vote_average.toString() + " / 10"
+        holder.binding.tvRating.text = liveData[position].vote_average.toString()
 
     }
 

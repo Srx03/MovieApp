@@ -91,5 +91,11 @@ dependencies {
     //Navigation 2
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
 
+    //comming soon
+    implementation 'com.github.sparrow007:carouselrecyclerview:1.2.5'
+
+    //youtube player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
 
 }

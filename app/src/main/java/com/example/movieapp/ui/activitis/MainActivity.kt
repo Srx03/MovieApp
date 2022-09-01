@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.search -> findNavController(R.id.fragmentContainerView).navigate(R.id.searchFragment)
                 R.id.watchlist -> findNavController(R.id.fragmentContainerView).navigate(R.id.watchListFragment)
                 R.id.profile -> findNavController(R.id.fragmentContainerView).navigate(R.id.profileFragment)
-                R.id.comingSoon -> findNavController(R.id.fragmentContainerView).navigate(R.id.loginFragment)
+                R.id.comingSoon -> findNavController(R.id.fragmentContainerView).navigate(R.id.searchFragment)
             }
         }
     }

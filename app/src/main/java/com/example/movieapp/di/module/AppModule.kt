@@ -2,9 +2,7 @@ package com.example.movieapp.di.module
 
 import android.content.Context
 import androidx.room.Room
-import com.example.movieapp.data.dao.GenreDao
-import com.example.movieapp.data.dao.LocalDatabase
-import com.example.movieapp.di.retrofit.RetrofitServiceInstance
+import com.example.movieapp.data.remote.ApiService
 import com.example.movieapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -22,15 +20,11 @@ import javax.inject.Singleton
 class AppModule {
 
 
-    @Singleton
-    @Provides
-  fun providesGenreDao(localDatabase: LocalDatabase): GenreDao = localDatabase.genreDao()
-
 
     @Singleton
     @Provides
-    fun getRetrofitServiceInstance(retrofit: Retrofit): RetrofitServiceInstance {
-        return retrofit.create(RetrofitServiceInstance::class.java)
+    fun getRetrofitServiceInstance(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
     @Singleton
@@ -42,12 +36,13 @@ class AppModule {
             .build()
     }
 
-    @Singleton
+    /*@Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext appContext:  Context): LocalDatabase = Room.databaseBuilder(
         appContext,
         LocalDatabase::class.java,
         "movie.db"
-    ).fallbackToDestructiveMigration().build()
+    ).fallbackToDestructiveMigration().build()*/
+
 
 }

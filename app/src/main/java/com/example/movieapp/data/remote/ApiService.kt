@@ -1,5 +1,6 @@
 package com.example.movieapp.data.remote
 
+import com.example.movieapp.data.local.entity.Actors
 import com.example.movieapp.models.Genre
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.MovieCredits
@@ -31,7 +32,7 @@ interface ApiService {
     @GET("3/movie/{movieId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getMovieCredits(@Path("movieId") movieId: String) : Response<MovieCredits>
 
-    @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")
+    @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchMovieData(@Query("query") query: String) : Response<Movie>
 
     @GET("3/movie/{id}/videos?api_key=0d78a49b1a3056a1df36e1de7787fcda")
@@ -53,8 +54,20 @@ interface ApiService {
     @GET("3/tv/{tvId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
 
-    @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda&language=en-US")
+    @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchTvData(@Query("query") query: String) : Response<Tv>
+
+
+
+
+    @GET("3/trending/movie/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTrendigMovies() : Response<Movie>
+
+    @GET("3/trending/tv/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTrendigTv() : Response<Tv>
+
+    @GET("3/trending/person/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTrendigActor() : Response<Actors>
 
 
 

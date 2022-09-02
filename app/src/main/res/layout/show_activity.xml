@@ -83,7 +83,7 @@
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:src="@drawable/ic_date"
-                                app:tint="@color/text_secondary" />
+                                app:tint="@color/red" />
 
                             <TextView
                                 android:id="@+id/tvYear"
@@ -118,7 +118,7 @@
                                     android:layout_width="16dp"
                                     android:layout_height="16dp"
                                     android:src="@drawable/ic_rate"
-                                    app:tint="@color/text_secondary" />
+                                    app:tint="@color/red" />
 
                                 <TextView
                                     android:id="@+id/tvRating"

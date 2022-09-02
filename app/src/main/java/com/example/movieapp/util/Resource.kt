@@ -1,6 +1,27 @@
 package com.example.movieapp.util
 
-sealed class Resource<T>(val data: T?, val message: String?) {
-    class Success<T>(data: T) : Resource<T>(data, null)
-    class Error<T>(message: String) : Resource<T>(null, message)
+sealed class Resource<T>(
+    val data: T? = null,
+    val message: String? = null,
+    val status: Status
+) {
+
+    class Success<T>(data: T) : Resource<T>(data = data, status = Status.SUCCESS)
+    class Error<T>(
+        val errorMessage: String,
+        val errorType: ErrorType? = null
+    ) : Resource<T>(message = errorMessage, status = Status.ERROR)
+    class Loading<T> : Resource<T>(status = Status.LOADING)
+}
+
+enum class Status {
+    SUCCESS,
+    ERROR,
+    LOADING
+}
+
+enum class ErrorType {
+    NETWORK,
+    HTTP,
+    UNKNOWN
 }

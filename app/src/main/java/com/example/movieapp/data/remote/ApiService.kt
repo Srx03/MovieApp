@@ -1,10 +1,10 @@
 package com.example.movieapp.data.remote
 
-import com.example.movieapp.data.local.entity.Actors
+import com.example.movieapp.models.actor.Actors
 import com.example.movieapp.models.Genre
-import com.example.movieapp.models.Movie
-import com.example.movieapp.models.MovieCredits
-import com.example.movieapp.models.Tv
+import com.example.movieapp.models.movie.Movie
+import com.example.movieapp.models.movie.MovieCredits
+import com.example.movieapp.models.tv.Tv
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -54,8 +54,13 @@ interface ApiService {
     @GET("3/tv/{tvId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
 
-    @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/search/tv?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchTvData(@Query("query") query: String) : Response<Tv>
+
+
+
+    @GET("3/search/person?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getSearchActorData(@Query("query") query: String) : Response<Actors>
 
 
 

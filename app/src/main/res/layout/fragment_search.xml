@@ -90,6 +90,30 @@
 
 
         <LinearLayout
+            android:id="@+id/llError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_72sdp"
+            android:visibility="gone"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:fontFamily="@font/bold"
+                android:gravity="center_horizontal"
+                android:text="Error"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/_14sdp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/empty_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -134,7 +158,7 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:paddingHorizontal="@dimen/_6sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/recommendation_item" />
+            tools:listitem="@layout/trending_movie_item" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchedRecyclerView"
@@ -149,7 +173,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
             tools:itemCount="10"
-            tools:listitem="@layout/recent_movie_item" />
+            tools:listitem="@layout/searched_movie_item" />
 
     </LinearLayout>
 

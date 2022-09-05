@@ -9,12 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movieapp.adapter.*
+import com.example.movieapp.adapter.home.*
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.ui.activitis.ShowActivity
 import com.example.movieapp.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {

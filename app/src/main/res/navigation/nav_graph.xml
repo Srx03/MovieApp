@@ -25,4 +25,9 @@
         android:name="com.example.movieapp.ui.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/comingSoonFragment"
+        android:name="com.example.movieapp.ui.fragments.ComingSoonFragment"
+        android:label="fragment_coming_soon"
+        tools:layout="@layout/fragment_coming_soon" />
 </navigation>

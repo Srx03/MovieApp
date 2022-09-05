@@ -1,9 +1,6 @@
 package com.example.movieapp.data.remote
 
 
-import com.example.movieapp.models.Movie
-
-import retrofit2.Response
 import javax.inject.Inject
 
 
@@ -26,6 +23,7 @@ class RetrofitRepostory @Inject constructor(
      suspend fun getTrendingMovies() = apiService.getTrendigMovies()
      suspend fun getTrendingTv() = apiService.getTrendigTv()
      suspend fun getTrendingActor() = apiService.getTrendigActor()
+     suspend fun getSearchActorData(query: String) = apiService.getSearchActorData(query)
 
 
 }

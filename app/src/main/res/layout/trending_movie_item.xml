@@ -7,11 +7,10 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-
     android:foreground="?selectableItemBackgroundBorderless"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:layout_marginTop="@dimen/_6sdp"
+    android:layout_marginTop="@dimen/_10sdp"
     android:layout_marginBottom="@dimen/_2sdp">
 
     <com.google.android.material.card.MaterialCardView

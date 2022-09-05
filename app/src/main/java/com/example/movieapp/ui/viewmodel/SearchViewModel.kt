@@ -5,12 +5,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.data.local.entity.Actors
+import com.example.movieapp.models.actor.Actors
 import com.example.movieapp.data.remote.RetrofitRepostory
-import com.example.movieapp.models.Actor
 
-import com.example.movieapp.models.Movie
-import com.example.movieapp.models.Tv
+import com.example.movieapp.models.movie.Movie
+import com.example.movieapp.models.tv.Tv
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,10 +19,13 @@ class SearchViewModel @Inject constructor(
     private val retrofitRepostory: RetrofitRepostory
 ): ViewModel() {
 
-
     val trendingMovieList: MutableLiveData<Movie> = MutableLiveData()
     val trendingTvList: MutableLiveData<Tv> = MutableLiveData()
     val trendingActorList: MutableLiveData<Actors> = MutableLiveData()
+
+    val searchedMovieList: MutableLiveData<Movie> = MutableLiveData()
+    val searchedTvList: MutableLiveData<Tv> = MutableLiveData()
+    val searchedActorList: MutableLiveData<Actors> = MutableLiveData()
 
 
 
@@ -62,6 +64,45 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    fun getSearchedMovie(searchQuery: String) = viewModelScope.launch {
+        retrofitRepostory.getSearchMovieData(searchQuery).let { response ->
+            if (response.isSuccessful){
+                searchedMovieList.postValue(response.body())
+            }else{
+                Log.d("Searched", "getSearchedMovie Error: ${response.code()}")
+            }
+        }
+    }
+
+
+    fun getSearchedTv(searchQuery: String) = viewModelScope.launch {
+        retrofitRepostory.getSearchTvData(searchQuery).let { response ->
+            if (response.isSuccessful){
+                searchedTvList.postValue(response.body())
+            }else{
+                Log.d("Searched", "getSearchedTv Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getSearchedActor(searchQuery: String) = viewModelScope.launch {
+        retrofitRepostory.getSearchActorData(searchQuery).let { response ->
+            if (response.isSuccessful){
+                searchedActorList.postValue(response.body())
+            }else{
+                Log.d("Searched", "getSearchedActor Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getTrendingData(category: Int){
+        if (category == 0)
+            getTrendingMovies()
+        if (category == 1)
+            getTrendingTv()
+        if (category == 2)
+            getTrendingActor()
+    }
 
 
 }

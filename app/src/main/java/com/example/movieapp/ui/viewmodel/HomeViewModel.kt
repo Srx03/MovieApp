@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.remote.RetrofitRepostory
-import com.example.movieapp.models.Movie
-import com.example.movieapp.models.Tv
+import com.example.movieapp.models.movie.Movie
+import com.example.movieapp.models.tv.Tv
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -2,19 +2,15 @@ package com.example.movieapp.ui.activitis
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.R
-import com.example.movieapp.adapter.MovieAdapter
-import com.example.movieapp.adapter.RecentMovieAdapter
+import com.example.movieapp.adapter.home.MovieAdapter
+import com.example.movieapp.adapter.home.RecentMovieAdapter
 import com.example.movieapp.databinding.ActivityMainBinding
 
 import com.example.movieapp.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -43,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.search -> findNavController(R.id.fragmentContainerView).navigate(R.id.searchFragment)
                 R.id.watchlist -> findNavController(R.id.fragmentContainerView).navigate(R.id.watchListFragment)
                 R.id.profile -> findNavController(R.id.fragmentContainerView).navigate(R.id.profileFragment)
-                R.id.comingSoon -> findNavController(R.id.fragmentContainerView).navigate(R.id.searchFragment)
+                R.id.comingSoon -> findNavController(R.id.fragmentContainerView).navigate(R.id.comingSoonFragment)
             }
         }
     }

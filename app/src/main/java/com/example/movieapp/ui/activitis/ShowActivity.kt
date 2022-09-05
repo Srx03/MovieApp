@@ -4,14 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.movieapp.adapter.ActorShowAdapter
-import com.example.movieapp.adapter.SimilarAdapter
-import com.example.movieapp.adapter.TopRatedTvAdapter
+import com.example.movieapp.adapter.show.ActorShowAdapter
+import com.example.movieapp.adapter.show.SimilarAdapter
 import com.example.movieapp.databinding.ShowActivityBinding
-import com.example.movieapp.ui.viewmodel.HomeViewModel
 import com.example.movieapp.ui.viewmodel.ShowViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

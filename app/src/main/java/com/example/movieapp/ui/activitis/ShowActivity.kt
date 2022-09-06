@@ -27,6 +27,8 @@ class ShowActivity: AppCompatActivity() {
     private lateinit var vote: String
     private lateinit var id: String
 
+    private var isClicked: Boolean = false
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +52,7 @@ class ShowActivity: AppCompatActivity() {
         })
 
         setUpRecyclerView()
+        setUpClickListeners()
 
     }
 
@@ -91,6 +94,21 @@ class ShowActivity: AppCompatActivity() {
             adapter = similarAdapter
         }
 
+    }
+
+    private fun setUpClickListeners() = binding.apply {
+
+        tvOverview.setOnClickListener {
+            if (!isClicked) {
+                // Expand it
+                isClicked = true
+                tvOverview.maxLines = 100
+            } else {
+                // Collapse it
+                isClicked = false
+                tvOverview.maxLines = 4
+            }
+        }
     }
 
 

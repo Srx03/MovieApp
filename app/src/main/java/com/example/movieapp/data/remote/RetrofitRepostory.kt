@@ -24,6 +24,7 @@ class RetrofitRepostory @Inject constructor(
      suspend fun getTrendingTv() = apiService.getTrendigTv()
      suspend fun getTrendingActor() = apiService.getTrendigActor()
      suspend fun getSearchActorData(query: String) = apiService.getSearchActorData(query)
+     suspend fun getGenreMovie() = apiService.getGeners()
 
 
 }

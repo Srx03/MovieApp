@@ -1,7 +1,7 @@
 package com.example.movieapp.data.remote
 
 import com.example.movieapp.models.actor.Actors
-import com.example.movieapp.models.Genre
+import com.example.movieapp.models.genres.Genre
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
 import com.example.movieapp.models.tv.Tv

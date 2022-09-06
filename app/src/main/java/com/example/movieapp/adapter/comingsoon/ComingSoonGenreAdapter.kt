@@ -7,33 +7,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ComingsoonMovieItemBinding
+import com.example.movieapp.databinding.GenreItemBinding
 import com.example.movieapp.databinding.PopularMovieItemBinding
+import com.example.movieapp.models.genres.GenreX
 import com.example.movieapp.models.movie.MovieResult
 
 
-class ComingSoonMovieAdapter(): RecyclerView.Adapter<ComingSoonMovieAdapter.MovieViewHolder>() {
+class ComingSoonGenreAdapter(): RecyclerView.Adapter<ComingSoonGenreAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<MovieResult>()
+    private var liveData = ArrayList<GenreX>()
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(liveData: List<MovieResult>){
-        this.liveData = liveData as ArrayList<MovieResult>
+    fun setList(liveData: List<GenreX>){
+        this.liveData = liveData as ArrayList<GenreX>
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(val binding: ComingsoonMovieItemBinding): RecyclerView.ViewHolder(binding.root)
+    class MovieViewHolder(val binding: GenreItemBinding): RecyclerView.ViewHolder(binding.root)
 
-    fun getSelectedItem(position: Int): MovieResult = liveData[position]
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(ComingsoonMovieItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return MovieViewHolder(GenreItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
-
+        holder.binding.tvGenres.text = liveData[position].name
     }
 
     override fun getItemCount(): Int {

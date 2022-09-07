@@ -10,6 +10,7 @@ import com.example.movieapp.adapter.comingsoon.ComingSoonGenreAdapter
 import com.example.movieapp.adapter.show.ActorShowAdapter
 import com.example.movieapp.adapter.show.SimilarAdapter
 import com.example.movieapp.databinding.ShowActivityBinding
+import com.example.movieapp.ui.fragments.HomeFragment
 import com.example.movieapp.ui.viewmodel.ShowViewModel
 import com.example.movieapp.util.Genres
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,8 @@ class ShowActivity: AppCompatActivity() {
 
 
     private lateinit var id: String
+    private lateinit var idTv: String
+    private lateinit var isMovie: String
     private var isClicked: Boolean = false
 
 
@@ -35,10 +38,7 @@ class ShowActivity: AppCompatActivity() {
 
         getOnPopularMovieClickData()
 
-        viewModel.getMovieCredits(id)
-        viewModel.getSimilarMovie(id)
-        viewModel.getMoiveDetail(id)
-        viewModel.getTvDetail(id)
+
 
 
         viewModel.movieCreditsList.observe(this,{
@@ -65,8 +65,8 @@ class ShowActivity: AppCompatActivity() {
             Glide.with(applicationContext)
                 .load("https://image.tmdb.org/t/p/w500/" + it.poster_path)
                 .into(binding.youtubePlayerView)
-            binding.tvTitle.text = it.title
-            binding.tvYear.text = it.release_date
+            binding.tvTitle.text = it.name
+            binding.tvYear.text = it.first_air_date
             binding.tvOverview.text = it.overview
             binding.tvRating.text = String.format("%.1f", it.vote_average)
             binding.tvGenres.text = it.genres.joinToString ("  /  "){ it.name }
@@ -84,7 +84,20 @@ class ShowActivity: AppCompatActivity() {
     private fun getOnPopularMovieClickData() {
         val intent = intent
         id = intent.getStringExtra("id").toString()
+        idTv = intent.getStringExtra("idTv").toString()
+        isMovie = intent.getStringExtra("isMovie").toString()
+
+        if(isMovie == "0"){
+            viewModel.getSimilarMovie(id)
+            viewModel.getMovieCredits(id)
+            viewModel.getMoiveDetail(id)
+        }
+        else viewModel.getTvDetail(idTv)
+
+
     }
+
+
 
 
     private fun setUpRecyclerView(){

@@ -56,7 +56,7 @@ interface ApiService {
     @GET("3/tv/{tvId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
 
-    @GET("3/movie/{tvId}?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/tv/{tvId}?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvDetail(@Path("tvId") tvId: String) : Response<TvDetail>
 
     @GET("3/search/tv?api_key=0d78a49b1a3056a1df36e1de7787fcda")

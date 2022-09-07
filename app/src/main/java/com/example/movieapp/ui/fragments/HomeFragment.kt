@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var recentMovieAdapter: RecentMovieAdapter
     private lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     private lateinit var topRatedTvAdapter: TopRatedTvAdapter
+
     private val  viewModel: HomeViewModel by activityViewModels()
 
 
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
 
     }
 
@@ -112,20 +114,26 @@ class HomeFragment : Fragment() {
     }
 
     fun onPopularMoviesClick(){
+
         movieAdapter.setOnPopularMovieItemClick { movie ->
             val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","0")
             intent.putExtra("id",movie.id.toString())
             startActivity(intent)
         }
+
     }
 
     fun onPopularTvClick(){
         popularTvAdapter.setOnPopularTvItemClick { tv ->
             val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("id",tv.id.toString())
+            intent.putExtra("isMovie","1")
+            intent.putExtra("idTv",tv.id.toString())
             startActivity(intent)
         }
     }
+
+
 
 
 

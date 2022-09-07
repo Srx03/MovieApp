@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
+import com.example.movieapp.models.movie.MovieDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,6 +19,8 @@ class ShowViewModel@Inject constructor(
 
     val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
     val similarMovieList: MutableLiveData<Movie> = MutableLiveData()
+    val movieDetailList: MutableLiveData<MovieDetail> = MutableLiveData()
+    val tvDetailList: MutableLiveData<MovieDetail> = MutableLiveData()
 
 
 
@@ -40,6 +43,28 @@ class ShowViewModel@Inject constructor(
                 similarMovieList.postValue(response.body())
             }else{
                 Log.d("SimilarMovie", "getSimilarMovie Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getMoiveDetail(movieId: String) = viewModelScope.launch {
+        retrofitRepostory.getMovieDetail(movieId).let { response ->
+
+            if (response.isSuccessful){
+                movieDetailList.postValue(response.body())
+            }else{
+                Log.d("MovieDetail", "getMovieDetail Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getTvDetail(movieId: String) = viewModelScope.launch {
+        retrofitRepostory.getMovieDetail(movieId).let { response ->
+
+            if (response.isSuccessful){
+                tvDetailList.postValue(response.body())
+            }else{
+                Log.d("MovieDetail", "getMovieDetail Error: ${response.code()}")
             }
         }
     }

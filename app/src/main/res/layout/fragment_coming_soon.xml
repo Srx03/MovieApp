@@ -14,8 +14,33 @@ tools:context=".ui.fragments.ComingSoonFragment">
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="24dp"
-        app:title="Coming Soon Movies"
+        app:title="Coming Soon"
         app:titleTextColor="@color/red">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_weight="1"
+            app:tabBackground="@color/black"
+            app:tabIndicatorColor="@color/red"
+            app:tabSelectedTextColor="@color/red"
+            app:tabTextColor="@color/text_secondary">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movies" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tv Shows" />
+
+
+        </com.google.android.material.tabs.TabLayout>
 
 
     </com.google.android.material.appbar.MaterialToolbar>
@@ -105,10 +130,12 @@ tools:context=".ui.fragments.ComingSoonFragment">
                     android:layout_below="@id/tvRelaseDate"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/italic"
+                    android:fontFamily="@font/myfont"
+                    android:justificationMode="inter_word"
                     android:paddingTop="@dimen/_8sdp"
-                    android:text="It is a ninth installment of FF series. It is a ninth installment of Fast and Furious series. It is a ninth installment of Fast and Furious series. It is a ninth installment of Fast and Furious series. It is a ninth installment of Fast and Furious series. It is a ninth installment of Fast and Furious series."
-                    android:textAlignment="textStart"
+                    android:paddingEnd="@dimen/_2sdp"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:text="Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric v Srdjan Djuric Srdjan DjuricSrdjan Djuric Srdjan Djuric Srdjan Djuric"
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />

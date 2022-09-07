@@ -70,6 +70,7 @@ class HomeFragment : Fragment() {
         })
 
         onPopularMoviesClick()
+        onPopularTvClick()
     }
 
 
@@ -113,13 +114,15 @@ class HomeFragment : Fragment() {
     fun onPopularMoviesClick(){
         movieAdapter.setOnPopularMovieItemClick { movie ->
             val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("title",movie.title)
-            intent.putExtra("date",movie.release_date)
-            intent.putExtra("vote",movie.vote_average.toString())
-            intent.putExtra("overview",movie.overview)
-            intent.putExtra("image",movie.poster_path)
             intent.putExtra("id",movie.id.toString())
-            Log.d("PopularShowpass", "${movie.popularity}")
+            startActivity(intent)
+        }
+    }
+
+    fun onPopularTvClick(){
+        popularTvAdapter.setOnPopularTvItemClick { tv ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("id",tv.id.toString())
             startActivity(intent)
         }
     }

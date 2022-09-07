@@ -25,6 +25,17 @@ class Genres {
             return results
         }
 
+        fun getTvGenreListFromIds(ids: List<Int>?): List<GenreX> {
+            if (ids == null) {
+                return emptyList()
+            }
+            val results = mutableListOf<GenreX>()
+            ids.forEach {
+                tvShowsGenresMap.containsKey(it) && results.add(GenreX(it, tvShowsGenresMap[it]!!))
+            }
+            return results
+        }
+
         fun getAllMovieGenreList() = arrayListOf(
             GenreX(28, "Action"),
             GenreX(12, "Adventure"),

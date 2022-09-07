@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.genres.Genre
 import com.example.movieapp.models.movie.Movie
+import com.example.movieapp.models.tv.Tv
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,12 +19,9 @@ class ComingSoonViewModel @Inject constructor(
 
 
     val comingSoonMovieList: MutableLiveData<Movie> = MutableLiveData()
-    val comingSoonGenreList: MutableLiveData<Genre> = MutableLiveData()
+    val comingSoonTvList: MutableLiveData<Tv> = MutableLiveData()
 
-init {
-    getComingSoonMovies()
 
-}
 
     fun getComingSoonMovies() = viewModelScope.launch {
         retrofitRepostory.getUpcomingMovies().let { response ->
@@ -32,6 +30,17 @@ init {
                 comingSoonMovieList.postValue(response.body())
             }else{
                 Log.d("comingSoon", "getComingSoonMovie Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getComingSoonTv() = viewModelScope.launch {
+        retrofitRepostory.getUpcomingTv().let { response ->
+
+            if (response.isSuccessful){
+                comingSoonTvList.postValue(response.body())
+            }else{
+                Log.d("comingSoon", "getComingSoonTv Error: ${response.code()}")
             }
         }
     }

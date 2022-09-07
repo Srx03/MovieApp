@@ -136,7 +136,7 @@
                 android:layout_marginTop="@dimen/_18sdp"
                 android:fontFamily="@font/bold"
                 android:gravity="center_horizontal"
-                android:text="Oops... no results found !!"
+                android:text="Sorry cant find that result!"
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/_14sdp" />
 

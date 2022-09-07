@@ -11,10 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.movieapp.R
 import com.example.movieapp.adapter.comingsoon.ComingSoonGenreAdapter
 import com.example.movieapp.adapter.comingsoon.ComingSoonMovieAdapter
+import com.example.movieapp.adapter.comingsoon.ComingSoonTvAdapter
 import com.example.movieapp.databinding.FragmentComingSoonBinding
 import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.ui.viewmodel.ComingSoonViewModel
 import com.example.movieapp.util.Genres
+import com.example.movieapp.util.formatUpcomingDate
+import com.example.movieapp.util.formatUpcomingTv
+import com.google.android.material.tabs.TabLayout
 import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -28,9 +32,11 @@ class ComingSoonFragment : Fragment() {
 
     private val viewModel: ComingSoonViewModel by activityViewModels()
     private lateinit var comingSoonMovieAdapter: ComingSoonMovieAdapter
+    private lateinit var comingSoonTvAdapter: ComingSoonTvAdapter
     private var isFirstPrinted: Boolean = false
     private lateinit var genreAdapter: ComingSoonGenreAdapter
-    private var _movieResult: MovieResult? = null
+    private var onTabSelectedListener: TabLayout.OnTabSelectedListener? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,21 +50,68 @@ class ComingSoonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        setupRecyclerViewMovie()
-
         viewModel.comingSoonMovieList.observe(viewLifecycleOwner, {
+            setupRecyclerViewMovie()
             comingSoonMovieAdapter.setList(it.results)
         })
+
+        viewModel.comingSoonTvList.observe(viewLifecycleOwner, {
+            setupRecyclerViewTv()
+            comingSoonTvAdapter.setList(it.results)
+        })
+
+
+
+        onTabSelectedListener = object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.position){
+
+                    0 -> {
+                        isFirstPrinted = false
+                        viewModel.getComingSoonMovies()
+                        binding.toolbar.title = "Coming Soon Movies"
+
+
+                    }
+                    1 -> {
+                        isFirstPrinted = false
+                        viewModel.getComingSoonTv()
+                        binding.toolbar.title = "Coming Soon Tv"
+                    }
+
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+        }
+        binding.tabLayout.addOnTabSelectedListener(onTabSelectedListener!!)
+
+
+
     }
 
     fun setupRecyclerViewMovie() {
-        comingSoonMovieAdapter = ComingSoonMovieAdapter()
+        comingSoonMovieAdapter = ComingSoonMovieAdapter(
+            onFirstLoad = {
+                if (!isFirstPrinted) {
+                    isFirstPrinted = true
+                    binding.apply {
+                        title.text = it.title
+                        overview.text = it.overview
+                        tvRelaseDate.formatUpcomingDate(it.release_date)
+                        genreAdapter.setList(Genres.Genres.getMovieGenreListFromIds(it.genre_ids))
+                    }
+                }
+            }
+        )
         binding.comingSoonRecyclerView.apply {
             adapter = comingSoonMovieAdapter
-            set3DItem(true)
+            set3DItem(false)
             setAlpha(true)
             setInfinite(true)
-
         }
         binding.genresRv.apply {
             // Setting Genre Recyclerview
@@ -73,8 +126,53 @@ class ComingSoonFragment : Fragment() {
                             val movieResult = comingSoonMovieAdapter.getSelectedItem(position)
                             title.text = movieResult.title
                             // Setting the Genre List
+                            tvRelaseDate.formatUpcomingDate(movieResult.release_date)
                                 genreAdapter.setList(Genres.Genres.getMovieGenreListFromIds(movieResult.genre_ids))
                                 overview.text = movieResult.overview
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    fun setupRecyclerViewTv() {
+        comingSoonTvAdapter = ComingSoonTvAdapter(
+            onFirstLoad = {
+                if (!isFirstPrinted) {
+                    isFirstPrinted = true
+                    binding.apply {
+                        title.text = it.name
+                        overview.text = it.overview
+                        tvRelaseDate.formatUpcomingTv(it.first_air_date)
+                        genreAdapter.setList(Genres.Genres.getTvGenreListFromIds(it.genre_ids))
+                    }
+                }
+            }
+        )
+        binding.comingSoonRecyclerView.apply {
+            adapter = comingSoonTvAdapter
+            set3DItem(false)
+            setAlpha(true)
+            setInfinite(true)
+
+        }
+        binding.genresRv.apply {
+            // Setting Genre Recyclerview
+            genreAdapter = ComingSoonGenreAdapter()
+            adapter = genreAdapter
+            binding.apply {
+                comingSoonRecyclerView.setItemSelectListener(object :
+                    CarouselLayoutManager.OnSelected {
+                    override fun onItemSelected(position: Int) {
+                        _binding?.let {
+
+                            val tvResult = comingSoonTvAdapter.getSelectedItem(position)
+                            title.text = tvResult.name
+                            // Setting the Genre List
+                            tvRelaseDate.formatUpcomingTv(tvResult.first_air_date)
+                            genreAdapter.setList(Genres.Genres.getMovieGenreListFromIds(tvResult.genre_ids))
+                            overview.text = tvResult.overview
                         }
                     }
                 })
@@ -85,11 +183,10 @@ class ComingSoonFragment : Fragment() {
 
 
 
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        onTabSelectedListener = null
     }
 
 }

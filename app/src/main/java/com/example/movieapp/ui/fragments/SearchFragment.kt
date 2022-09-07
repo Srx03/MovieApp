@@ -81,24 +81,28 @@ class SearchFragment : Fragment() {
 
 
         viewModel.searchedMovieList.observe(viewLifecycleOwner, {
+            if(it.results.isNotEmpty()){
             setupRecyclerViewSeachedMovie()
           searchedMovieAdapter.setList(it.results)
             bindingSetupSearch()
-
+            }else binding.emptySearch.isGone = false
         })
 
         viewModel.searchedTvList.observe(viewLifecycleOwner, {
+            if(it.results.isNotEmpty()){
             setupRecyclerViewSeachedTv()
           searchedTvAdapter.setList(it.results)
             bindingSetupSearch()
+            }else binding.emptySearch.isGone = false
 
         })
 
         viewModel.searchedActorList.observe(viewLifecycleOwner, {
-            setupRecyclerViewSeachedActor()
-          searchedActorAdapter.setList(it.results)
-            bindingSetupSearch()
-
+            if(it.results.isNotEmpty()) {
+                setupRecyclerViewSeachedActor()
+                searchedActorAdapter.setList(it.results)
+                bindingSetupSearch()
+            }else binding.emptySearch.isGone = false
         })
 
 

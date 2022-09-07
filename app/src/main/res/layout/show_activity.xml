@@ -60,6 +60,7 @@
                             android:textStyle="bold"
                             tools:text="Avengers: Age of ultron" />
 
+
                         <TextView
                             android:id="@+id/tvGenres"
                             android:layout_width="match_parent"
@@ -95,16 +96,6 @@
                                 android:textSize="@dimen/_10sdp"
                                 tools:text="2016" />
 
-
-
-                            <View
-                                android:id="@+id/runTimeDivider"
-                                android:layout_width="0.5dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_6sdp"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginBottom="@dimen/_2sdp"
-                                android:background="@color/text_secondary" />
 
                             <LinearLayout
                                 android:id="@+id/rating_ll"

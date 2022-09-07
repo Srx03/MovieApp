@@ -12,25 +12,24 @@ import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.models.tv.TVResults
 
 
-class ComingSoonMovieAdapter(
-    private var onFirstLoad: (movieResult: MovieResult) -> Unit,
-): RecyclerView.Adapter<ComingSoonMovieAdapter.MovieViewHolder>() {
+class ComingSoonTvAdapter(
+    private var onFirstLoad: (tvResult: TVResults) -> Unit
+): RecyclerView.Adapter<ComingSoonTvAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<MovieResult>()
-    private var liveDataTv = ArrayList<TVResults>()
+    private var liveData = ArrayList<TVResults>()
+
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(liveData: List<MovieResult>){
-        this.liveData = liveData as ArrayList<MovieResult>
+    fun setList(liveData: List<TVResults>){
+        this.liveData = liveData as ArrayList<TVResults>
         notifyDataSetChanged()
     }
-
 
     class MovieViewHolder(val binding: ComingsoonMovieItemBinding): RecyclerView.ViewHolder(binding.root)
 
 
-    fun getSelectedItem(position: Int): MovieResult = liveData[position]
+    fun getSelectedItem(position: Int): TVResults = liveData[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(ComingsoonMovieItemBinding.inflate(LayoutInflater.from(parent.context)))

@@ -6,10 +6,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.movieapp.adapter.comingsoon.ComingSoonGenreAdapter
 import com.example.movieapp.adapter.show.ActorShowAdapter
 import com.example.movieapp.adapter.show.SimilarAdapter
 import com.example.movieapp.databinding.ShowActivityBinding
 import com.example.movieapp.ui.viewmodel.ShowViewModel
+import com.example.movieapp.util.Genres
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,13 +22,8 @@ class ShowActivity: AppCompatActivity() {
     private lateinit var similarAdapter: SimilarAdapter
     private val  viewModel: ShowViewModel by viewModels()
 
-    private lateinit var title: String
-    private lateinit var overview: String
-    private lateinit var date: String
-    private lateinit var image: String
-    private lateinit var vote: String
-    private lateinit var id: String
 
+    private lateinit var id: String
     private var isClicked: Boolean = false
 
 
@@ -37,19 +34,46 @@ class ShowActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         getOnPopularMovieClickData()
-        setUpInformations()
 
         viewModel.getMovieCredits(id)
         viewModel.getSimilarMovie(id)
+        viewModel.getMoiveDetail(id)
+        viewModel.getTvDetail(id)
 
 
         viewModel.movieCreditsList.observe(this,{
+
             actorShowAdapter.setList(it.cast)
         })
 
         viewModel.similarMovieList.observe(this,{
             similarAdapter.setList(it.results)
         })
+
+        viewModel.movieDetailList.observe(this,{
+            Glide.with(applicationContext)
+                .load("https://image.tmdb.org/t/p/w500/" + it.poster_path)
+                .into(binding.youtubePlayerView)
+            binding.tvTitle.text = it.title
+            binding.tvYear.text = it.release_date
+            binding.tvOverview.text = it.overview
+            binding.tvRating.text = String.format("%.1f", it.vote_average)
+            binding.tvGenres.text = it.genres.joinToString ("  /  "){ it.name }
+        })
+
+        viewModel.tvDetailList.observe(this,{
+            Glide.with(applicationContext)
+                .load("https://image.tmdb.org/t/p/w500/" + it.poster_path)
+                .into(binding.youtubePlayerView)
+            binding.tvTitle.text = it.title
+            binding.tvYear.text = it.release_date
+            binding.tvOverview.text = it.overview
+            binding.tvRating.text = String.format("%.1f", it.vote_average)
+            binding.tvGenres.text = it.genres.joinToString ("  /  "){ it.name }
+        })
+
+
+
 
         setUpRecyclerView()
         setUpClickListeners()
@@ -59,26 +83,9 @@ class ShowActivity: AppCompatActivity() {
 
     private fun getOnPopularMovieClickData() {
         val intent = intent
-       title = intent.getStringExtra("title").toString()
-        date = intent.getStringExtra("date").toString()
-        overview = intent.getStringExtra("overview").toString()
-        image = intent.getStringExtra("image").toString()
-        vote = intent.getStringExtra("vote").toString()
         id = intent.getStringExtra("id").toString()
-        Log.d("PopularShow", "$vote")
-
     }
 
-    private fun setUpInformations(){
-        Glide.with(applicationContext)
-            .load("https://image.tmdb.org/t/p/w500/" + image)
-            .into(binding.youtubePlayerView)
-        binding.tvTitle.text = title
-        binding.tvYear.text = date
-        binding.tvOverview.text = overview
-        binding.tvRating.text = vote
-
-    }
 
     private fun setUpRecyclerView(){
         actorShowAdapter = ActorShowAdapter()
@@ -93,6 +100,7 @@ class ShowActivity: AppCompatActivity() {
             layoutManager = LinearLayoutManager(context,  LinearLayoutManager.HORIZONTAL, false)
             adapter = similarAdapter
         }
+
 
     }
 

@@ -4,7 +4,9 @@ import com.example.movieapp.models.actor.Actors
 import com.example.movieapp.models.genres.Genre
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
+import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.Tv
+import com.example.movieapp.models.tv.TvDetail
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -32,6 +34,9 @@ interface ApiService {
     @GET("3/movie/{movieId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getMovieCredits(@Path("movieId") movieId: String) : Response<MovieCredits>
 
+    @GET("3/movie/{movieId}?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getMovieDetail(@Path("movieId") movieId: String) : Response<MovieDetail>
+
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchMovieData(@Query("query") query: String) : Response<Movie>
 
@@ -45,17 +50,20 @@ interface ApiService {
     @GET("3/tv/now_playing?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getRecentTv() : Response<Tv>
 
-    @GET("3/tv/upcoming?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getUpcomingTv() : Response<Tv>
-
     @GET("3/tv/top_rated?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTopRatedTv() : Response<Tv>
 
     @GET("3/tv/{tvId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
 
+    @GET("3/movie/{tvId}?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTvDetail(@Path("tvId") tvId: String) : Response<TvDetail>
+
     @GET("3/search/tv?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchTvData(@Query("query") query: String) : Response<Tv>
+
+    @GET("3/tv/on_the_air?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getUpcomingTv() : Response<Tv>
 
 
 

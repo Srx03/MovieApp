@@ -8,15 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.SimilarItemBinding
 import com.example.movieapp.models.movie.MovieResult
+import com.example.movieapp.models.tv.TVResults
 
-class SimilarAdapter: RecyclerView.Adapter<SimilarAdapter.MovieViewHolder>() {
+class SimilarAdapter(
+    private var isMoive: Boolean = true
+): RecyclerView.Adapter<SimilarAdapter.MovieViewHolder>() {
 
     private var liveData = ArrayList<MovieResult>()
+    private var liveDataTv = ArrayList<TVResults>()
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<MovieResult>){
         this.liveData = liveData as ArrayList<MovieResult>
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setListTv(liveData: List<TVResults>){
+        this.liveDataTv = liveData as ArrayList<TVResults>
         notifyDataSetChanged()
     }
 
@@ -29,10 +39,14 @@ class SimilarAdapter: RecyclerView.Adapter<SimilarAdapter.MovieViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
-        holder.binding.tvRating.text = liveData[position].vote_average.toString()
-        Log.d("test", "${liveData[position].vote_average}")
 
+        if(isMoive){
+            Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
+            holder.binding.tvRating.text =  String.format("%.1f", liveData[position].vote_average)
+        }else{
+            Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveDataTv[position].poster_path).into(holder.binding.imgMovie)
+            holder.binding.tvRating.text =  String.format("%.1f", liveDataTv[position].vote_average)
+        }
     }
 
     override fun getItemCount(): Int {

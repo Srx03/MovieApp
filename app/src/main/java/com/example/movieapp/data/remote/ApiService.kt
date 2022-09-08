@@ -6,6 +6,7 @@ import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
 import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.Tv
+import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
 import retrofit2.Call
 import retrofit2.Response
@@ -54,7 +55,7 @@ interface ApiService {
     suspend fun getTopRatedTv() : Response<Tv>
 
     @GET("3/tv/{tvId}/credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<MovieCredits>
+    suspend fun getTvCredits(@Path("tvId") tvId: String) : Response<TvCredits>
 
     @GET("3/tv/{tvId}?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTvDetail(@Path("tvId") tvId: String) : Response<TvDetail>
@@ -64,6 +65,9 @@ interface ApiService {
 
     @GET("3/tv/on_the_air?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getUpcomingTv() : Response<Tv>
+
+    @GET("3/tv/{tvId}/similar?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getSimilarTv(@Path("tvId") tvId: String) : Response<Tv>
 
 
 

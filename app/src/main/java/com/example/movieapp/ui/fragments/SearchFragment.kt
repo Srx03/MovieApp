@@ -1,6 +1,8 @@
 package com.example.movieapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapp.adapter.search.*
 import com.example.movieapp.databinding.FragmentSearchBinding
+import com.example.movieapp.ui.activitis.ShowActivity
 import com.example.movieapp.ui.viewmodel.SearchViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +45,7 @@ class SearchFragment : Fragment() {
         trendingMovieAdapter = TrendingMovieAdapter()
         trendingTvAdapter = TrendingTvAdapter()
         trendingActorAdapter = TrendingActorAdapter()
+
     }
 
 
@@ -62,6 +66,8 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
 
         viewModel.trendingMovieList.observe(viewLifecycleOwner, {
@@ -139,11 +145,12 @@ class SearchFragment : Fragment() {
         onTabSelectedListener = object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
-                    0 -> binding.apply {
+                    0 -> {
                         categroy = 0
                         if (searchQuery.isNullOrEmpty()){
                             viewModel.getTrendingMovies()
                             setupRecyclerViewTrendingMovie()
+                            onTrendingMoviesClick()
                         }
                         searchQuery?.let {
                             if(it.isNotEmpty()){
@@ -152,7 +159,7 @@ class SearchFragment : Fragment() {
                             }
                         }
                     }
-                    1 -> binding.apply {
+                    1 ->  {
                         categroy = 1
                         if (searchQuery.isNullOrEmpty()){
                             viewModel.getTrendingTv()
@@ -164,7 +171,7 @@ class SearchFragment : Fragment() {
                             }
                         }
                     }
-                    2 -> binding.apply {
+                    2 ->  {
                         categroy = 2
                         if (searchQuery.isNullOrEmpty()){
                             viewModel.getTrendingActor()
@@ -219,6 +226,8 @@ class SearchFragment : Fragment() {
         binding.searchedRecyclerView.apply {
             layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
             adapter =  searchedMovieAdapter
+            Log.d("Srdjan","pozdrav")
+            onSearchMoviesClick()
         }
     }
 
@@ -267,6 +276,46 @@ class SearchFragment : Fragment() {
         binding.searchingProgressBar.isGone = true
         binding.trendingRecyclerView.isGone = false
         binding.emptySearch.isGone = true
+    }
+
+    fun onTrendingMoviesClick(){
+
+        trendingMovieAdapter.setOnPopularMovieItemClick { movie ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","0")
+            intent.putExtra("id",movie.id.toString())
+            startActivity(intent)
+        }
+
+    }
+
+    fun onSearchMoviesClick(){
+
+        searchedMovieAdapter.setOnPopularMovieItemClick { movie ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","0")
+            intent.putExtra("id",movie.id.toString())
+            startActivity(intent)
+        }
+
+    }
+
+    fun onTvClick(){
+
+        trendingTvAdapter.setOnPopularTvItemClick { tv ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","1")
+            intent.putExtra("id",tv.id.toString())
+            startActivity(intent)
+        }
+
+        searchedTvAdapter.setOnPopularTvItemClick { tv ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","1")
+            intent.putExtra("id",tv.id.toString())
+            startActivity(intent)
+        }
+
     }
 
 

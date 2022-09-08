@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.models.actor.Result
 import com.example.movieapp.databinding.TrendingActorItemBinding
-
+import com.example.movieapp.util.Constants.imgActor
 
 
 class TrendingActorAdapter: RecyclerView.Adapter<TrendingActorAdapter.MovieViewHolder>() {
@@ -30,7 +30,7 @@ class TrendingActorAdapter: RecyclerView.Adapter<TrendingActorAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].profile_path).into(holder.binding.imgMovie)
+        Glide.with(holder.itemView).load(imgActor + liveData[position].profile_path).into(holder.binding.imgMovie)
         holder.binding.tvName.text = liveData[position].name
 
     }

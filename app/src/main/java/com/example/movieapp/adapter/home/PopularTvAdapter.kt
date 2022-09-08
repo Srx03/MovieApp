@@ -34,7 +34,7 @@ class PopularTvAdapter : RecyclerView.Adapter<PopularTvAdapter.MovieViewHolder>(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
         holder.binding.tvRating.text = liveData[position].vote_average.toString()
-
+        holder.binding.tvActorName.text = liveData[position].name
         holder.itemView.setOnClickListener {
             onItemClick!!.invoke(liveData[position])
         }

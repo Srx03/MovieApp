@@ -25,11 +25,11 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_tv_item.xml" value="0.21422101449275363" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/recent_movie_item.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/recommendation_item.xml" value="0.2677083333333333" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/searched_actor_item.xml" value="0.67" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/searched_actor_item.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/searched_movie_item.xml" value="0.23550724637681159" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/searched_tv_item.xml" value="0.23550724637681159" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/show_activity.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/similar_item.xml" value="0.9" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/similar_item.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/toprated_movie_item.xml" value="0.15552178318135765" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/toprated_tv_item.xml" value="0.26875" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_actor_item.xml" value="0.5" />

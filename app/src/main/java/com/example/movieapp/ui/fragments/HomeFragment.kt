@@ -122,10 +122,33 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        recentMovieAdapter.setOnPopularMovieItemClick { movie ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","0")
+            intent.putExtra("id",movie.id.toString())
+            startActivity(intent)
+        }
+
+        topRatedMovieAdapter.setOnPopularMovieItemClick { movie ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","0")
+            intent.putExtra("id",movie.id.toString())
+            startActivity(intent)
+        }
+
+
+
     }
 
     fun onPopularTvClick(){
         popularTvAdapter.setOnPopularTvItemClick { tv ->
+            val intent = Intent(activity, ShowActivity::class.java)
+            intent.putExtra("isMovie","1")
+            intent.putExtra("idTv",tv.id.toString())
+            startActivity(intent)
+        }
+
+        topRatedTvAdapter.setOnPopularTvItemClick { tv ->
             val intent = Intent(activity, ShowActivity::class.java)
             intent.putExtra("isMovie","1")
             intent.putExtra("idTv",tv.id.toString())

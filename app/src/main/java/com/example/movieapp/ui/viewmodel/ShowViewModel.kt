@@ -8,6 +8,8 @@ import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
 import com.example.movieapp.models.movie.MovieDetail
+import com.example.movieapp.models.tv.Tv
+import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,6 +23,9 @@ class ShowViewModel@Inject constructor(
     val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
     val similarMovieList: MutableLiveData<Movie> = MutableLiveData()
     val movieDetailList: MutableLiveData<MovieDetail> = MutableLiveData()
+
+    val tvCreditsList: MutableLiveData<TvCredits> = MutableLiveData()
+    val similarTvList: MutableLiveData<Tv> = MutableLiveData()
     val tvDetailList: MutableLiveData<TvDetail> = MutableLiveData()
 
 
@@ -71,5 +76,29 @@ class ShowViewModel@Inject constructor(
             }
         }
     }
+
+    fun getTvCredits(tvId: String) = viewModelScope.launch {
+        retrofitRepostory.getTvCredits(tvId).let { response ->
+
+            if (response.isSuccessful){
+              tvCreditsList.postValue(response.body())
+            }else{
+                Log.d("TvCredits", "getTvCredits Error: ${response.code()}")
+            }
+        }
+    }
+
+    fun getSimilarTv(tvId: String) = viewModelScope.launch {
+        retrofitRepostory.getSimialrTv(tvId).let { response ->
+
+            if (response.isSuccessful){
+                similarTvList.postValue(response.body())
+                Log.d("TvSimilar", "Launched")
+            }else{
+                Log.d("SimilarTv", "getSimilarTv Error: ${response.code()}")
+            }
+        }
+    }
+
 
 }

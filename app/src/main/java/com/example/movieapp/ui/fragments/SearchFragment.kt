@@ -1,6 +1,8 @@
 package com.example.movieapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +11,12 @@ import androidx.core.view.isGone
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.movieapp.R
 import com.example.movieapp.adapter.search.*
 import com.example.movieapp.databinding.FragmentSearchBinding
+import com.example.movieapp.ui.activitis.ShowActivity
 import com.example.movieapp.ui.viewmodel.SearchViewModel
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +47,7 @@ class SearchFragment : Fragment() {
         trendingMovieAdapter = TrendingMovieAdapter()
         trendingTvAdapter = TrendingTvAdapter()
         trendingActorAdapter = TrendingActorAdapter()
+
     }
 
 
@@ -62,6 +68,8 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
 
         viewModel.trendingMovieList.observe(viewLifecycleOwner, {
@@ -139,11 +147,12 @@ class SearchFragment : Fragment() {
         onTabSelectedListener = object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){
-                    0 -> binding.apply {
+                    0 -> {
                         categroy = 0
                         if (searchQuery.isNullOrEmpty()){
                             viewModel.getTrendingMovies()
                             setupRecyclerViewTrendingMovie()
+
                         }
                         searchQuery?.let {
                             if(it.isNotEmpty()){
@@ -152,27 +161,31 @@ class SearchFragment : Fragment() {
                             }
                         }
                     }
-                    1 -> binding.apply {
+                    1 ->  {
                         categroy = 1
                         if (searchQuery.isNullOrEmpty()){
                             viewModel.getTrendingTv()
                             setupRecyclerViewTrendingTv()
+
                         }
                         searchQuery?.let {
                             if(it.isNotEmpty()){
                                 viewModel.getSearchedTv(it)
+                                setupRecyclerViewSeachedTv()
                             }
                         }
                     }
-                    2 -> binding.apply {
+                    2 ->  {
                         categroy = 2
                         if (searchQuery.isNullOrEmpty()){
                             viewModel.getTrendingActor()
                             setupRecyclerViewTrendingActor()
+
                         }
                         searchQuery?.let {
                             if(it.isNotEmpty()){
                                 viewModel.getSearchedActor(it)
+                                setupRecyclerViewSeachedActor()
                             }
                         }
                     }
@@ -193,6 +206,7 @@ class SearchFragment : Fragment() {
         binding.trendingRecyclerView.apply {
             layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             adapter = trendingMovieAdapter
+            onTrendingMoviesClick()
         }
     }
 
@@ -201,6 +215,7 @@ class SearchFragment : Fragment() {
         binding.trendingRecyclerView.apply {
             layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             adapter = trendingTvAdapter
+            onTrendingTvClick()
         }
     }
 
@@ -209,6 +224,7 @@ class SearchFragment : Fragment() {
         binding.trendingRecyclerView.apply {
             layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             adapter = trendingActorAdapter
+            setOnActorTrendigClick()
         }
     }
 
@@ -219,6 +235,7 @@ class SearchFragment : Fragment() {
         binding.searchedRecyclerView.apply {
             layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
             adapter =  searchedMovieAdapter
+            onSearchMoviesClick()
         }
     }
 
@@ -227,6 +244,8 @@ class SearchFragment : Fragment() {
         binding.searchedRecyclerView.apply {
             layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
             adapter =  searchedTvAdapter
+            onSearchedTvClick()
+
         }
     }
 
@@ -235,6 +254,7 @@ class SearchFragment : Fragment() {
         binding.searchedRecyclerView.apply {
             layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
             adapter =   searchedActorAdapter
+            setOnActorSearchedClick()
         }
     }
 
@@ -267,6 +287,75 @@ class SearchFragment : Fragment() {
         binding.searchingProgressBar.isGone = true
         binding.trendingRecyclerView.isGone = false
         binding.emptySearch.isGone = true
+    }
+
+    fun onTrendingMoviesClick(){
+
+        trendingMovieAdapter.setOnPopularMovieItemClick { movie ->
+            val bundle = Bundle().apply {
+               putString("isMovie", "0")
+                putString("id", movie.id.toString())
+            }
+            findNavController().navigate(R.id.action_searchFragment_to_showFragment, bundle)
+
+        }
+
+    }
+
+    fun onSearchMoviesClick(){
+
+        searchedMovieAdapter.setOnPopularMovieItemClick { movie ->
+            val bundle = Bundle().apply {
+                putString("isMovie", "0")
+                putString("id", movie.id.toString())
+            }
+            findNavController().navigate(R.id.action_searchFragment_to_showFragment, bundle)
+        }
+
+    }
+
+    fun onTrendingTvClick(){
+
+        trendingTvAdapter.setOnPopularTvItemClick { tv ->
+            val bundle = Bundle().apply {
+                putString("isMovie", "1")
+                putString("idTv", tv.id.toString())
+            }
+            findNavController().navigate(R.id.action_searchFragment_to_showFragment, bundle)
+        }
+
+    }
+
+    fun onSearchedTvClick(){
+
+        searchedTvAdapter.setOnPopularTvItemClick { tv ->
+            val bundle = Bundle().apply {
+                putString("isMovie", "1")
+                putString("idTv", tv.id.toString())
+            }
+            findNavController().navigate(R.id.action_searchFragment_to_showFragment, bundle)
+        }
+
+    }
+
+    private fun setOnActorTrendigClick(){
+
+            trendingActorAdapter.setOnPopularMovieItemClick { movie ->
+                val bundle = Bundle().apply {
+                    putString("id", movie.id.toString())
+                }
+                findNavController().navigate(R.id.action_searchFragment_to_actorFragment, bundle)
+            }
+    }
+
+    private fun setOnActorSearchedClick(){
+
+        searchedActorAdapter.setOnPopularMovieItemClick { movie ->
+            val bundle = Bundle().apply {
+                putString("id", movie.id.toString())
+            }
+            findNavController().navigate(R.id.action_searchFragment_to_actorFragment, bundle)
+        }
     }
 
 

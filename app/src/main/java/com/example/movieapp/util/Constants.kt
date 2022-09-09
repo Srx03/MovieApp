@@ -5,5 +5,7 @@ object Constants {
     const val URL_START = "https://image.tmdb.org/t/p/w500/"
     const val API_KEY = "0d78a49b1a3056a1df36e1de7787fcda"
 
+    const val imgActor = "https://image.tmdb.org/t/p/w185"
+
 
 }

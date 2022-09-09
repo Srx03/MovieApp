@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.models.actor.Result
 import com.example.movieapp.databinding.SearchedActorItemBinding
+import com.example.movieapp.util.Constants.imgActor
 
 class SearchedActorAdapter: RecyclerView.Adapter<SearchedActorAdapter.MovieViewHolder>() {
 
     private var liveData = ArrayList<Result>()
+    var onItemClick: ((Result) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -30,12 +32,23 @@ class SearchedActorAdapter: RecyclerView.Adapter<SearchedActorAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" +
+        Glide.with(holder.itemView).load(
+            imgActor +
                 liveData[position].profile_path).into(holder.binding.imgMovie)
+        holder.binding.tvActorName.text = liveData[position].name
+
+        holder.itemView.setOnClickListener {
+            onItemClick!!.invoke(liveData[position])
+        }
+
     }
 
     override fun getItemCount(): Int {
         return liveData.size
 
+    }
+
+    fun setOnPopularMovieItemClick(actor: (Result) -> Unit) {
+        onItemClick = actor
     }
 }

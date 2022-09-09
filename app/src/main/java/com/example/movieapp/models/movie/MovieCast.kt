@@ -12,5 +12,7 @@ data class MovieCast(
     val order: Int?,
     val original_name: String?,
     val popularity: Double?,
-    var profile_path: String?
+    val profile_path: String?
 )
+
+

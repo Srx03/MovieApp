@@ -6,16 +6,31 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ActorShowItemBinding
+import com.example.movieapp.models.actor.Result
 import com.example.movieapp.models.movie.MovieCast
+import com.example.movieapp.models.tv.TvCast
+import com.example.movieapp.util.Constants.imgActor
 
-class ActorShowAdapter: RecyclerView.Adapter<ActorShowAdapter.MovieViewHolder>() {
+class ActorShowAdapter(
+    private var isMoive: String = "1"
+): RecyclerView.Adapter<ActorShowAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<MovieCast>()
+    private var liveDataMovie = ArrayList<MovieCast>()
+    private var liveDataTv = ArrayList<TvCast>()
+    var onItemClickMovieActor: ((MovieCast) -> Unit)? = null
+    var onItemClickTvActor: ((TvCast) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(liveData: List<MovieCast>){
-        this.liveData = liveData as ArrayList<MovieCast>
+    fun setList(liveDataMovie: List<MovieCast>){
+        this.liveDataMovie = liveDataMovie as ArrayList<MovieCast>
+        notifyDataSetChanged()
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setListTv(liveDataTv: List<TvCast>){
+        this.liveDataTv = liveDataTv as ArrayList<TvCast>
         notifyDataSetChanged()
     }
 
@@ -28,14 +43,44 @@ class ActorShowAdapter: RecyclerView.Adapter<ActorShowAdapter.MovieViewHolder>()
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].profile_path).into(holder.binding.imgActorShow)
-        holder.binding.tvActorRealName.text = liveData[position].name.toString()
-        holder.binding.tvActorCharacterName.text = liveData[position].character.toString()
 
+        if (isMoive == "0") {
+
+            Glide.with(holder.itemView)
+                .load(imgActor + liveDataMovie[position].profile_path)
+                .into(holder.binding.imgActorShow)
+            holder.binding.tvActorRealName.text = liveDataMovie[position].name.toString()
+            holder.binding.tvActorCharacterName.text = liveDataMovie[position].character.toString()
+            holder.itemView.setOnClickListener {
+                onItemClickMovieActor!!.invoke(liveDataMovie[position])
+            }
+        }else{
+            Glide.with(holder.itemView)
+                .load(imgActor + liveDataTv[position].profile_path)
+                .into(holder.binding.imgActorShow)
+            holder.binding.tvActorRealName.text = liveDataTv[position].name
+            holder.binding.tvActorCharacterName.text = liveDataTv[position].character
+            holder.itemView.setOnClickListener {
+                onItemClickTvActor!!.invoke(liveDataTv[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return liveData.size
+        if (isMoive == "0"){
+            return liveDataMovie.size
+        }else{
+            return liveDataTv.size
+        }
 
     }
+
+    fun setOnMovieActorItemClick(actorMovie: (MovieCast) -> Unit) {
+        onItemClickMovieActor = actorMovie
+    }
+
+    fun setOnTvActorItemClick(actorTv: (TvCast) -> Unit) {
+        onItemClickTvActor = actorTv
+    }
+
 }

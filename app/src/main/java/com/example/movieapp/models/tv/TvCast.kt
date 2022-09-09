@@ -1,20 +1,15 @@
 package com.example.movieapp.models.tv
 
 data class TvCast(
-    val backdrop_path: String?,
-    val character: String?,
-    val credit_id: String?,
-    val episode_count: Int?,
-    val first_air_date: String?,
-    val genre_ids: List<Int>?,
+    val adult: Boolean,
+    val character: String,
+    val credit_id: String,
+    val gender: Int,
     val id: Int,
-    val name: String?,
-    val origin_country: List<String>?,
-    val original_language: String?,
-    val original_name: String?,
-    val overview: String?,
-    val popularity: Double?,
-    val poster_path: String?,
-    val vote_average: Double?,
-    val vote_count: Int?
+    val known_for_department: String,
+    val name: String,
+    val order: Int,
+    val original_name: String,
+    val popularity: Double,
+    val profile_path: String
 )

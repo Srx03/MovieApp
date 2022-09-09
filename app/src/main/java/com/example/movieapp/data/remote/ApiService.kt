@@ -1,14 +1,14 @@
 package com.example.movieapp.data.remote
 
+import com.example.movieapp.models.actor.ActorCredits
+import com.example.movieapp.data.local.entity.ActorDetail
 import com.example.movieapp.models.actor.Actors
-import com.example.movieapp.models.genres.Genre
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
 import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.Tv
 import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -41,8 +41,12 @@ interface ApiService {
     @GET("3/search/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchMovieData(@Query("query") query: String) : Response<Movie>
 
-    @GET("3/movie/{id}/videos?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    fun  getTrailerTeasers(@Path("id") id: Int) : Call<Movie>
+    @GET("3/trending/movie/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTrendigMovies() : Response<Movie>
+
+
+
+
 
 
     @GET("3/tv/popular?api_key=0d78a49b1a3056a1df36e1de7787fcda")
@@ -69,28 +73,24 @@ interface ApiService {
     @GET("3/tv/{tvId}/similar?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSimilarTv(@Path("tvId") tvId: String) : Response<Tv>
 
+    @GET("3/trending/tv/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTrendigTv() : Response<Tv>
+
+
+
 
 
     @GET("3/search/person?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchActorData(@Query("query") query: String) : Response<Actors>
 
-
-
-
-    @GET("3/trending/movie/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getTrendigMovies() : Response<Movie>
-
-    @GET("3/trending/tv/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    suspend fun getTrendigTv() : Response<Tv>
-
     @GET("3/trending/person/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTrendigActor() : Response<Actors>
 
+    @GET("3/person/{personId}?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getActorDetail(@Path("personId") personId: String) : Response<ActorDetail>
 
-
-
-    @GET("3/genre/movie/list?api_key=0d78a49b1a3056a1df36e1de7787fcda")
-    fun getGeners() : Response<Genre>
+    @GET("3/person/{personId}/combined_credits?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getActorCredits(@Path("personId") personId: String) : Response<ActorCredits>
 
 
 }

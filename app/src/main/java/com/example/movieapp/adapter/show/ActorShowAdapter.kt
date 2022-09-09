@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ActorShowItemBinding
+import com.example.movieapp.models.actor.Result
 import com.example.movieapp.models.movie.MovieCast
 import com.example.movieapp.models.tv.TvCast
 import com.example.movieapp.util.Constants.imgActor
@@ -16,6 +17,8 @@ class ActorShowAdapter(
 
     private var liveDataMovie = ArrayList<MovieCast>()
     private var liveDataTv = ArrayList<TvCast>()
+    var onItemClickMovieActor: ((MovieCast) -> Unit)? = null
+    var onItemClickTvActor: ((TvCast) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -48,13 +51,18 @@ class ActorShowAdapter(
                 .into(holder.binding.imgActorShow)
             holder.binding.tvActorRealName.text = liveDataMovie[position].name.toString()
             holder.binding.tvActorCharacterName.text = liveDataMovie[position].character.toString()
+            holder.itemView.setOnClickListener {
+                onItemClickMovieActor!!.invoke(liveDataMovie[position])
+            }
         }else{
             Glide.with(holder.itemView)
                 .load(imgActor + liveDataTv[position].profile_path)
                 .into(holder.binding.imgActorShow)
             holder.binding.tvActorRealName.text = liveDataTv[position].name
             holder.binding.tvActorCharacterName.text = liveDataTv[position].character
-
+            holder.itemView.setOnClickListener {
+                onItemClickTvActor!!.invoke(liveDataTv[position])
+            }
         }
     }
 
@@ -66,4 +74,13 @@ class ActorShowAdapter(
         }
 
     }
+
+    fun setOnMovieActorItemClick(actorMovie: (MovieCast) -> Unit) {
+        onItemClickMovieActor = actorMovie
+    }
+
+    fun setOnTvActorItemClick(actorTv: (TvCast) -> Unit) {
+        onItemClickTvActor = actorTv
+    }
+
 }

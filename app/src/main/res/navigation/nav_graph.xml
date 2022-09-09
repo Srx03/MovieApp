@@ -9,12 +9,23 @@
         android:id="@+id/homeFragment"
         android:name="com.example.movieapp.ui.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_showFragment"
+            app:destination="@id/showFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.movieapp.ui.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_showFragment"
+            app:destination="@id/showFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_actorFragment"
+            app:destination="@id/actorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/watchListFragment"
         android:name="com.example.movieapp.ui.fragments.WatchListFragment"
@@ -30,4 +41,18 @@
         android:name="com.example.movieapp.ui.fragments.ComingSoonFragment"
         android:label="fragment_coming_soon"
         tools:layout="@layout/fragment_coming_soon" />
+    <fragment
+        android:id="@+id/showFragment"
+        android:name="com.example.movieapp.ui.fragments.ShowFragment"
+        tools:layout="@layout/fragment_show"
+        android:label="ShowFragment" >
+        <action
+            android:id="@+id/action_showFragment_to_actorFragment"
+            app:destination="@id/actorFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/actorFragment"
+        android:name="com.example.movieapp.ui.fragments.ActorFragment"
+        tools:layout="@layout/fragment_actor"
+        android:label="ActorFragment" />
 </navigation>

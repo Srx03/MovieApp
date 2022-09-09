@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movieapp.R
 import com.example.movieapp.adapter.home.*
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.ui.activitis.ShowActivity
@@ -116,24 +118,27 @@ class HomeFragment : Fragment() {
     fun onPopularMoviesClick(){
 
         movieAdapter.setOnPopularMovieItemClick { movie ->
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("isMovie","0")
-            intent.putExtra("id",movie.id.toString())
-            startActivity(intent)
+            val bundle = Bundle().apply {
+                putString("isMovie", "0")
+                putString("id", movie.id.toString())
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_showFragment, bundle)
         }
 
         recentMovieAdapter.setOnPopularMovieItemClick { movie ->
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("isMovie","0")
-            intent.putExtra("id",movie.id.toString())
-            startActivity(intent)
+            val bundle = Bundle().apply {
+                putString("isMovie", "0")
+                putString("id", movie.id.toString())
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_showFragment, bundle)
         }
 
         topRatedMovieAdapter.setOnPopularMovieItemClick { movie ->
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("isMovie","0")
-            intent.putExtra("id",movie.id.toString())
-            startActivity(intent)
+            val bundle = Bundle().apply {
+                putString("isMovie", "0")
+                putString("id", movie.id.toString())
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_showFragment, bundle)
         }
 
 
@@ -142,17 +147,19 @@ class HomeFragment : Fragment() {
 
     fun onPopularTvClick(){
         popularTvAdapter.setOnPopularTvItemClick { tv ->
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("isMovie","1")
-            intent.putExtra("idTv",tv.id.toString())
-            startActivity(intent)
+            val bundle = Bundle().apply {
+                putString("isMovie", "1")
+                putString("idTv", tv.id.toString())
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_showFragment, bundle)
         }
 
         topRatedTvAdapter.setOnPopularTvItemClick { tv ->
-            val intent = Intent(activity, ShowActivity::class.java)
-            intent.putExtra("isMovie","1")
-            intent.putExtra("idTv",tv.id.toString())
-            startActivity(intent)
+            val bundle = Bundle().apply {
+                putString("isMovie", "1")
+                putString("idTv", tv.id.toString())
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_showFragment, bundle)
         }
     }
 

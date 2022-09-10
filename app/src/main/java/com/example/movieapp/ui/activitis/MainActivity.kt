@@ -15,13 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var movieAdapter: MovieAdapter
-    private lateinit var recentMovieAdapter: RecentMovieAdapter
     private lateinit var binding: ActivityMainBinding
-
-    val viewModel by lazy {
-        ViewModelProvider(this, defaultViewModelProviderFactory).get(HomeViewModel::class.java)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

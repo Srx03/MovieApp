@@ -1,8 +1,6 @@
 package com.example.movieapp.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.R
 import com.example.movieapp.adapter.home.*
 import com.example.movieapp.databinding.FragmentHomeBinding
-import com.example.movieapp.ui.activitis.ShowActivity
 import com.example.movieapp.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

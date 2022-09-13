@@ -1,27 +1,21 @@
 package com.example.movieapp.ui.fragments
 
-import android.graphics.Bitmap
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.movieapp.R
 import com.example.movieapp.adapter.comingsoon.ComingSoonGenreAdapter
 import com.example.movieapp.adapter.comingsoon.ComingSoonMovieAdapter
 import com.example.movieapp.adapter.comingsoon.ComingSoonTvAdapter
 import com.example.movieapp.databinding.FragmentComingSoonBinding
-import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.ui.viewmodel.ComingSoonViewModel
 import com.example.movieapp.util.*
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ComingSoonFragment : Fragment() {
@@ -33,6 +27,7 @@ class ComingSoonFragment : Fragment() {
     private lateinit var comingSoonMovieAdapter: ComingSoonMovieAdapter
     private lateinit var comingSoonTvAdapter: ComingSoonTvAdapter
     private var isFirstPrinted: Boolean = false
+    private var onFirstLoad: Boolean = false
     private lateinit var genreAdapter: ComingSoonGenreAdapter
     private var onTabSelectedListener: TabLayout.OnTabSelectedListener? = null
 
@@ -48,6 +43,11 @@ class ComingSoonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(!onFirstLoad){
+            viewModel.getComingSoonMovies()
+            setupRecyclerViewMovie()
+            onFirstLoad = true
+        }
 
         viewModel.comingSoonMovieList.observe(viewLifecycleOwner) {
             when (it){

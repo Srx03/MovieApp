@@ -64,6 +64,7 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         onTabSelectedListener = null
+        onFirstLoad = false
     }
 
 
@@ -100,6 +101,7 @@ class SearchFragment : Fragment() {
 
                 is Resource.Success -> {
                     trendingMovieAdapter.setList(it.data!!.results)
+                    bindingSetupTrending()
                 }
 
                 else -> Unit

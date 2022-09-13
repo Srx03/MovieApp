@@ -1,25 +1,34 @@
 package com.example.movieapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
-
+import com.example.movieapp.data.firebase.entities.User
 import com.example.movieapp.databinding.FragmentRegisterBinding
+import com.example.movieapp.ui.viewmodel.RegisterViewModel
+import com.example.movieapp.util.RegisterValidation
+import com.example.movieapp.util.Resource
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val  viewModel: RegisterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +41,64 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
+            btnRegister.setOnClickListener{
+                val user = User(
+                    etEmail.text.toString().trim(),
+                    etPhone.text.toString().trim()
+                )
+                val password = etPassword.text.toString()
+                viewModel.createAccountWithEmailAndPassword(user,password)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.register.collect{
+                when(it){
+                    is Resource.Loading ->{
+                        binding.btnRegister.startAnimation()
+                    }
+
+                    is Resource.Error ->{
+                        Log.e("error", it.message.toString())
+                        binding.btnRegister.revertAnimation()
+                    }
+
+                    is Resource.Success ->{
+                        Log.d("test", it.data.toString())
+                        binding.btnRegister.revertAnimation()
+                    }
+                    else -> Unit
+
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.validation.collect{ validation ->
+                if (validation.email is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.etEmail.apply {
+                            requestFocus()
+                            error = validation.email.message
+                        }
+                    }
+                }
+
+                if (validation.password is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.etPassword.apply {
+                            requestFocus()
+                            error = validation.password.message
+                        }
+                    }
+                }
+            }
+        }
+
+        binding.mLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
     }
 

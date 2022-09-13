@@ -2,6 +2,7 @@ package com.example.movieapp.adapter.home
 
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,13 +13,13 @@ import com.example.movieapp.models.movie.MovieResult
 
 class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<MovieResult>()
+    private var liveData: List<MovieResult>? = null
     var onItemClick: ((MovieResult) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<MovieResult>){
-        this.liveData = liveData as ArrayList<MovieResult>
+        this.liveData = liveData
         notifyDataSetChanged()
     }
 
@@ -32,15 +33,16 @@ class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].poster_path).into(holder.binding.imgMovie)
         holder.itemView.setOnClickListener {
-            onItemClick!!.invoke(liveData[position])
+            onItemClick!!.invoke(liveData!![position])
         }
 
     }
 
     override fun getItemCount(): Int {
-        return liveData.size
+        return if(liveData == null) 0
+          else  liveData!!.size
     }
 
     fun setOnPopularMovieItemClick(movie: (MovieResult) -> Unit) {

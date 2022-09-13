@@ -108,7 +108,7 @@
                     android:inputType="textPassword"
                     android:padding="10dp" />
 
-                <Button
+                <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +119,8 @@
                     android:background="@color/red"
                     android:text="Login"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    app:spinning_bar_color="@color/white"/>
 
 
             </RelativeLayout>

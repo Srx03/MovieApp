@@ -7,7 +7,7 @@
     tools:context=".ui.activitis.LogActivity">
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/fragmentContainerViewLogin"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"

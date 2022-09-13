@@ -15,6 +15,8 @@ import com.example.movieapp.adapter.show.ActorShowAdapter
 import com.example.movieapp.adapter.show.SimilarAdapter
 import com.example.movieapp.databinding.FragmentShowBinding
 import com.example.movieapp.ui.viewmodel.ShowViewModel
+import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,40 +55,121 @@ class ShowFragment: Fragment() {
 
         if (isMovie == "0"){
             viewModel.movieCreditsList.observe(viewLifecycleOwner) {
-                actorShowAdapter.setList(it.cast)
+                when (it){
+
+                    is Resource.Error -> {
+                        showSnackBar(message = it.message!!)
+                    }
+                    is Resource.Loading -> {
+                    }
+
+                    is Resource.Success -> {
+
+                        actorShowAdapter.setList(it.data!!.cast)
+                    }
+                    else -> Unit
+                }
             }
 
             viewModel.similarMovieList.observe(viewLifecycleOwner) {
-                similarAdapter.setList(it.results)
+                when (it){
+
+                    is Resource.Error -> {
+                        showSnackBar(message = it.message!!)
+                    }
+                    is Resource.Loading -> {
+                    }
+
+                    is Resource.Success -> {
+
+                        similarAdapter.setList(it.data!!.results)
+                    }
+                    else -> Unit
+                }
             }
 
             viewModel.movieDetailList.observe(viewLifecycleOwner) {
-                Glide.with(this)
-                    .load("https://image.tmdb.org/t/p/w500/" + it.poster_path)
-                    .into(binding.youtubePlayerView)
-                binding.tvTitle.text = it.title
-                binding.tvYear.text = it.release_date
-                binding.tvOverview.text = it.overview
-                binding.tvRating.text = String.format("%.1f", it.vote_average)
-                binding.tvGenres.text = it.genres.joinToString("  /  ") { it.name }
+
+                when (it){
+
+                    is Resource.Error -> {
+                        showSnackBar(message = it.message!!)
+                    }
+                    is Resource.Loading -> {
+                    }
+
+                    is Resource.Success -> {
+
+                        Glide.with(this)
+                            .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
+                            .into(binding.youtubePlayerView)
+                        binding.tvTitle.text = it.data.title
+                        binding.tvYear.text = it.data.release_date
+                        binding.tvOverview.text = it.data.overview
+                        binding.tvRating.text = String.format("%.1f", it.data.vote_average)
+                        binding.tvGenres.text = it.data.genres.joinToString("  /  ") { it.name }
+                    }
+                    else -> Unit
+                }
             }
         }else{
             viewModel.tvCreditsList.observe(viewLifecycleOwner) {
-                actorShowAdapter.setListTv(it.cast)
+                when (it){
+
+                    is Resource.Error -> {
+                        showSnackBar(message = it.message!!)
+                    }
+                    is Resource.Loading -> {
+                    }
+
+                    is Resource.Success -> {
+
+                        actorShowAdapter.setListTv(it.data!!.cast)
+                    }
+                    else -> Unit
+                }
             }
 
             viewModel.similarTvList.observe(viewLifecycleOwner) {
-                similarAdapter.setListTv(it.results)
+                when (it){
+
+                    is Resource.Error -> {
+                        showSnackBar(message = it.message!!)
+                    }
+                    is Resource.Loading -> {
+                    }
+
+                    is Resource.Success -> {
+
+                        similarAdapter.setListTv(it.data!!.results)
+                    }
+                    else -> Unit
+                }
             }
             viewModel.tvDetailList.observe(viewLifecycleOwner) {
-                Glide.with(this)
-                    .load("https://image.tmdb.org/t/p/w500/" + it.poster_path)
-                    .into(binding.youtubePlayerView)
-                binding.tvTitle.text = it.name
-                binding.tvYear.text = it.first_air_date
-                binding.tvOverview.text = it.overview
-                binding.tvRating.text = String.format("%.1f", it.vote_average)
-                binding.tvGenres.text = it.genres.joinToString("  /  ") { it.name }
+
+                when (it){
+
+                    is Resource.Error -> {
+                        showSnackBar(message = it.message!!)
+                    }
+                    is Resource.Loading -> {
+                    }
+
+                    is Resource.Success -> {
+
+                        Glide.with(this)
+                            .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
+                            .into(binding.youtubePlayerView)
+                        binding.tvTitle.text = it.data.name
+                        binding.tvYear.text = it.data.first_air_date
+                        binding.tvOverview.text = it.data.overview
+                        binding.tvRating.text = String.format("%.1f", it.data.vote_average)
+                        binding.tvGenres.text = it.data.genres.joinToString("  /  ") { it.name }
+                    }
+                    else -> Unit
+                }
+
             }
         }
 

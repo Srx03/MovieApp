@@ -8,4 +8,7 @@ object Constants {
     const val imgActor = "https://image.tmdb.org/t/p/w185"
 
 
+    const val USER_COLLECTION = "user"
+
+
 }

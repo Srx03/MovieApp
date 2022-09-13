@@ -10,13 +10,13 @@ import com.example.movieapp.models.movie.MovieResult
 
 class TrendingMovieAdapter: RecyclerView.Adapter<TrendingMovieAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<MovieResult>()
+    private var liveData: List<MovieResult>? = null
     var onItemClick: ((MovieResult) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<MovieResult>){
-        this.liveData = liveData as ArrayList<MovieResult>
+        this.liveData = liveData
         notifyDataSetChanged()
     }
 
@@ -29,16 +29,17 @@ class TrendingMovieAdapter: RecyclerView.Adapter<TrendingMovieAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
-        holder.binding.tvTitle.text = liveData[position].title
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].poster_path).into(holder.binding.imgMovie)
+        holder.binding.tvTitle.text = liveData!![position].title
 
         holder.itemView.setOnClickListener {
-            onItemClick!!.invoke(liveData[position])
+            onItemClick!!.invoke(liveData!![position])
         }
     }
 
     override fun getItemCount(): Int {
-        return liveData.size
+        return if(liveData == null) 0
+        else  liveData!!.size
 
     }
 

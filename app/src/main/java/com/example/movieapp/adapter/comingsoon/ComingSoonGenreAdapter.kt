@@ -15,12 +15,12 @@ import com.example.movieapp.models.movie.MovieResult
 
 class ComingSoonGenreAdapter(): RecyclerView.Adapter<ComingSoonGenreAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<GenreX>()
+    private var liveData: List<GenreX>? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<GenreX>){
-        this.liveData = liveData as ArrayList<GenreX>
+        this.liveData = liveData
         notifyDataSetChanged()
     }
 
@@ -33,11 +33,12 @@ class ComingSoonGenreAdapter(): RecyclerView.Adapter<ComingSoonGenreAdapter.Movi
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.binding.tvGenres.text = liveData[position].name
+        holder.binding.tvGenres.text = liveData!![position].name
     }
 
     override fun getItemCount(): Int {
-        return liveData.size
+        return if(liveData == null) 0
+        else  liveData!!.size
     }
 
 }

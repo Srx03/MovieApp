@@ -15,9 +15,8 @@ import com.example.movieapp.adapter.comingsoon.ComingSoonTvAdapter
 import com.example.movieapp.databinding.FragmentComingSoonBinding
 import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.ui.viewmodel.ComingSoonViewModel
-import com.example.movieapp.util.Genres
-import com.example.movieapp.util.formatUpcomingDate
-import com.example.movieapp.util.formatUpcomingTv
+import com.example.movieapp.util.*
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,15 +49,39 @@ class ComingSoonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.comingSoonMovieList.observe(viewLifecycleOwner, {
-            setupRecyclerViewMovie()
-            comingSoonMovieAdapter.setList(it.results)
-        })
+        viewModel.comingSoonMovieList.observe(viewLifecycleOwner) {
+            when (it){
 
-        viewModel.comingSoonTvList.observe(viewLifecycleOwner, {
-            setupRecyclerViewTv()
-            comingSoonTvAdapter.setList(it.results)
-        })
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {
+                }
+
+                is Resource.Success -> {
+                    setupRecyclerViewMovie()
+                    comingSoonMovieAdapter.setList(it.data!!.results)
+                }
+                else -> Unit
+            }
+        }
+
+        viewModel.comingSoonTvList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {
+                }
+
+                is Resource.Success -> {
+                    setupRecyclerViewTv()
+                    comingSoonTvAdapter.setList(it.data!!.results)
+                }
+                else -> Unit
+            }
+        }
 
 
 

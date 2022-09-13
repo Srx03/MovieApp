@@ -7,19 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.models.actor.Result
 import com.example.movieapp.databinding.TrendingActorItemBinding
-import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.util.Constants.imgActor
 
 
 class TrendingActorAdapter: RecyclerView.Adapter<TrendingActorAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<Result>()
+    private var liveData: List<Result>? = null
     var onItemClick: ((Result) -> Unit)? = null
 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<Result>){
-        this.liveData = liveData as ArrayList<Result>
+        this.liveData = liveData
         notifyDataSetChanged()
     }
 
@@ -32,16 +31,17 @@ class TrendingActorAdapter: RecyclerView.Adapter<TrendingActorAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load(imgActor + liveData[position].profile_path).into(holder.binding.imgMovie)
-        holder.binding.tvName.text = liveData[position].name
+        Glide.with(holder.itemView).load(imgActor + liveData!![position].profile_path).into(holder.binding.imgMovie)
+        holder.binding.tvName.text = liveData!![position].name
 
         holder.itemView.setOnClickListener {
-            onItemClick!!.invoke(liveData[position])
+            onItemClick!!.invoke(liveData!![position])
         }
     }
 
     override fun getItemCount(): Int {
-        return liveData.size
+        return if(liveData == null) 0
+        else  liveData!!.size
 
     }
 

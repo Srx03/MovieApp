@@ -1,28 +1,21 @@
 package com.example.movieapp.ui.fragments
 
-import android.graphics.Bitmap
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.movieapp.R
 import com.example.movieapp.adapter.comingsoon.ComingSoonGenreAdapter
 import com.example.movieapp.adapter.comingsoon.ComingSoonMovieAdapter
 import com.example.movieapp.adapter.comingsoon.ComingSoonTvAdapter
 import com.example.movieapp.databinding.FragmentComingSoonBinding
-import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.ui.viewmodel.ComingSoonViewModel
-import com.example.movieapp.util.Genres
-import com.example.movieapp.util.formatUpcomingDate
-import com.example.movieapp.util.formatUpcomingTv
+import com.example.movieapp.util.*
 import com.google.android.material.tabs.TabLayout
 import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ComingSoonFragment : Fragment() {
@@ -34,6 +27,7 @@ class ComingSoonFragment : Fragment() {
     private lateinit var comingSoonMovieAdapter: ComingSoonMovieAdapter
     private lateinit var comingSoonTvAdapter: ComingSoonTvAdapter
     private var isFirstPrinted: Boolean = false
+    private var onFirstLoad: Boolean = false
     private lateinit var genreAdapter: ComingSoonGenreAdapter
     private var onTabSelectedListener: TabLayout.OnTabSelectedListener? = null
 
@@ -49,16 +43,45 @@ class ComingSoonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        viewModel.comingSoonMovieList.observe(viewLifecycleOwner, {
+        if(!onFirstLoad){
+            viewModel.getComingSoonMovies()
             setupRecyclerViewMovie()
-            comingSoonMovieAdapter.setList(it.results)
-        })
+            onFirstLoad = true
+        }
 
-        viewModel.comingSoonTvList.observe(viewLifecycleOwner, {
-            setupRecyclerViewTv()
-            comingSoonTvAdapter.setList(it.results)
-        })
+        viewModel.comingSoonMovieList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {
+                }
+
+                is Resource.Success -> {
+                    setupRecyclerViewMovie()
+                    comingSoonMovieAdapter.setList(it.data!!.results)
+                }
+                else -> Unit
+            }
+        }
+
+        viewModel.comingSoonTvList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {
+                }
+
+                is Resource.Success -> {
+                    setupRecyclerViewTv()
+                    comingSoonTvAdapter.setList(it.data!!.results)
+                }
+                else -> Unit
+            }
+        }
 
 
 

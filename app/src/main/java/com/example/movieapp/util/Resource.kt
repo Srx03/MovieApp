@@ -12,12 +12,14 @@ sealed class Resource<T>(
         val errorType: ErrorType? = null
     ) : Resource<T>(message = errorMessage, status = Status.ERROR)
     class Loading<T> : Resource<T>(status = Status.LOADING)
+    class Unspecified<T> : Resource<T>(status = Status.UNDEFINE)
 }
 
 enum class Status {
     SUCCESS,
     ERROR,
-    LOADING
+    LOADING,
+    UNDEFINE
 }
 
 enum class ErrorType {

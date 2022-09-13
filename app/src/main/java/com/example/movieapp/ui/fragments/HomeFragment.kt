@@ -1,6 +1,5 @@
 package com.example.movieapp.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.R
 import com.example.movieapp.adapter.home.*
 import com.example.movieapp.databinding.FragmentHomeBinding
-import com.example.movieapp.ui.activitis.ShowActivity
 import com.example.movieapp.ui.viewmodel.HomeViewModel
+import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,25 +54,106 @@ class HomeFragment : Fragment() {
 
         setupRecyclerView()
 
-        viewModel.popularMovieList.observe(viewLifecycleOwner, {
-            movieAdapter.setList(it.results)
-        })
+        viewModel.popularMovieList.observe(viewLifecycleOwner) {
+            when (it){
 
-        viewModel.recentMovieList.observe(viewLifecycleOwner, {
-            recentMovieAdapter.setList(it.results)
-        })
+                is Resource.Error -> {
+                    showSnackBar(
+                        message = it.message!!,
+                        length = Snackbar.LENGTH_INDEFINITE,
+                        actionMsg = "Retry"
+                    ) { viewModel.retry() }
+                }
+                is Resource.Loading -> {
+                }
 
-        viewModel.topRatedMovieList.observe(viewLifecycleOwner, {
-           topRatedMovieAdapter.setList(it.results)
-        })
+                is Resource.Success -> {
+                    movieAdapter.setList(it.data!!.results)
+                }
+                else -> Unit
+            }
+        }
 
-        viewModel.popularTvList.observe(viewLifecycleOwner, {
-           popularTvAdapter.setList(it.results)
-        })
+        viewModel.recentMovieList.observe(viewLifecycleOwner) {
+            when (it){
 
-        viewModel.topRatedTvList.observe(viewLifecycleOwner, {
-         topRatedTvAdapter.setList(it.results)
-        })
+                is Resource.Error -> {
+                    showSnackBar(
+                        message = it.message!!,
+                        length = Snackbar.LENGTH_INDEFINITE,
+                        actionMsg = "Retry"
+                    ) { viewModel.retry() }
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    recentMovieAdapter.setList(it.data!!.results)
+                }
+
+                else -> Unit
+            }
+        }
+
+        viewModel.topRatedMovieList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(
+                        message = it.message!!,
+                        length = Snackbar.LENGTH_INDEFINITE,
+                        actionMsg = "Retry"
+                    ) { viewModel.retry() }
+                }
+
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                   topRatedMovieAdapter.setList(it.data!!.results)
+                }
+
+                else -> Unit
+            }
+        }
+
+        viewModel.popularTvList.observe(viewLifecycleOwner) {
+            when (it){
+                is Resource.Error -> {
+                    showSnackBar(
+                        message = it.message!!,
+                        length = Snackbar.LENGTH_INDEFINITE,
+                        actionMsg = "Retry"
+                    ) { viewModel.retry() }
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    popularTvAdapter.setList(it.data!!.results)
+                }
+
+                else -> Unit
+            }
+
+        }
+
+        viewModel.topRatedTvList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(
+                        message = it.message!!,
+                        length = Snackbar.LENGTH_INDEFINITE,
+                        actionMsg = "Retry"
+                    ) { viewModel.retry() }
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                   popularTvAdapter.setList(it.data!!.results)
+                }
+
+                else -> Unit
+            }
+        }
 
         onPopularMoviesClick()
         onPopularTvClick()

@@ -1,6 +1,9 @@
 package com.example.movieapp.util
 
+import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,3 +41,32 @@ fun TextView.formatUpcomingTv(inputTime: String?) = if (!inputTime.isNullOrEmpty
     this.text = "New episode coming on $formattedTime"
 } else
     this.text = "Unknown"
+
+
+fun View.showSnackBar(
+    message: String,
+    length: Int = Snackbar.LENGTH_LONG,
+    actionMsg: String? = null,
+    action: (() -> Unit)? = null
+) {
+    Snackbar.make(this, message, length).apply {
+        actionMsg?.let {
+            setAction(actionMsg) {
+                action?.invoke()
+            }
+        }
+        show()
+    }
+}
+
+fun Fragment.showSnackBar(
+    message: String,
+    length: Int = Snackbar.LENGTH_LONG,
+    actionMsg: String? = null,
+    action: (() -> Unit)? = null
+) = requireView().showSnackBar(
+    message = message,
+    action = action,
+    actionMsg = actionMsg,
+    length = length
+)

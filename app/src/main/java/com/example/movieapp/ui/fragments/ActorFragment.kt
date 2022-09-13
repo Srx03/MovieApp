@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.adapter.actor.ActorKnowFromAdapter
 import com.example.movieapp.databinding.FragmentActorBinding
 import com.example.movieapp.ui.viewmodel.ActorViewModel
+import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,17 +42,43 @@ override fun onCreateView(
         getOnClickData()
 
         viewModel.actorCreditsList.observe(viewLifecycleOwner) {
-            actorKnowFromAdapter.setList(it.cast)
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {
+                }
+
+                is Resource.Success -> {
+
+                    actorKnowFromAdapter.setList(it.data!!.cast)
+                }
+                else -> Unit
+            }
         }
 
         viewModel.actorDetailList.observe(viewLifecycleOwner) {
-            Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500/" + it.profile_path)
-                .into(binding.imgMovie)
-            binding.tvName.text = it.name
-            binding.tvBirthday.text = it.birthday
-            binding.tvPlace.text = it.place_of_birth
-            binding.tvBiography.text = it.biography
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    Glide.with(this)
+                        .load("https://image.tmdb.org/t/p/w500/" + it.data!!.profile_path)
+                        .into(binding.imgMovie)
+                    binding.tvName.text = it.data.name
+                    binding.tvBirthday.text = it.data.birthday
+                    binding.tvPlace.text = it.data.place_of_birth
+                    binding.tvBiography.text = it.data.biography
+                }
+                else -> Unit
+            }
+
         }
         setUpRecyclerView()
         setUpClickListeners()

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-
+    android:paddingTop="@dimen/_12sdp"
     android:foreground="?selectableItemBackgroundBorderless"
     android:gravity="center_vertical"
     android:orientation="horizontal"

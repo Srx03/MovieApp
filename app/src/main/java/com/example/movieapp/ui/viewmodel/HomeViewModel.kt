@@ -1,12 +1,14 @@
 package com.example.movieapp.ui.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.tv.Tv
+import com.example.movieapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,13 +18,27 @@ class HomeViewModel @Inject constructor(
     private val retrofitRepostory: RetrofitRepostory
 ): ViewModel() {
 
-    val popularMovieList: MutableLiveData<Movie> = MutableLiveData()
-     val recentMovieList: MutableLiveData<Movie> = MutableLiveData()
-     val topRatedMovieList: MutableLiveData<Movie> = MutableLiveData()
-     val popularTvList: MutableLiveData<Tv> = MutableLiveData()
-     val topRatedTvList: MutableLiveData<Tv> = MutableLiveData()
+    private val _popularMovieList = MutableLiveData<Resource<Movie>>()
+    val popularMovieList: LiveData<Resource<Movie>> = _popularMovieList
+
+    private val _recentMovieList = MutableLiveData<Resource<Movie>>()
+     val recentMovieList: LiveData<Resource<Movie>> = _recentMovieList
+
+    private val _topRatedMovieList = MutableLiveData<Resource<Movie>>()
+     val topRatedMovieList: LiveData<Resource<Movie>> = _topRatedMovieList
+
+    private val _popularTvList = MutableLiveData<Resource<Tv>>()
+     val popularTvList: LiveData<Resource<Tv>> = _popularTvList
+
+    private val _topRatedTvList = MutableLiveData<Resource<Tv>>()
+     val topRatedTvList: LiveData<Resource<Tv>> = _topRatedTvList
+
 
     init {
+       retry()
+    }
+
+    fun retry(){
         getPopularMovies()
         getRecentMovies()
         getTopRatedMovies()
@@ -31,59 +47,30 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getPopularMovies() = viewModelScope.launch {
-        retrofitRepostory.getPopularMovies().let { response ->
 
-            if (response.isSuccessful){
-               popularMovieList.postValue(response.body())
-            }else{
-                Log.d("Popular", "getPopularMovies Error: ${response.code()}")
-            }
-        }
+        _popularMovieList.postValue(Resource.Loading())
+        _popularMovieList.postValue(retrofitRepostory.getPopularMovies())
     }
 
 
     fun getRecentMovies() = viewModelScope.launch {
-        retrofitRepostory.getRecentMovies().let { response ->
-
-            if (response.isSuccessful){
-              recentMovieList.postValue(response.body())
-            }else{
-                Log.d("Recent", "getRecentMovies Error: ${response.code()}")
-            }
-        }
+        _recentMovieList.postValue(Resource.Loading())
+        _recentMovieList.postValue(retrofitRepostory.getRecentMovies())
     }
 
     fun getTopRatedMovies() = viewModelScope.launch {
-        retrofitRepostory.getTopRatedMovies().let { response ->
-
-            if (response.isSuccessful){
-              topRatedMovieList.postValue(response.body())
-            }else{
-                Log.d("TopRated", "getTopRatedMovies Error: ${response.code()}")
-            }
-        }
+        _topRatedMovieList.postValue(Resource.Loading())
+        _topRatedMovieList.postValue(retrofitRepostory.getTopRatedMovies())
     }
 
     fun getPopularTv() = viewModelScope.launch {
-        retrofitRepostory.getPopularTv().let { response ->
-
-            if (response.isSuccessful){
-             popularTvList.postValue(response.body())
-            }else{
-                Log.d("PopularTv", "getPopularTv Error: ${response.code()}")
-            }
-        }
+        _popularTvList.postValue(Resource.Loading())
+        _popularTvList.postValue(retrofitRepostory.getPopularTv())
     }
 
     fun getTopRatedTv() = viewModelScope.launch {
-        retrofitRepostory.getTopRatedTv().let { response ->
-
-            if (response.isSuccessful){
-                topRatedTvList.postValue(response.body())
-            }else{
-                Log.d("TopRated", "getTopRatedTv Error: ${response.code()}")
-            }
-        }
+        _topRatedTvList.postValue(Resource.Loading())
+        _topRatedTvList.postValue(retrofitRepostory.getTopRatedTv())
     }
 
 

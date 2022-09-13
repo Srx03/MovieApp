@@ -1,8 +1,6 @@
 package com.example.movieapp.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapp.R
 import com.example.movieapp.adapter.search.*
 import com.example.movieapp.databinding.FragmentSearchBinding
-import com.example.movieapp.ui.activitis.ShowActivity
 import com.example.movieapp.ui.viewmodel.SearchViewModel
+import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -39,6 +39,7 @@ class SearchFragment : Fragment() {
     private var searchQuery: String? = null
     private var job: Job? = null
     private var categroy = 0
+    private var onFirstLoad: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +64,7 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         onTabSelectedListener = null
+        onFirstLoad = false
     }
 
 
@@ -70,48 +72,140 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        if(!onFirstLoad){
+            categroy = 0
+            if (searchQuery.isNullOrEmpty()){
+                viewModel.getTrendingMovies()
+                setupRecyclerViewTrendingMovie()
+
+            }
+            searchQuery?.let {
+                if(it.isNotEmpty()){
+                    viewModel.getSearchedMovie(it)
+                    setupRecyclerViewSeachedMovie()
+                }
+            }
+            onFirstLoad = true
+        }
 
 
-        viewModel.trendingMovieList.observe(viewLifecycleOwner, {
-            trendingMovieAdapter.setList(it.results)
-            bindingSetupTrending()
-        })
-
-        viewModel.trendingTvList.observe(viewLifecycleOwner, {
-            trendingTvAdapter.setList(it.results)
-            bindingSetupTrending()
-        })
-
-        viewModel.trendingActorList.observe(viewLifecycleOwner, {
-            trendingActorAdapter.setList(it.results)
-            bindingSetupTrending()
-        })
 
 
-        viewModel.searchedMovieList.observe(viewLifecycleOwner, {
-            if(it.results.isNotEmpty()){
-            setupRecyclerViewSeachedMovie()
-          searchedMovieAdapter.setList(it.results)
-            bindingSetupSearch()
-            }else binding.emptySearch.isGone = false
-        })
+        viewModel.trendingMovieList.observe(viewLifecycleOwner) {
+            when (it){
 
-        viewModel.searchedTvList.observe(viewLifecycleOwner, {
-            if(it.results.isNotEmpty()){
-            setupRecyclerViewSeachedTv()
-          searchedTvAdapter.setList(it.results)
-            bindingSetupSearch()
-            }else binding.emptySearch.isGone = false
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {}
 
-        })
+                is Resource.Success -> {
+                    trendingMovieAdapter.setList(it.data!!.results)
+                    bindingSetupTrending()
+                }
 
-        viewModel.searchedActorList.observe(viewLifecycleOwner, {
-            if(it.results.isNotEmpty()) {
-                setupRecyclerViewSeachedActor()
-                searchedActorAdapter.setList(it.results)
-                bindingSetupSearch()
-            }else binding.emptySearch.isGone = false
-        })
+                else -> Unit
+            }
+        }
+
+        viewModel.trendingTvList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    trendingTvAdapter.setList(it.data!!.results)
+                    bindingSetupTrending()
+                }
+
+                else -> Unit
+            }
+
+        }
+
+        viewModel.trendingActorList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    trendingActorAdapter.setList(it.data!!.results)
+                    bindingSetupTrending()
+                }
+
+                else -> Unit
+            }
+        }
+
+
+        viewModel.searchedMovieList.observe(viewLifecycleOwner) {
+
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    if(it.data!!.results.isNotEmpty()){
+                        setupRecyclerViewSeachedMovie()
+                        searchedMovieAdapter.setList(it.data.results)
+                        bindingSetupSearch()
+                    }else binding.emptySearch.isGone = false
+                }
+
+                else -> Unit
+            }
+
+        }
+
+        viewModel.searchedTvList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    if(it.data!!.results.isNotEmpty()){
+                        setupRecyclerViewSeachedTv()
+                        searchedTvAdapter.setList(it.data.results)
+                        bindingSetupSearch()
+                    }else binding.emptySearch.isGone = false
+                }
+
+                else -> Unit
+            }
+
+        }
+
+        viewModel.searchedActorList.observe(viewLifecycleOwner) {
+            when (it){
+
+                is Resource.Error -> {
+                    showSnackBar(message = it.message!!)
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Success -> {
+                    if(it.data!!.results.isNotEmpty()){
+                        setupRecyclerViewSeachedActor()
+                        searchedActorAdapter.setList(it.data.results)
+                        bindingSetupSearch()
+                    }else binding.emptySearch.isGone = false
+                }
+
+                else -> Unit
+            }
+        }
 
 
         binding.etSearch.doOnTextChanged { text, _, _, _ ->

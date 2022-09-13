@@ -1,16 +1,20 @@
 package com.example.movieapp.ui.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.local.entity.ActorDetail
 import com.example.movieapp.data.remote.RetrofitRepostory
+import com.example.movieapp.models.actor.ActorCredits
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
 import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.Tv
 import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
+import com.example.movieapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,84 +24,56 @@ class ShowViewModel@Inject constructor(
     private val retrofitRepostory: RetrofitRepostory
 ): ViewModel() {
 
-    val movieCreditsList: MutableLiveData<MovieCredits> = MutableLiveData()
-    val similarMovieList: MutableLiveData<Movie> = MutableLiveData()
-    val movieDetailList: MutableLiveData<MovieDetail> = MutableLiveData()
+    private val _movieCreditsList = MutableLiveData<Resource<MovieCredits>>()
+    val movieCreditsList: LiveData<Resource<MovieCredits>> = _movieCreditsList
 
-    val tvCreditsList: MutableLiveData<TvCredits> = MutableLiveData()
-    val similarTvList: MutableLiveData<Tv> = MutableLiveData()
-    val tvDetailList: MutableLiveData<TvDetail> = MutableLiveData()
+    private val _similarMovieList = MutableLiveData<Resource<Movie>>()
+    val similarMovieList: LiveData<Resource<Movie>> = _similarMovieList
+
+    private val _movieDetailList = MutableLiveData<Resource<MovieDetail>>()
+    val movieDetailList: LiveData<Resource<MovieDetail>> = _movieDetailList
+
+
+    private val _tvCreditsList = MutableLiveData<Resource<TvCredits>>()
+    val tvCreditsList: LiveData<Resource<TvCredits>> = _tvCreditsList
+
+    private val _similarTvList = MutableLiveData<Resource<Tv>>()
+    val similarTvList: LiveData<Resource<Tv>> = _similarTvList
+
+    private val _tvDetailList = MutableLiveData<Resource<TvDetail>>()
+    val tvDetailList: LiveData<Resource<TvDetail>> = _tvDetailList
 
 
 
 
     fun getMovieCredits(movieId: String) = viewModelScope.launch {
-        retrofitRepostory.getMovieCredits(movieId).let { response ->
-
-            if (response.isSuccessful){
-                movieCreditsList.postValue(response.body())
-            }else{
-                Log.d("MovieCredits", "getMovieCredits Error: ${response.code()}")
-            }
-        }
+       _movieCreditsList.postValue(Resource.Loading())
+       _movieCreditsList.postValue(retrofitRepostory.getMovieCredits(movieId))
     }
 
     fun getSimilarMovie(movieId: String) = viewModelScope.launch {
-        retrofitRepostory.getSimilarMovies(movieId).let { response ->
-
-            if (response.isSuccessful){
-                similarMovieList.postValue(response.body())
-            }else{
-                Log.d("SimilarMovie", "getSimilarMovie Error: ${response.code()}")
-            }
-        }
+        _similarMovieList.postValue(Resource.Loading())
+        _similarMovieList.postValue(retrofitRepostory.getSimilarMovies(movieId))
     }
 
     fun getMoiveDetail(movieId: String) = viewModelScope.launch {
-        retrofitRepostory.getMovieDetail(movieId).let { response ->
-
-            if (response.isSuccessful){
-                movieDetailList.postValue(response.body())
-                Log.d("MovieDetail", "Launched")
-            }else{
-                Log.d("MovieDetail", "getMovieDetail Error: ${response.code()}")
-            }
-        }
+        _movieDetailList.postValue(Resource.Loading())
+        _movieDetailList.postValue(retrofitRepostory.getMovieDetail(movieId))
     }
 
     fun getTvDetail(tvId: String) = viewModelScope.launch {
-        retrofitRepostory.getTvDetail(tvId).let { response ->
-
-            if (response.isSuccessful){
-                tvDetailList.postValue(response.body())
-                Log.d("TvDetail", "Launched")
-            }else{
-                Log.d("MovieDetail", "getMovieDetail Error: ${response.code()}")
-            }
-        }
+        _tvDetailList.postValue(Resource.Loading())
+        _tvDetailList.postValue(retrofitRepostory.getTvDetail(tvId))
     }
 
     fun getTvCredits(tvId: String) = viewModelScope.launch {
-        retrofitRepostory.getTvCredits(tvId).let { response ->
-
-            if (response.isSuccessful){
-              tvCreditsList.postValue(response.body())
-            }else{
-                Log.d("TvCredits", "getTvCredits Error: ${response.code()}")
-            }
-        }
+        _tvCreditsList.postValue(Resource.Loading())
+        _tvCreditsList.postValue(retrofitRepostory.getTvCredits(tvId))
     }
 
     fun getSimilarTv(tvId: String) = viewModelScope.launch {
-        retrofitRepostory.getSimialrTv(tvId).let { response ->
-
-            if (response.isSuccessful){
-                similarTvList.postValue(response.body())
-                Log.d("TvSimilar", "Launched")
-            }else{
-                Log.d("SimilarTv", "getSimilarTv Error: ${response.code()}")
-            }
-        }
+        _similarTvList.postValue(Resource.Loading())
+        _similarTvList.postValue(retrofitRepostory.getSimialrTv(tvId))
     }
 
 

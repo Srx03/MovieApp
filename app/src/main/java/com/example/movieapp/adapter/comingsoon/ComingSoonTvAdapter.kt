@@ -16,20 +16,18 @@ class ComingSoonTvAdapter(
     private var onFirstLoad: (tvResult: TVResults) -> Unit
 ): RecyclerView.Adapter<ComingSoonTvAdapter.MovieViewHolder>() {
 
-    private var liveData = ArrayList<TVResults>()
-
-
+    private var liveData: List<TVResults>? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<TVResults>){
-        this.liveData = liveData as ArrayList<TVResults>
+        this.liveData = liveData
         notifyDataSetChanged()
     }
 
     class MovieViewHolder(val binding: ComingsoonMovieItemBinding): RecyclerView.ViewHolder(binding.root)
 
 
-    fun getSelectedItem(position: Int): TVResults = liveData[position]
+    fun getSelectedItem(position: Int): TVResults = liveData!![position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(ComingsoonMovieItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -38,14 +36,16 @@ class ComingSoonTvAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
         if(position == 0){
-            onFirstLoad(liveData[0])
+            onFirstLoad(liveData!![0])
         }
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData[position].poster_path).into(holder.binding.imgMovie)
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].poster_path).into(holder.binding.imgMovie)
 
     }
 
     override fun getItemCount(): Int {
-        return liveData.size
+        return if(liveData == null) 0
+        else  liveData!!.size
+
     }
 
 }

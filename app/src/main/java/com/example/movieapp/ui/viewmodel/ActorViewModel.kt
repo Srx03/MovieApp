@@ -1,12 +1,15 @@
 package com.example.movieapp.ui.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.models.actor.ActorCredits
 import com.example.movieapp.data.local.entity.ActorDetail
 import com.example.movieapp.data.remote.RetrofitRepostory
+import com.example.movieapp.models.movie.Movie
+import com.example.movieapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,31 +20,22 @@ class ActorViewModel@Inject constructor(
     private val retrofitRepostory: RetrofitRepostory
 ): ViewModel() {
 
-    val actorDetailList: MutableLiveData<ActorDetail> = MutableLiveData()
-    val actorCreditsList: MutableLiveData<ActorCredits> = MutableLiveData()
+    private val _actorDetailList = MutableLiveData<Resource<ActorDetail>>()
+    val actorDetailList: LiveData<Resource<ActorDetail>> = _actorDetailList
+
+
+    val _actorCreditsList = MutableLiveData<Resource<ActorCredits>>()
+    val actorCreditsList: LiveData<Resource<ActorCredits>> = _actorCreditsList
 
 
     fun getActorCredits(personId: String) = viewModelScope.launch {
-        retrofitRepostory.getActorCredits(personId).let { response ->
-
-            if (response.isSuccessful){
-                actorCreditsList.postValue(response.body())
-            }else{
-                Log.d("ActorCredits", "getActorCredits Error: ${response.code()}")
-            }
-        }
+        _actorCreditsList.postValue(Resource.Loading())
+        _actorCreditsList.postValue(retrofitRepostory.getActorCredits(personId))
     }
 
     fun getActorDetail(personId: String) = viewModelScope.launch {
-        retrofitRepostory.getActorDetail(personId).let { response ->
-
-            if (response.isSuccessful){
-                actorDetailList.postValue(response.body())
-                Log.d("ActorDetail", "Launched")
-            }else{
-                Log.d("ActorDetail", "getActorDetail Error: ${response.code()}")
-            }
-        }
+        _actorDetailList.postValue(Resource.Loading())
+        _actorDetailList.postValue(retrofitRepostory.getActorDetail(personId))
     }
 
 

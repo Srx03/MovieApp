@@ -75,11 +75,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvName"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:textSize="@dimen/_20sdp"
-                android:textColor="@color/text_primary"
-                android:fontFamily="@font/bold"
                 android:layout_toEndOf="@id/imgCard"
-                android:text="2003-08-01" />
+                android:fontFamily="@font/bold"
+                android:text="2003-08-01"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/_20sdp" />
 
             <TextView
                 android:id="@+id/tvPlace"

@@ -14,7 +14,7 @@ tools:context=".ui.fragments.ComingSoonFragment">
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="24dp"
-        app:title="Coming Soon"
+        app:title="Coming Soon Movie"
         app:titleTextColor="@color/red">
 
         <com.google.android.material.tabs.TabLayout

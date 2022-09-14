@@ -157,6 +157,10 @@ class HomeFragment : Fragment() {
 
         onPopularMoviesClick()
         onPopularTvClick()
+
+        binding.btnOrder.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_orderFragment)
+        }
     }
 
 

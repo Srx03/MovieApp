@@ -36,13 +36,18 @@
 
 
 
-                  <ImageView
-
+                  <TextView
+                    android:id="@+id/tvSearch"
                       android:layout_width="wrap_content"
                       android:layout_height="match_parent"
                       android:layout_alignParentEnd="true"
-                      android:paddingHorizontal="@dimen/_8sdp"
-                      android:src="@drawable/ic_search" />
+                      android:text="Trending Search"
+                      android:textColor="@color/red"
+                      android:textSize="@dimen/_20sdp"
+                      android:layout_marginStart="@dimen/_12sdp"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="center_vertical"
+                     />
 
 
 
@@ -167,7 +172,7 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:paddingStart="@dimen/_2sdp"
+            android:paddingStart="@dimen/_15sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

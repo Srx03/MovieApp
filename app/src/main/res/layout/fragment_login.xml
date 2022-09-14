@@ -120,7 +120,7 @@
                     android:text="Login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    app:spinning_bar_color="@color/white"/>
+                    app:spinning_bar_color="@color/white" />
 
 
             </RelativeLayout>

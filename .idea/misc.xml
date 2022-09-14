@@ -19,14 +19,16 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/comingsoon_tv_item.xml" value="0.23550724637681159" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_actor.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_coming_soon.xml" value="0.33" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_order.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.21" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_show.xml" value="0.26132246376811596" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_watch_list.xml" value="0.13903985507246377" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/genre_item.xml" value="0.5" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/genre_item.xml" value="0.67" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/order_item.xml" value="0.2346014492753623" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_movie_item.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_tv_item.xml" value="0.21422101449275363" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/recent_movie_item.xml" value="0.5" />

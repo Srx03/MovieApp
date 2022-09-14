@@ -27,7 +27,7 @@ class ComingSoonFragment : Fragment() {
     private lateinit var comingSoonMovieAdapter: ComingSoonMovieAdapter
     private lateinit var comingSoonTvAdapter: ComingSoonTvAdapter
     private var isFirstPrinted: Boolean = false
-    private var onFirstLoad: Boolean = false
+    private var onFirstLoadTab: Boolean = false
     private lateinit var genreAdapter: ComingSoonGenreAdapter
     private var onTabSelectedListener: TabLayout.OnTabSelectedListener? = null
 
@@ -43,10 +43,10 @@ class ComingSoonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(!onFirstLoad){
+        if(!onFirstLoadTab){
             viewModel.getComingSoonMovies()
             setupRecyclerViewMovie()
-            onFirstLoad = true
+            onFirstLoadTab = true
         }
 
         viewModel.comingSoonMovieList.observe(viewLifecycleOwner) {
@@ -210,6 +210,7 @@ class ComingSoonFragment : Fragment() {
         super.onDestroy()
         _binding = null
         onTabSelectedListener = null
+        onFirstLoadTab = false
     }
 
 }

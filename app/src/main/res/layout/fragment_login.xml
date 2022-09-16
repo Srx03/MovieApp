@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:text="Welcome to SrxMovie"
-        android:textColor="@color/red"
+        android:textColor="@color/main"
         android:fontFamily="@font/bold"
         android:textSize="@dimen/_50sdp"
         android:textAlignment="center"/>
@@ -65,7 +65,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="E-Mail"
-                    android:textColor="@color/red"
+                    android:textColor="@color/main"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
                     android:text="Password"
-                    android:textColor="@color/red"
+                    android:textColor="@color/main"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -116,7 +116,7 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@color/red"
+                    android:background="@color/main"
                     android:text="Login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"

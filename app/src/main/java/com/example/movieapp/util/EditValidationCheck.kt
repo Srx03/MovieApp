@@ -2,20 +2,14 @@ package com.example.movieapp.util
 
 import android.util.Patterns
 
-fun validateEmail(email: String): RegisterValidation{
-    if (email.isEmpty())
-        return RegisterValidation.Failed("Email cannot be empty")
-
+fun validateEditEmail(email: String): RegisterValidation{
     if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         return RegisterValidation.Failed("Wrong email format")
 
     return RegisterValidation.Succes
 }
 
-fun validatePassword(password: String): RegisterValidation{
-    if (password.isEmpty())
-        return RegisterValidation.Failed("Password cannot be empty")
-
+fun validateEditPassword(password: String): RegisterValidation{
     if (password.length < 8)
         return RegisterValidation.Failed("Password must have 8 carachters")
 
@@ -23,10 +17,7 @@ fun validatePassword(password: String): RegisterValidation{
 }
 
 
-fun validateUser(userName: String): RegisterValidation{
-    if (userName.isEmpty())
-        return RegisterValidation.Failed("Username cannot be empty")
-
+fun validateEditUser(userName: String): RegisterValidation{
     if (userName.length < 3)
         return RegisterValidation.Failed("Username must have 3 carachters")
 

@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,7 +54,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         setupRecyclerView()
 
@@ -148,7 +151,7 @@ class HomeFragment : Fragment() {
                 is Resource.Loading -> {}
 
                 is Resource.Success -> {
-                   popularTvAdapter.setList(it.data!!.results)
+                  topRatedTvAdapter.setList(it.data!!.results)
                 }
 
                 else -> Unit
@@ -161,6 +164,8 @@ class HomeFragment : Fragment() {
         binding.btnOrder.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_orderFragment)
         }
+
+
     }
 
 

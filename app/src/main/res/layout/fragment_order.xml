@@ -67,8 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 app:tabBackground="@color/black"
-                app:tabIndicatorColor="@color/red"
-                app:tabSelectedTextColor="@color/red"
+                app:tabIndicatorColor="@color/main"
+                app:tabSelectedTextColor="@color/main"
                 android:layout_gravity="center_horizontal"
                 app:tabTextColor="@color/text_secondary">
 
@@ -86,7 +86,7 @@
 
             <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                 android:id="@+id/btnFindResult"
-                android:background="@color/red"
+                android:background="@color/main"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_37sdp"
@@ -115,8 +115,6 @@
             android:nestedScrollingEnabled="true"
             android:orientation="vertical"
             android:paddingVertical="@dimen/_6sdp"
-            tools:visibility="visible"
-            android:paddingStart="@dimen/_15sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
             tools:listitem="@layout/searched_movie_item" />

@@ -1,16 +1,12 @@
-package com.example.movieapp.adapter
+package com.example.movieapp.adapter.order
 
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.movieapp.databinding.ComingsoonMovieItemBinding
 import com.example.movieapp.databinding.GenreItemBinding
-import com.example.movieapp.databinding.PopularMovieItemBinding
 import com.example.movieapp.models.genres.GenreX
-import com.example.movieapp.models.movie.MovieResult
 import kotlinx.android.synthetic.main.genre_item.view.*
 
 

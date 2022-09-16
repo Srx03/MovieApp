@@ -5,6 +5,7 @@ import com.example.movieapp.data.firebase.entities.User
 import com.example.movieapp.util.*
 import com.example.movieapp.util.Constants.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +23,7 @@ class RegisterViewModel @Inject constructor(
    private val firestore: FirebaseFirestore
 ): ViewModel() {
 
+
     private val _register = MutableStateFlow<Resource<User>>(Resource.Unspecified())
     val register : Flow<Resource<User>> = _register
 
@@ -29,27 +31,33 @@ class RegisterViewModel @Inject constructor(
     val validation = _validation.receiveAsFlow()
 
 
-    fun createAccountWithEmailAndPassword(user: User, password: String){
 
-        if (checkValidation(user, password)) {
+
+
+
+    fun createAccountWithEmailAndPassword(user: User){
+
+        if (checkValidation(user)) {
 
 
             runBlocking {
                 _register.emit(Resource.Loading())
             }
-            firebaseAuth.createUserWithEmailAndPassword(user.email, password)
+            firebaseAuth.createUserWithEmailAndPassword(user.email, user.password)
                 .addOnSuccessListener {
                     it.user?.let {
                         saveUserInfo(it.uid,user)
                     }
                 }.addOnFailureListener {
+
                     _register.value = Resource.Error(it.message.toString())
                 }
         }else{
 
             val registerFieldsState = RegisterFieldsState(
                 validateEmail(user.email),
-                validatePassword(password)
+                validatePassword(user.password),
+                validateUser(user.userName)
             )
 
             runBlocking {
@@ -60,9 +68,17 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun saveUserInfo(userUid: String, user: User) {
+
+        val hashMap = hashMapOf<String, Any>()
+        hashMap["email"] = user.email
+        hashMap["userName"] = user.userName
+        hashMap["imagePath"] = user.imagePath
+        hashMap["uid"] = userUid
+        hashMap["password"] = user.password
+
         firestore.collection(USER_COLLECTION)
             .document(userUid)
-            .set(user)
+            .set(hashMap)
             .addOnSuccessListener {
                  _register.value = Resource.Success(user)
             }
@@ -71,11 +87,12 @@ class RegisterViewModel @Inject constructor(
             }
     }
 
-    private fun checkValidation(user: User, password: String): Boolean {
+    private fun checkValidation(user: User): Boolean {
         val emailValidaiton = validateEmail(user.email)
-        val passwordValidation = validatePassword(password)
+        val passwordValidation = validatePassword(user.password)
+        val userValidation = validateUser(user.userName)
         val shouldRegister = emailValidaiton is RegisterValidation.Succes &&
-                passwordValidation is RegisterValidation.Succes
+                passwordValidation is RegisterValidation.Succes && userValidation is RegisterValidation.Succes
 
         return shouldRegister
     }

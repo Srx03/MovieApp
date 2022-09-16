@@ -42,7 +42,7 @@
                       android:layout_height="match_parent"
                       android:layout_alignParentEnd="true"
                       android:text="Trending Search"
-                      android:textColor="@color/red"
+                      android:textColor="@color/main"
                       android:textSize="@dimen/_20sdp"
                       android:layout_marginStart="@dimen/_12sdp"
                       android:layout_gravity="center_vertical"
@@ -70,8 +70,8 @@
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 app:tabBackground="@color/black"
-                app:tabIndicatorColor="@color/red"
-                app:tabSelectedTextColor="@color/red"
+                app:tabIndicatorColor="@color/main"
+                app:tabSelectedTextColor="@color/main"
                 app:tabTextColor="@color/text_secondary">
 
                 <com.google.android.material.tabs.TabItem
@@ -133,7 +133,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:src="@drawable/ic_error"
-                app:tint="@color/red" />
+                app:tint="@color/main" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_96sdp"
-            android:indeterminateTint="@color/red"
+            android:indeterminateTint="@color/main"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F6F5F5"
+android:background="@color/black"
     tools:context=".ui.fragments.ProfileFragment">
 
     <RelativeLayout
@@ -14,45 +14,48 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/red"
+            android:layout_height="match_parent"
+            android:background="@color/black"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="55dp"
                 android:foregroundGravity="center_horizontal"
                 app:cardCornerRadius="100dp">
 
                 <ImageView
+                    android:id="@+id/imgProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/black" />
+                    android:src="@color/white"
+                    android:scaleType="fitXY"/>
             </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btnChangeImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change image"
                 android:layout_gravity="center_horizontal"
-                android:textSize="18dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:backgroundTint="@color/main"
                 android:fontFamily="@font/myfont"
-                android:textStyle="bold"
-                android:backgroundTint="@color/black"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                android:text="Change image"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvUsername"
+                android:id="@+id/tvUsernameFirst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="Srx"
                 android:fontFamily="@font/bold"
-                android:textColor="@color/white"
+                android:text="Srx"
+                android:textColor="@color/main"
                 android:textSize="23dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -61,11 +64,23 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/layoutEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Edit your profile"
+            android:textSize="@dimen/_30sdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/myfont"
+            android:textColor="@color/main"
+            android:gravity="center"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,13 +89,14 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_email"
-                app:tint="@color/red" />
+                app:tint="@color/main" />
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/main"
                 android:textSize="18dp"
+                android:hint="asasasas"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"/>
 
@@ -94,15 +110,16 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_lock"
-                app:tint="@color/red" />
+                app:tint="@color/main" />
+
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="18dp"
+                android:layout_gravity="center_vertical"
                 android:paddingLeft="15dp"
-                android:layout_gravity="center_vertical"/>
+                android:textColor="@color/main"
+                android:textSize="18dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -114,29 +131,128 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_profile"
-                app:tint="@color/red" />
+                app:tint="@color/main" />
             <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/main"
                 android:textSize="18dp"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnSaveChanges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save changes"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:fontFamily="@font/myfont"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutCurrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="start"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Current refrences"
+            android:textSize="@dimen/_30sdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/myfont"
+            android:textColor="@color/main"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/_30sdp">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_email"
+                app:tint="@color/main" />
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:paddingLeft="15dp"
+                android:text="srdjan.djuric003@gmail.com"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/_30sdp">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_lock"
+                app:tint="@color/main" />
+
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="123456789"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/_30sdp">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_profile"
+                app:tint="@color/main" />
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:paddingLeft="15dp"
+                android:text="Srx"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnSaveChanges"
+        android:id="@+id/btnEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="save changes"
-        android:layout_gravity="center_horizontal"
+        android:text="Edit profile"
+        android:layout_gravity="center"
+        android:gravity="start"
         android:textSize="18dp"
+        android:background="@color/main"
+        android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/myfont"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/_45sdp"/>
+        android:textStyle="bold" />
 
 </LinearLayout>

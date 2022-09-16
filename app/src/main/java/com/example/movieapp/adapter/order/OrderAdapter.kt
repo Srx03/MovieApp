@@ -1,13 +1,11 @@
-package com.example.movieapp.adapter
+package com.example.movieapp.adapter.order
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.OrderItemBinding
-import com.example.movieapp.databinding.SimilarItemBinding
 import com.example.movieapp.models.movie.MovieResult
 import com.example.movieapp.models.tv.TVResults
 

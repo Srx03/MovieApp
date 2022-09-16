@@ -23,7 +23,7 @@ class LoginViewModel @Inject constructor(
     private val _login = MutableSharedFlow<Resource<FirebaseUser>>()
     val login = _login.asSharedFlow()
 
-    private val _validation  = Channel<RegisterFieldsState>()
+    private val _validation  = Channel<LoginFieldsState>()
     val validation = _validation.receiveAsFlow()
 
     fun login(email: String, password: String){
@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
                 }
         }else{
 
-            val registerFieldsState = RegisterFieldsState(
+            val registerFieldsState = LoginFieldsState(
                 validateEmail(email),
                 validatePassword(password)
             )

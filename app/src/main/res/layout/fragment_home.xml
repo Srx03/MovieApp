@@ -18,7 +18,7 @@
         android:layout_marginBottom="@dimen/_2sdp"
         android:translationZ="@dimen/_100sdp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@android:color/transparent"
@@ -34,13 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_filter"
-                app:backgroundTint="@color/red"
+                app:backgroundTint="@color/main"
                 app:iconSize="@dimen/_40sdp"
                 app:tint="@color/white"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:text="Order by genres"
                 android:layout_gravity="bottom|right" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

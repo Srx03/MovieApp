@@ -23,7 +23,7 @@
             android:layout_height="@dimen/_138sdp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@color/red" />
+            android:src="@color/main" />
 
         <TextView
             android:id="@+id/tvRating"

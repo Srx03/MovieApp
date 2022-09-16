@@ -11,13 +11,10 @@ import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.example.movieapp.R
-import com.example.movieapp.adapter.GenreAdapter
-import com.example.movieapp.adapter.OrderAdapter
-import com.example.movieapp.adapter.comingsoon.ComingSoonGenreAdapter
+import com.example.movieapp.adapter.order.GenreAdapter
+import com.example.movieapp.adapter.order.OrderAdapter
 import com.example.movieapp.databinding.FragmentOrderBinding
-import com.example.movieapp.models.genres.Genre
 import com.example.movieapp.models.genres.GenreX
-import com.example.movieapp.ui.viewmodel.LoginViewModel
 import com.example.movieapp.ui.viewmodel.OrderViewModel
 import com.example.movieapp.util.Genres
 import com.example.movieapp.util.Resource
@@ -145,7 +142,7 @@ class OrderFragment : Fragment() {
     private fun setUpRecyclerView() = binding.apply {
         // Setting up genres option list Recyclerview
         genresAdapter = GenreAdapter(
-            selectedStrokeColor = ContextCompat.getColor(requireContext(), R.color.red),
+            selectedStrokeColor = ContextCompat.getColor(requireContext(), R.color.main),
             unSelectedStrokeColor = ContextCompat.getColor(requireContext(), R.color.divider),
             cardBgColor = ContextCompat.getColor(requireContext(), R.color.text_primary),
             selectGenreItemClick = { genre: GenreX ->

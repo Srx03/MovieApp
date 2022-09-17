@@ -2,8 +2,10 @@ package com.example.movieapp.ui.fragments
 
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +18,12 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.data.firebase.entities.User
 import com.example.movieapp.databinding.FragmentProfileBinding
+import com.example.movieapp.ui.activitis.MainActivity
 import com.example.movieapp.ui.viewmodel.ProfileViewModel
 import com.example.movieapp.util.RegisterValidation
+import com.example.movieapp.util.Resource
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,10 +58,31 @@ class ProfileFragment : Fragment() {
         viewModel.getDataFromFirebase()
         observeLiveData()
 
+        binding.apply {
+            btnSaveEmail.setOnClickListener{
+                val email = etEmail.text.toString().trim()
+                Log.d("email",email)
+                viewModel.saveEditEmail(email)
+            }
+
+            btnSavePassword.setOnClickListener {
+                val password = etPassword.text.toString()
+                Log.d("password",password)
+                viewModel.saveEditPassword(password)
+            }
+
+            btnSaveUsername.setOnClickListener {
+                val userName = etUsername.text.toString().trim()
+                Log.d("username",userName)
+                viewModel.saveEditUser(userName)
+            }
+
+        }
+
         lifecycleScope.launch {
-            viewModel.validationEmail.collect{ validation ->
-                if (validation.email is RegisterValidation.Failed){
-                    withContext(Dispatchers.Main){
+            viewModel.validationEmail.collect { validation ->
+                if (validation.email is RegisterValidation.Failed) {
+                    withContext(Dispatchers.Main) {
                         binding.etEmail.apply {
                             requestFocus()
                             error = validation.email.message
@@ -65,11 +91,14 @@ class ProfileFragment : Fragment() {
                 }
 
             }
+        }
 
-            viewModel.validationPassword.collect{ validation ->
-                if (validation.password is RegisterValidation.Failed){
-                    withContext(Dispatchers.Main){
-                        binding.etEmail.apply {
+        lifecycleScope.launch {
+
+            viewModel.validationPassword.collect { validation ->
+                if (validation.password is RegisterValidation.Failed) {
+                    withContext(Dispatchers.Main) {
+                        binding.etPassword.apply {
                             requestFocus()
                             error = validation.password.message
                         }
@@ -77,11 +106,14 @@ class ProfileFragment : Fragment() {
                 }
 
             }
+        }
 
-            viewModel.validationUsername.collect{ validation ->
-                if (validation.userName is RegisterValidation.Failed){
-                    withContext(Dispatchers.Main){
-                        binding.etEmail.apply {
+        lifecycleScope.launch {
+
+            viewModel.validationUsername.collect { validation ->
+                if (validation.userName is RegisterValidation.Failed) {
+                    withContext(Dispatchers.Main) {
+                        binding.etUsername.apply {
                             requestFocus()
                             error = validation.userName.message
                         }
@@ -89,13 +121,82 @@ class ProfileFragment : Fragment() {
                 }
 
             }
+        }
 
+        lifecycleScope.launchWhenCreated {
+            viewModel.editEmail.collect{
+                when(it){
+                    is Resource.Loading ->{
+                        binding.btnSaveEmail.startAnimation()
+                    }
+
+                    is Resource.Error ->{
+                        binding.btnSaveEmail.revertAnimation()
+                    }
+
+                    is Resource.Success ->{
+                        binding.btnSaveEmail.revertAnimation()
+
+                    }
+                    else -> Unit
+
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.editPassword.collect{
+                when(it){
+                    is Resource.Loading ->{
+                        binding.btnSavePassword.startAnimation()
+                        Log.d("test", it.data.toString())
+                    }
+
+                    is Resource.Error ->{
+                        binding.btnSavePassword.revertAnimation()
+                    }
+
+                    is Resource.Success ->{
+                        binding.btnSavePassword.revertAnimation()
+
+                    }
+                    else -> Unit
+
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.editUsername.collect{
+                when(it){
+                    is Resource.Loading ->{
+                        binding.btnSaveUsername.startAnimation()
+                    }
+
+                    is Resource.Error ->{
+                        binding.btnSaveUsername.revertAnimation()
+                    }
+
+                    is Resource.Success ->{
+                        binding.btnSaveUsername.revertAnimation()
+
+                    }
+                    else -> Unit
+
+                }
+            }
         }
 
 
+
+
+
+
         onImageEdit()
-        onEdit()
-    }
+        onEditButtonClick()
+        onExitButtonClick()
+
+  }
 
     private fun onImageEdit(){
         binding.btnChangeImg.setOnClickListener {
@@ -148,28 +249,25 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun onEdit() {
+    private fun onEditButtonClick() {
+
         binding.apply {
             btnEditProfile.setOnClickListener {
                 layoutCurrent.isGone = true
                 layoutEdit.isGone = false
                 btnEditProfile.isGone = true
+
             }
-                btnSaveChanges.setOnClickListener {
-                    layoutCurrent.isGone = true
-                    layoutEdit.isGone = false
-                    var email = etEmail.text.trim().toString()
-                    var password = etPassword.text.toString()
-                    var username = etUsername.text.trim().toString()
+        }
+    }
 
-                    viewModel.saveEdit(password, email, username)
-
-                    layoutCurrent.isGone = false
-                    layoutEdit.isGone = true
-                    btnEditProfile.isGone = false
-
-                }
-
+    private fun onExitButtonClick(){
+        binding.apply {
+            btnExit.setOnClickListener {
+                layoutCurrent.isGone = false
+                layoutEdit.isGone = true
+                btnEditProfile.isGone = false
+            }
         }
     }
 

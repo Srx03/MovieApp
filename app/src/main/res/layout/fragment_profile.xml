@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-android:background="@color/black"
+android:background="@color/white"
     tools:context=".ui.fragments.ProfileFragment">
 
     <RelativeLayout
@@ -15,7 +15,7 @@ android:background="@color/black"
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
+            android:background="@color/main"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -30,8 +30,8 @@ android:background="@color/black"
                     android:id="@+id/imgProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/white"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    android:src="@color/white" />
             </androidx.cardview.widget.CardView>
 
             <Button
@@ -40,10 +40,10 @@ android:background="@color/black"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:backgroundTint="@color/main"
+                android:backgroundTint="@color/white"
                 android:fontFamily="@font/myfont"
                 android:text="Change image"
-                android:textColor="@color/white"
+                android:textColor="@color/main"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -55,7 +55,7 @@ android:background="@color/black"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bold"
                 android:text="Srx"
-                android:textColor="@color/main"
+                android:textColor="@color/white"
                 android:textSize="23dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -96,9 +96,19 @@ android:background="@color/black"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main"
                 android:textSize="18dp"
-                android:hint="asasasas"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"/>
+
+            <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                android:id="@+id/btnSaveEmail"
+                android:background="@color/main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="save"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"
+                android:fontFamily="@font/bold" />
 
         </LinearLayout>
         <LinearLayout
@@ -120,6 +130,18 @@ android:background="@color/black"
                 android:paddingLeft="15dp"
                 android:textColor="@color/main"
                 android:textSize="18dp" />
+
+            <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                android:id="@+id/btnSavePassword"
+                android:background="@color/main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="save"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"
+                android:fontFamily="@font/bold" />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -141,13 +163,25 @@ android:background="@color/black"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"/>
 
+            <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                android:id="@+id/btnSaveUsername"
+                android:background="@color/main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="save"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bold" />
+
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSaveChanges"
+            android:id="@+id/btnExit"
+            android:background="@color/main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save changes"
+            android:text="Exit"
             android:layout_gravity="center_horizontal"
             android:textSize="18dp"
             android:fontFamily="@font/myfont"
@@ -187,7 +221,7 @@ android:background="@color/black"
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/main"
                 android:textSize="18dp"
                 android:paddingLeft="15dp"
                 android:text="srdjan.djuric003@gmail.com"
@@ -213,7 +247,7 @@ android:background="@color/black"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:text="123456789"
-                android:textColor="@color/white"
+                android:textColor="@color/main"
                 android:textSize="18dp" />
         </LinearLayout>
         <LinearLayout
@@ -231,7 +265,7 @@ android:background="@color/black"
                 android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/main"
                 android:textSize="18dp"
                 android:paddingLeft="15dp"
                 android:text="Srx"

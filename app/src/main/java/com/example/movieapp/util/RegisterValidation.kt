@@ -8,7 +8,30 @@ sealed class RegisterValidation(){
 
 }
 
-data class RegisterFieldsState(
+data class LoginFieldsState(
     val email: RegisterValidation,
     val password: RegisterValidation
+
 )
+
+data class RegisterFieldsState(
+    val email: RegisterValidation,
+    val password: RegisterValidation,
+    val userName: RegisterValidation
+)
+
+
+//for each chech
+
+data class EmailFieldsState(
+    val email: RegisterValidation
+)
+
+data class PasswordFieldsState(
+    val password: RegisterValidation
+)
+
+data class UsernameFieldsState(
+    val userName: RegisterValidation
+)
+

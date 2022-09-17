@@ -44,7 +44,10 @@ interface ApiService {
     @GET("3/trending/movie/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTrendigMovies() : Response<Movie>
 
-
+    @GET("3/discover/movie?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getMoviesByGenres(
+        @Query("with_genres") genres: String, // It will require comma separated string of genres ids
+        @Query("sort_by") sortBy: String? = "popularity.desc"): Response<Movie>
 
 
 
@@ -75,6 +78,11 @@ interface ApiService {
 
     @GET("3/trending/tv/week?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getTrendigTv() : Response<Tv>
+
+    @GET("3/discover/tv?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    suspend fun getTvByGenres(
+        @Query("with_genres") genres: String, // It will require comma separated string of genres ids
+        @Query("sort_by") sortBy: String? = "popularity.desc"): Response<Tv>
 
 
 

@@ -210,6 +210,7 @@ class SearchFragment : Fragment() {
 
         binding.etSearch.doOnTextChanged { text, _, _, _ ->
             text?.let {
+                binding.tvSearch.text = "Searched Result"
                 searchQuery = it.trim().toString()
                 binding.apply {
                     if (it.isNotEmpty() && it.isNotBlank()) {
@@ -220,6 +221,7 @@ class SearchFragment : Fragment() {
                         searchedRecyclerView.isGone = true // Make it visible on getting results
                         performSearch(it.trim().toString())
                     } else {
+                        binding.tvSearch.text = "Trending Search"
                         viewModel.getTrendingData(categroy)
                         trendingRecyclerView.isGone = false
                         searchedRecyclerView.isGone = true

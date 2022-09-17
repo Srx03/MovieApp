@@ -16,9 +16,11 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentLoginBinding
 import com.example.movieapp.ui.activitis.MainActivity
 import com.example.movieapp.ui.viewmodel.LoginViewModel
+import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
@@ -42,7 +44,7 @@ class LoginFragment : Fragment() {
 
         binding.apply {
             btnLogin.setOnClickListener{
-                val email = etEmail.text.trim().toString()
+                val email = etEmail.text.toString().trim()
                 val password = etPassword.text.toString()
                 viewModel.login(email, password)
             }
@@ -73,6 +75,29 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.validation.collect{ validation ->
+                if (validation.email is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.etEmail.apply {
+                            requestFocus()
+                            error = validation.email.message
+                        }
+                    }
+                }
+
+                if (validation.password is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.etPassword.apply {
+                            requestFocus()
+                            error = validation.password.message
+                        }
+                    }
+                }
+            }
+        }
+
 
         binding.mRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)

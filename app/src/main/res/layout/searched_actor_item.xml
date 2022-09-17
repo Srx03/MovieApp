@@ -23,7 +23,7 @@
 
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@color/red" />
+            android:src="@color/main" />
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -2,6 +2,7 @@ package com.example.movieapp.data.remote
 
 
 import com.example.movieapp.util.ErrorType
+import com.example.movieapp.util.Genres
 import com.example.movieapp.util.Resource
 import com.squareup.okhttp.ResponseBody
 import javax.inject.Inject
@@ -38,6 +39,8 @@ class RetrofitRepostory @Inject constructor(
      suspend fun getSearchActorData(query: String) = safeApiCall { apiService.getSearchActorData(query) }
      suspend fun getActorDetail(personId: String) = safeApiCall { apiService.getActorDetail(personId) }
      suspend fun getActorCredits(personId: String) = safeApiCall { apiService.getActorCredits(personId) }
+     suspend fun getMoviesByGenres(genresId: String) = safeApiCall { apiService.getMoviesByGenres(genresId) }
+     suspend fun getTvByGenres(genresId: String) = safeApiCall { apiService.getTvByGenres(genresId) }
 
 
 
@@ -60,7 +63,6 @@ class RetrofitRepostory @Inject constructor(
                          )
 
                          is HttpException ->
-                              // val code = e.code() HTTP Exception code
                               Resource.Error(
                                    errorMessage = throwable.message ?: "Something went wrong",
                                    errorType = ErrorType.HTTP

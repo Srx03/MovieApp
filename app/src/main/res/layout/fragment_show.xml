@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/red"
+    android:background="@color/main"
     tools:context=".ui.fragments.ShowFragment">
 
 
@@ -67,7 +67,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/bold"
                             android:paddingHorizontal="@dimen/_6sdp"
-                            android:textColor="@color/red"
+                            android:textColor="@color/main"
                             android:textSize="@dimen/_10sdp"
                             tools:text="Action / Adventure / Comedy / Scifi" />
 
@@ -84,7 +84,7 @@
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:src="@drawable/ic_date"
-                                app:tint="@color/red" />
+                                app:tint="@color/main" />
 
                             <TextView
                                 android:id="@+id/tvYear"
@@ -109,7 +109,7 @@
                                     android:layout_width="16dp"
                                     android:layout_height="16dp"
                                     android:src="@drawable/ic_rate"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/main" />
 
                                 <TextView
                                     android:id="@+id/tvRating"
@@ -138,7 +138,7 @@
                             android:layout_gravity="start"
                             android:layout_marginHorizontal="@dimen/_6sdp"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:backgroundTint="@color/red"
+                            android:backgroundTint="@color/main"
                             android:fontFamily="@font/bold"
                             android:text="Add to your watch list"
                             android:textAllCaps="false"

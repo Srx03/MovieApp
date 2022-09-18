@@ -21,7 +21,7 @@ data class RegisterFieldsState(
 )
 
 
-//for each chech
+//for each check
 
 data class EmailFieldsState(
     val email: RegisterValidation

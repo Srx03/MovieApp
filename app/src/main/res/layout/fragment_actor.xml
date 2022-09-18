@@ -64,9 +64,9 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_toEndOf="@id/imgCard"
+                android:fontFamily="@font/bold"
                 android:text="Srdjan Djuric"
                 android:textColor="@color/text_primary"
-                android:fontFamily="@font/bold"
                 android:textSize="@dimen/_30sdp" />
 
             <TextView
@@ -87,11 +87,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvBirthday"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:textSize="@dimen/_20sdp"
-                android:textColor="@color/text_primary"
-                android:fontFamily="@font/bold"
                 android:layout_toEndOf="@id/imgCard"
-                android:text="BiH, Tuzla" />
+                android:fontFamily="@font/bold"
+                android:text="BiH, Tuzla"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/_20sdp" />
 
 
 
@@ -123,7 +123,7 @@
             android:layout_marginEnd="@dimen/_8sdp"
             android:fontFamily="@font/myfont"
             android:textStyle="bold"
-            android:maxLines="5"
+            android:maxLines="100"
             android:justificationMode="inter_word"
             android:text="Srdjan Djuric Srdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan DjuricSrdjan Djuric"
             android:textColor="@color/text_primary"

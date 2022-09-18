@@ -164,7 +164,7 @@ class ProfileViewModel @Inject constructor(
     fun saveEditPassword(password: String) {
 
 
-        if(checkValidationEmail(password)) {
+        if(checkValidationPassword(password)) {
             runBlocking {
                 _editPassword.emit(Resource.Loading())
             }

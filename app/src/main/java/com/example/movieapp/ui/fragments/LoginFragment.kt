@@ -66,6 +66,7 @@ class LoginFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.btnLogin.revertAnimation()
+                        Toast.makeText(requireContext(),"Succesfully Login", Toast.LENGTH_SHORT).show()
                         Intent(requireActivity(), MainActivity::class.java).also { intent ->
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)

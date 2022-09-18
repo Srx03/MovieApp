@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.data.firebase.entities.User
@@ -67,10 +69,8 @@ class RegisterFragment : Fragment() {
 
                     is Resource.Success ->{
                         binding.btnRegister.revertAnimation()
-                        Intent(requireActivity(), MainActivity::class.java).also { intent ->
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                        }
+                        Toast.makeText(requireContext(),"Succesfully register, please Login", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                     }
                     else -> Unit
 

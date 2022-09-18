@@ -64,6 +64,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/myfont"
                     android:text="E-Mail"
                     android:textColor="@color/main"
                     android:textSize="14sp"
@@ -90,6 +91,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/myfont"
                     android:text="Password"
                     android:textColor="@color/main"
                     android:textSize="14sp"
@@ -116,6 +118,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/myfont"
                     android:text="Username"
                     android:textColor="@color/main"
                     android:textSize="14sp"
@@ -128,7 +131,7 @@
                     android:layout_below="@+id/tvPhone"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                     android:drawableRight="@drawable/ic_profile"
+                    android:drawableRight="@drawable/ic_profile"
                     android:drawablePadding="30dp"
                     android:inputType="text"
                     android:padding="10dp" />
@@ -139,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/etPhone"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:background="@color/main"
                     android:gravity="center"
@@ -158,12 +161,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center"
             android:padding="10dp"
             android:text="You already have an accunt?"
-            android:textColor="@color/white"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:textAppearance="?attr/textAppearanceSubtitle1" />
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

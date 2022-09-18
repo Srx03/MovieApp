@@ -27,9 +27,7 @@ import com.example.movieapp.util.Resource
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -61,25 +59,23 @@ class ProfileFragment : Fragment() {
         binding.apply {
             btnSaveEmail.setOnClickListener{
                 val email = etEmail.text.toString().trim()
-                Log.d("email",email)
                 viewModel.saveEditEmail(email)
             }
 
             btnSavePassword.setOnClickListener {
                 val password = etPassword.text.toString()
-                Log.d("password",password)
                 viewModel.saveEditPassword(password)
             }
 
             btnSaveUsername.setOnClickListener {
                 val userName = etUsername.text.toString().trim()
-                Log.d("username",userName)
                 viewModel.saveEditUser(userName)
             }
 
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
+            Log.d("coroutineEmail", this.coroutineContext.toString())
             viewModel.validationEmail.collect { validation ->
                 if (validation.email is RegisterValidation.Failed) {
                     withContext(Dispatchers.Main) {
@@ -93,7 +89,9 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted{
+
+            Log.d("coroutinePassword", this.coroutineContext.toString())
 
             viewModel.validationPassword.collect { validation ->
                 if (validation.password is RegisterValidation.Failed) {
@@ -108,8 +106,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-
+        lifecycleScope.launchWhenStarted {
+            Log.d("coroutineUsername", this.coroutineContext.toString())
             viewModel.validationUsername.collect { validation ->
                 if (validation.userName is RegisterValidation.Failed) {
                     withContext(Dispatchers.Main) {
@@ -121,9 +119,11 @@ class ProfileFragment : Fragment() {
                 }
 
             }
+
+            this.cancel()
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted  {
             viewModel.editEmail.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -144,12 +144,11 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted  {
             viewModel.editPassword.collect{
                 when(it){
                     is Resource.Loading ->{
                         binding.btnSavePassword.startAnimation()
-                        Log.d("test", it.data.toString())
                     }
 
                     is Resource.Error ->{
@@ -166,7 +165,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted  {
             viewModel.editUsername.collect{
                 when(it){
                     is Resource.Loading ->{

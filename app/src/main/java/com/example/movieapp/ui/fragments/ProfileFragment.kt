@@ -74,7 +74,7 @@ class ProfileFragment : Fragment() {
 
         }
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             Log.d("coroutineEmail", this.coroutineContext.toString())
             viewModel.validationEmail.collect { validation ->
                 if (validation.email is RegisterValidation.Failed) {
@@ -89,7 +89,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted{
+        viewLifecycleOwner.lifecycleScope.launch {
 
             Log.d("coroutinePassword", this.coroutineContext.toString())
 
@@ -106,11 +106,12 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             Log.d("coroutineUsername", this.coroutineContext.toString())
             viewModel.validationUsername.collect { validation ->
                 if (validation.userName is RegisterValidation.Failed) {
                     withContext(Dispatchers.Main) {
+                        Log.d("coroutineClick", this.coroutineContext.toString())
                         binding.etUsername.apply {
                             requestFocus()
                             error = validation.userName.message
@@ -121,9 +122,11 @@ class ProfileFragment : Fragment() {
             }
 
             this.cancel()
+
         }
 
-        lifecycleScope.launchWhenStarted  {
+        viewLifecycleOwner.lifecycleScope.launch {
+            Log.d("coroutineBTN", this.coroutineContext.toString())
             viewModel.editEmail.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -144,7 +147,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted  {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.editPassword.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -165,7 +168,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted  {
+        viewLifecycleOwner.lifecycleScope.launch  {
             viewModel.editUsername.collect{
                 when(it){
                     is Resource.Loading ->{

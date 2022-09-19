@@ -1,11 +1,10 @@
 package com.example.movieapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.data.firebase.entities.User
+import com.example.movieapp.data.firebase.User
 import com.example.movieapp.util.*
 import com.example.movieapp.util.Constants.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

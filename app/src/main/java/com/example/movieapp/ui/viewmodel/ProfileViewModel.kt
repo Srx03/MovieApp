@@ -4,7 +4,6 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.data.firebase.entities.User
 import com.example.movieapp.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
@@ -63,6 +61,7 @@ class ProfileViewModel @Inject constructor(
 
 
     val currentUid = firebaseAuth.currentUser?.uid.toString()
+    val user = firebaseAuth.currentUser
 
     fun getDataFromFirebase(){
 
@@ -122,13 +121,6 @@ class ProfileViewModel @Inject constructor(
     }
 
 
-
-
-
-
-
-
-
     fun saveEditEmail(email: String) {
 
             if(checkValidationEmail(email)) {
@@ -137,11 +129,15 @@ class ProfileViewModel @Inject constructor(
                     _editEmail.emit(Resource.Loading())
                 }
 
+
+
                 firestore.collection(Constants.USER_COLLECTION).document(currentUid)
                     .update(
                         mapOf("email" to email)
-                    ).addOnSuccessListener {
+                    )
+                    .addOnSuccessListener {
                         _editEmail.value = Resource.Success(email)
+                        user!!.updateEmail(email)
                     }
                     .addOnFailureListener{
                         _editEmail.value = Resource.Error(it.message.toString())
@@ -174,6 +170,7 @@ class ProfileViewModel @Inject constructor(
                     mapOf("password" to password)
                 ).addOnSuccessListener {
                     _editPassword.value = Resource.Success(password)
+                    user!!.updatePassword(password)
                 }
                 .addOnFailureListener{
                     _editPassword.value = Resource.Error(it.message.toString())

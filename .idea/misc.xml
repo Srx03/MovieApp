@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable-v24/stroke.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/bt_corner.xml" value="0.2645" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/bt_uisquare.xml" value="0.2645" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/circle.xml" value="0.192" />
@@ -44,6 +45,8 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_actor_item.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_movie_item.xml" value="0.22395833333333334" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_tv_item.xml" value="0.225" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/watchlistTv_item.xml" value="0.24456521739130435" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/watchlist_item.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/menu/bottom_menu.xml" value="0.20555555555555555" />
       </map>
     </option>

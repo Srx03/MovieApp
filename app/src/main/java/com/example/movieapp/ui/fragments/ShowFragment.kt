@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,11 +15,15 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.adapter.show.ActorShowAdapter
 import com.example.movieapp.adapter.show.SimilarAdapter
+import com.example.movieapp.data.firebase.MovieFirebase
+import com.example.movieapp.data.firebase.User
 import com.example.movieapp.databinding.FragmentShowBinding
+import com.example.movieapp.models.genres.GenreX
 import com.example.movieapp.ui.viewmodel.ShowViewModel
 import com.example.movieapp.util.Resource
 import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ShowFragment: Fragment() {
@@ -36,7 +42,6 @@ class ShowFragment: Fragment() {
     private var isClicked: Boolean = false
     private var isMovieHelp: Boolean = false
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +56,69 @@ class ShowFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getOnPopularClickData()
+
+
+        binding.apply {
+            btnAddToWatchlist.setOnClickListener{
+
+                if (isMovie == "0")
+                viewModel.saveMovie(id)
+                if (isMovie == "1")
+                    viewModel.saveTv(idTv)
+
+            }
+        }
+
+
+        lifecycleScope.launch {
+            viewModel.watchlistMovie.collect{
+                when(it){
+                    is Resource.Loading ->{
+                        binding.btnAddToWatchlist.startAnimation()
+                    }
+
+                    is Resource.Error ->{
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        binding.btnAddToWatchlist.revertAnimation()
+                    }
+
+                    is Resource.Success ->{
+                        binding. btnAddToWatchlist.revertAnimation()
+                        Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_LONG).show()
+
+                    }
+                    else -> Unit
+
+                }
+            }
+        }
+
+
+        lifecycleScope.launch {
+            viewModel.watchlistTv.collect{
+                when(it){
+                    is Resource.Loading ->{
+                        binding.btnAddToWatchlist.startAnimation()
+                    }
+
+                    is Resource.Error ->{
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        binding.btnAddToWatchlist.revertAnimation()
+                    }
+
+                    is Resource.Success ->{
+                        binding. btnAddToWatchlist.revertAnimation()
+                        Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_LONG).show()
+
+                    }
+                    else -> Unit
+
+                }
+            }
+        }
+
+
+
 
 
         if (isMovie == "0"){

@@ -2,14 +2,13 @@ package com.example.movieapp.ui.fragments
 
 
 import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
@@ -18,9 +17,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
-import com.example.movieapp.data.firebase.entities.User
 import com.example.movieapp.databinding.FragmentProfileBinding
-import com.example.movieapp.ui.activitis.MainActivity
 import com.example.movieapp.ui.viewmodel.ProfileViewModel
 import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
@@ -75,7 +72,6 @@ class ProfileFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("coroutineEmail", this.coroutineContext.toString())
             viewModel.validationEmail.collect { validation ->
                 if (validation.email is RegisterValidation.Failed) {
                     withContext(Dispatchers.Main) {
@@ -91,7 +87,6 @@ class ProfileFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            Log.d("coroutinePassword", this.coroutineContext.toString())
 
             viewModel.validationPassword.collect { validation ->
                 if (validation.password is RegisterValidation.Failed) {
@@ -107,11 +102,9 @@ class ProfileFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("coroutineUsername", this.coroutineContext.toString())
             viewModel.validationUsername.collect { validation ->
                 if (validation.userName is RegisterValidation.Failed) {
                     withContext(Dispatchers.Main) {
-                        Log.d("coroutineClick", this.coroutineContext.toString())
                         binding.etUsername.apply {
                             requestFocus()
                             error = validation.userName.message
@@ -126,7 +119,6 @@ class ProfileFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("coroutineBTN", this.coroutineContext.toString())
             viewModel.editEmail.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -135,10 +127,12 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSaveEmail.revertAnimation()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
 
                     is Resource.Success ->{
                         binding.btnSaveEmail.revertAnimation()
+                        Toast.makeText(requireContext(),"Succesfully Changed Email", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -156,10 +150,12 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSavePassword.revertAnimation()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
 
                     is Resource.Success ->{
                         binding.btnSavePassword.revertAnimation()
+                        Toast.makeText(requireContext(),"Succesfully Changed Password", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -177,10 +173,12 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSaveUsername.revertAnimation()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
 
                     is Resource.Success ->{
                         binding.btnSaveUsername.revertAnimation()
+                        Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -188,10 +186,6 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-
-
-
-
 
 
         onImageEdit()
@@ -217,7 +211,7 @@ class ProfileFragment : Fragment() {
                 placeholder(R.drawable.ic_profile)
                 error(R.drawable.ic_profile)
                 crossfade(true)
-                crossfade(400)
+                crossfade(100)
             }
             viewModel.saveImage(profilePictureUri!!)
         }
@@ -229,8 +223,10 @@ class ProfileFragment : Fragment() {
         val imageView = binding.imgProfile
         val tvEmail = binding.tvEmail
         val tvPassword = binding.tvPassword
+        val tvUsername = binding.tvUsername
         viewModel.nameState.observe(viewLifecycleOwner) { name ->
             userName.setText(name)
+            tvUsername.setText(name)
         }
         viewModel.emailState.observe(viewLifecycleOwner) { email ->
             tvEmail.setText(email)
@@ -243,7 +239,7 @@ class ProfileFragment : Fragment() {
                 .into(imageView)
         }
         viewModel.errorState.observe(viewLifecycleOwner) { error ->
-            if (error != null) Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+             Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
         }
         viewModel.loadingState.observe(viewLifecycleOwner) { loading ->
         }

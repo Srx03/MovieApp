@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/rootLayout"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/black"
-tools:context=".ui.fragments.ComingSoonFragment">
+    tools:context=".ui.fragments.ComingSoonFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -76,7 +76,16 @@ tools:context=".ui.fragments.ComingSoonFragment">
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_4sdp">
 
-
+                <ImageButton
+                    android:id="@+id/btnAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_alignTop="@id/title"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="-10dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/ic_add"
+                    app:tint="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/title"
@@ -84,6 +93,7 @@ tools:context=".ui.fragments.ComingSoonFragment">
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@id/btnAdd"
                     android:fontFamily="@font/bold"
                     android:text="TextView"
                     android:textColor="@color/text_primary"
@@ -93,7 +103,7 @@ tools:context=".ui.fragments.ComingSoonFragment">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/genresRv"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_below="@+id/title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
@@ -122,14 +132,13 @@ tools:context=".ui.fragments.ComingSoonFragment">
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/myfont"
                     android:justificationMode="inter_word"
-                    android:textStyle="bold"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_2sdp"
                     android:text="Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric Srdjan Djuric v Srdjan Djuric Srdjan DjuricSrdjan Djuric Srdjan Djuric Srdjan Djuric"
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/_14sdp"
-                    />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 

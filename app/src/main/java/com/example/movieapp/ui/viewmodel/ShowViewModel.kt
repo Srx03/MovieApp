@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.firebase.MovieFirebase
+import com.example.movieapp.data.firebase.User
 import com.example.movieapp.data.local.entity.ActorDetail
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.actor.ActorCredits
@@ -14,14 +16,22 @@ import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.Tv
 import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
+import com.example.movieapp.util.Constants
 import com.example.movieapp.util.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ShowViewModel@Inject constructor(
-    private val retrofitRepostory: RetrofitRepostory
+    private val retrofitRepostory: RetrofitRepostory,
+    private val firebaseAuth: FirebaseAuth,
+    private val firestore: FirebaseFirestore
 ): ViewModel() {
 
     private val _movieCreditsList = MutableLiveData<Resource<MovieCredits>>()
@@ -42,6 +52,15 @@ class ShowViewModel@Inject constructor(
 
     private val _tvDetailList = MutableLiveData<Resource<TvDetail>>()
     val tvDetailList: LiveData<Resource<TvDetail>> = _tvDetailList
+
+
+    private val _watchlistMovie = MutableStateFlow<Resource<String>>(Resource.Unspecified())
+    val watchlistMovie : Flow<Resource<String>> = _watchlistMovie
+
+    private val _watchlistTv = MutableStateFlow<Resource<String>>(Resource.Unspecified())
+    val watchlistTv : Flow<Resource<String>> = _watchlistTv
+
+    val currentUid = firebaseAuth.currentUser?.uid.toString()
 
 
 
@@ -75,6 +94,43 @@ class ShowViewModel@Inject constructor(
         _similarTvList.postValue(Resource.Loading())
         _similarTvList.postValue(retrofitRepostory.getSimialrTv(tvId))
     }
+
+
+
+
+    fun saveMovie(movieId: String) {
+
+        val hashMap = hashMapOf<String, Any>()
+        hashMap["movieId"] =  movieId
+
+        firestore.collection("watchlist")
+            .document(currentUid)
+            .set(hashMap)
+            .addOnSuccessListener {
+                _watchlistMovie.value = Resource.Success(movieId)
+            }
+            .addOnFailureListener{
+                _watchlistMovie.value = Resource.Error(it.message.toString())
+            }
+    }
+
+    fun saveTv(tvId: String) {
+        val hashMap = hashMapOf<String, Any>()
+        hashMap["tvId"] =  tvId
+
+        firestore.collection("watchlist")
+            .document(currentUid)
+            .set(hashMap)
+            .addOnSuccessListener {
+                _watchlistTv.value = Resource.Success(tvId)
+            }
+            .addOnFailureListener{
+                _watchlistTv.value = Resource.Error(it.message.toString())
+            }
+    }
+
+
+
 
 
 }

@@ -23,15 +23,18 @@ android:background="@color/white"
                 android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
+                android:backgroundTint="@color/divider"
                 android:foregroundGravity="center_horizontal"
                 app:cardCornerRadius="100dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@color/white" />
+                    app:shapeAppearanceOverlay="@style/circleImageView"
+                    app:strokeColor="@color/gold"
+                    app:strokeWidth="@dimen/_7sdp" />
             </androidx.cardview.widget.CardView>
 
             <Button
@@ -201,8 +204,9 @@ android:background="@color/white"
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Current refrences"
+            android:text="Current Information"
             android:textSize="@dimen/_30sdp"
+            android:paddingTop="@dimen/_5sdp"
             android:textStyle="bold"
             android:fontFamily="@font/myfont"
             android:textColor="@color/main"

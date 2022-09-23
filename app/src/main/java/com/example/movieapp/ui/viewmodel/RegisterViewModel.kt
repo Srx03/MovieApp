@@ -76,7 +76,7 @@ class RegisterViewModel @Inject constructor(
         hashMap["password"] = user.password
 
         val hashMapWatchList = hashMapOf<String, Any>()
-        hashMap["uid"] = userUid
+        hashMapWatchList["uid"] = userUid
 
         firestore.collection(USER_COLLECTION)
             .document(userUid)

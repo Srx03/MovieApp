@@ -50,7 +50,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.login.collect{
                 when(it){
                     is Resource.Loading -> {
@@ -77,7 +77,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.validation.collect{ validation ->
                 if (validation.email is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){

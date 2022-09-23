@@ -25,6 +25,8 @@ import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+import kotlin.collections.ArrayList
+
 @AndroidEntryPoint
 class ShowFragment: Fragment() {
 
@@ -35,6 +37,7 @@ class ShowFragment: Fragment() {
     private lateinit var similarAdapter: SimilarAdapter
     private val  viewModel: ShowViewModel by activityViewModels()
 
+    val arrayList: ArrayList<String> = ArrayList()
 
     private lateinit var id: String
     private lateinit var idTv: String
@@ -61,10 +64,14 @@ class ShowFragment: Fragment() {
         binding.apply {
             btnAddToWatchlist.setOnClickListener{
 
-                if (isMovie == "0")
-                viewModel.saveMovie(id)
-                if (isMovie == "1")
+                if (isMovie == "0"){
+                    viewModel.saveMovie(id)
+
+                }
+                if (isMovie == "1"){
                     viewModel.saveTv(idTv)
+
+                }
 
             }
         }

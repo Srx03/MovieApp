@@ -5,27 +5,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.data.firebase.MovieFirebase
-import com.example.movieapp.data.firebase.User
-import com.example.movieapp.data.local.entity.ActorDetail
+
 import com.example.movieapp.data.remote.RetrofitRepostory
-import com.example.movieapp.models.actor.ActorCredits
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits
 import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.Tv
 import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
-import com.example.movieapp.util.Constants
 import com.example.movieapp.util.Resource
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.database.*
+import com.google.firebase.firestore.*
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @HiltViewModel
 class ShowViewModel@Inject constructor(
@@ -61,6 +61,9 @@ class ShowViewModel@Inject constructor(
     val watchlistTv : Flow<Resource<String>> = _watchlistTv
 
     val currentUid = firebaseAuth.currentUser?.uid.toString()
+
+    private val watchListMovieId: ArrayList<String> = ArrayList()
+    private val watchListTvId: ArrayList<String> = ArrayList()
 
 
 
@@ -100,32 +103,29 @@ class ShowViewModel@Inject constructor(
 
     fun saveMovie(movieId: String) {
 
-        val hashMap = hashMapOf<String, Any>()
-        hashMap["movieId"] =  movieId
-
         firestore.collection("watchlist")
             .document(currentUid)
-            .set(hashMap)
+            .update("movieId", FieldValue.arrayUnion(movieId))
             .addOnSuccessListener {
                 _watchlistMovie.value = Resource.Success(movieId)
             }
             .addOnFailureListener{
                 _watchlistMovie.value = Resource.Error(it.message.toString())
             }
+
+
+
     }
 
     fun saveTv(tvId: String) {
-        val hashMap = hashMapOf<String, Any>()
-        hashMap["tvId"] =  tvId
-
         firestore.collection("watchlist")
             .document(currentUid)
-            .set(hashMap)
+            .update("tvId", FieldValue.arrayUnion(tvId))
             .addOnSuccessListener {
-                _watchlistTv.value = Resource.Success(tvId)
+                _watchlistMovie.value = Resource.Success(tvId)
             }
             .addOnFailureListener{
-                _watchlistTv.value = Resource.Error(it.message.toString())
+                _watchlistMovie.value = Resource.Error(it.message.toString())
             }
     }
 

@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movieapp.databinding.WatchlistMovieItemBinding
 import com.example.movieapp.databinding.WatchlistTvItemBinding
 import com.example.movieapp.models.tv.TVResults
 
-class WatchlistMovieAdapter : RecyclerView.Adapter<WatchlistMovieAdapter.MovieViewHolder>() {
+class WatchlistTvAdapter : RecyclerView.Adapter<WatchlistTvAdapter.MovieViewHolder>() {
 
 
 
@@ -23,12 +22,12 @@ class WatchlistMovieAdapter : RecyclerView.Adapter<WatchlistMovieAdapter.MovieVi
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(val binding: WatchlistMovieItemBinding): RecyclerView.ViewHolder(binding.root)
+    class MovieViewHolder(val binding: WatchlistTvItemBinding): RecyclerView.ViewHolder(binding.root)
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(WatchlistMovieItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return MovieViewHolder(WatchlistTvItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

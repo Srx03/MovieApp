@@ -75,15 +75,23 @@ class RegisterViewModel @Inject constructor(
         hashMap["uid"] = userUid
         hashMap["password"] = user.password
 
+        val hashMapWatchList = hashMapOf<String, Any>()
+        hashMap["uid"] = userUid
+
         firestore.collection(USER_COLLECTION)
             .document(userUid)
             .set(hashMap)
             .addOnSuccessListener {
                  _register.value = Resource.Success(user)
+                firestore.collection("watchlist")
+                    .document(userUid)
+                    .set(hashMapWatchList)
             }
             .addOnFailureListener{
                 _register.value = Resource.Error(it.message.toString())
             }
+
+
     }
 
     private fun checkValidation(user: User): Boolean {

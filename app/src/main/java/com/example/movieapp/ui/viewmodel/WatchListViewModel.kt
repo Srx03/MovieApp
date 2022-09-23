@@ -12,9 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WatchListViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val firestore: FirebaseFirestore,
-    private val firebaseStorage: FirebaseStorage
-
+    private val firestore: FirebaseFirestore
 ):ViewModel() {
 
     val currentUid = firebaseAuth.currentUser?.uid.toString()
@@ -31,6 +29,48 @@ class WatchListViewModel @Inject constructor(
     val loadingState = _loadingState
     private val _errorState = MutableLiveData<String>()
     val errorState = _errorState
+
+
+    private var _movieWatchList: ArrayList<String>? = null
+    private var _tvWatchList: ArrayList<String>? = null
+
+
+
+    fun getWatchListMovie(){
+
+        _loadingState.value = true
+
+
+
+        firestore.collection("watchlist").whereEqualTo("uid", currentUid)
+            .addSnapshotListener{ snapshot, exeption ->
+
+                if (exeption != null){
+                    _loadingState.value = false
+                    _errorState.value = exeption.localizedMessage
+
+                }else{
+                    if (!snapshot!!.isEmpty){
+                        val documentList = snapshot.documents
+
+                        for (document in documentList) {
+
+                            val email = document.get("email") as String
+                            val user = document.get("userName") as String
+                            val downloadUri = document.get("imagePath") as String
+                            val password = document.get("password") as String
+                            _nameState.value = user
+                            _imageState.value = downloadUri
+                            _emailState.value = email
+                            _passwordState.value = password
+                        }
+
+                    }
+                }
+
+            }
+    }
+
 
 
 }

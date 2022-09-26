@@ -5,6 +5,7 @@ import com.example.movieapp.data.firebase.User
 import com.example.movieapp.util.*
 import com.example.movieapp.util.Constants.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -86,6 +87,11 @@ class RegisterViewModel @Inject constructor(
                 firestore.collection("watchlist")
                     .document(userUid)
                     .set(hashMapWatchList)
+
+                firestore.collection("watchlist")
+                    .document(userUid)
+                    .update("tvId",FieldValue.arrayUnion(),"movieId", FieldValue.arrayUnion())
+
             }
             .addOnFailureListener{
                 _register.value = Resource.Error(it.message.toString())

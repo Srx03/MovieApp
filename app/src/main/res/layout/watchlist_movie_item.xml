@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/_5sdp"
         app:cardBackgroundColor="@color/dark_gray"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="@dimen/_5sdp">
+        app:cardCornerRadius="@dimen/_15sdp">
 
         <ImageView
             android:layout_width="@dimen/_138sdp"
@@ -55,7 +55,7 @@
         android:textStyle="bold"
         android:textSize="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:textColor="@color/text_primary"/>
+        android:textColor="@color/black"/>
 
 
 

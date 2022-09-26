@@ -98,7 +98,7 @@
                     android:paddingHorizontal="@dimen/_2sdp"
                     android:visibility="visible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/similar_item" />
+                    tools:listitem="@layout/watchlist_movie_item" />
 
                 <TextView
                     android:id="@+id/emptyWatchlistMovie"

@@ -34,7 +34,7 @@
         android:layout_below="@+id/tvDesc"
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/_38sdp"
-        android:src="@drawable/popcorn" />
+        android:src="@drawable/ic_movie" />
 
 
     <RelativeLayout

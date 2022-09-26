@@ -189,8 +189,9 @@ class ProfileFragment : Fragment() {
 
 
         onImageEdit()
-        onEditButtonClick()
-        onExitButtonClick()
+        onSettingsButtonClick()
+        onMovieButtonClick()
+        onTvButtonClick()
 
   }
 
@@ -221,9 +222,9 @@ class ProfileFragment : Fragment() {
     private fun observeLiveData() {
         val userName = binding.tvUsernameFirst
         val imageView = binding.imgProfile
-        val tvEmail = binding.tvEmail
-        val tvPassword = binding.tvPassword
-        val tvUsername = binding.tvUsername
+        val tvEmail = binding.etEmail
+        val tvPassword = binding.etPassword
+        val tvUsername = binding.etUsername
         viewModel.nameState.observe(viewLifecycleOwner) { name ->
             userName.setText(name)
             tvUsername.setText(name)
@@ -235,6 +236,7 @@ class ProfileFragment : Fragment() {
             tvPassword.setText(password)
         }
         viewModel.imageState.observe(viewLifecycleOwner) { image ->
+
             Glide.with(this).load(image)
                 .into(imageView)
         }
@@ -247,24 +249,32 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun onEditButtonClick() {
+    private fun onSettingsButtonClick() {
 
         binding.apply {
-            btnEditProfile.setOnClickListener {
-                layoutCurrent.isGone = true
+            btnSettings.setOnClickListener {
                 layoutEdit.isGone = false
-                btnEditProfile.isGone = true
-
+                layoutTv.isGone = true
+                layoutMovie.isGone = true
             }
         }
     }
 
-    private fun onExitButtonClick(){
+    private fun onMovieButtonClick(){
         binding.apply {
-            btnExit.setOnClickListener {
-                layoutCurrent.isGone = false
+            btnMovieWatchList.setOnClickListener {
                 layoutEdit.isGone = true
-                btnEditProfile.isGone = false
+                layoutTv.isGone = true
+                layoutMovie.isGone = false
+            }
+        }
+    }
+    private fun onTvButtonClick(){
+        binding.apply {
+            btnTvWatchList.setOnClickListener {
+                layoutEdit.isGone = true
+                layoutTv.isGone = false
+                layoutMovie.isGone = true
             }
         }
     }

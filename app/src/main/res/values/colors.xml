@@ -26,8 +26,8 @@
     <color name="main">#2196F3</color>
     <!--    red: E50914,  orange: F84107, yellow: FF9800-->
     <color name="black_transparent">#B2000000</color>
-    <color name="black_transparent_1">#66000000</color>
+    <color name="black_transparent_1">#661B1B1B</color>
     <color name="transparent">#00000000</color>
-    <color name="black_transparent_light">#7E000000</color>
+    <color name="baby">#9BD2EC</color>
     <color name="blue">#0269A4</color>
 </resources>

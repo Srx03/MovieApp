@@ -21,24 +21,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/youtube_player_view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_400sdp"
-                android:src="@color/black"
-                android:scaleType="fitXY"/>
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:paddingTop="@dimen/_2sdp">
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgPoster"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_400sdp"
+                        android:src="@color/black"
+                        android:scaleType="fitXY"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -56,10 +56,9 @@
                             android:fontFamily="@font/bold"
                             android:paddingHorizontal="@dimen/_6sdp"
                             android:textColor="@color/text_primary"
-                            android:textSize="@dimen/_18sdp"
+                            android:textSize="@dimen/_25sdp"
                             android:textStyle="bold"
                             tools:text="Vratice se rode" />
-
 
                         <TextView
                             android:id="@+id/tvGenres"
@@ -68,7 +67,7 @@
                             android:fontFamily="@font/bold"
                             android:paddingHorizontal="@dimen/_6sdp"
                             android:textColor="@color/main"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_15sdp"
                             tools:text="Action / Adventure / Comedy / Scifi" />
 
 
@@ -212,7 +211,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16sdp"
-                        android:layout_marginBottom="@dimen/_8sdp"
+
                         android:background="@color/black_light"
                         android:orientation="vertical"
                         android:paddingVertical="@dimen/_8sdp">
@@ -256,51 +255,8 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/recommendations_container"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/empty_recommendations_msg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_136sdp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_margin="@dimen/_4sdp"
-                                android:fontFamily="@font/bold"
-                                android:gravity="center"
-                                android:text="Oops, no recommendations are available for this."
-                                android:textColor="@color/text_secondary"
-                                android:visibility="gone" />
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rv_recommendations"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:nestedScrollingEnabled="false"
-                                android:orientation="horizontal"
-                                android:visibility="gone"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                tools:itemCount="10" />
-
-                        </LinearLayout>
-
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_similar_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:nestedScrollingEnabled="false"
-                            android:orientation="horizontal"
-                            android:visibility="gone"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="15" />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>

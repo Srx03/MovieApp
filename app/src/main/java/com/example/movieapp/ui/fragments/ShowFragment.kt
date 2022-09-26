@@ -77,7 +77,7 @@ class ShowFragment: Fragment() {
         }
 
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.watchlistMovie.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -101,7 +101,7 @@ class ShowFragment: Fragment() {
         }
 
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.watchlistTv.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -109,13 +109,13 @@ class ShowFragment: Fragment() {
                     }
 
                     is Resource.Error ->{
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                         binding.btnAddToWatchlist.revertAnimation()
                     }
 
                     is Resource.Success ->{
                         binding. btnAddToWatchlist.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,"Succesfully saved", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -177,7 +177,7 @@ class ShowFragment: Fragment() {
 
                         Glide.with(this)
                             .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
-                            .into(binding.youtubePlayerView)
+                            .into(binding.imgPoster)
                         binding.tvTitle.text = it.data.title
                         binding.tvYear.text = it.data.release_date
                         binding.tvOverview.text = it.data.overview
@@ -235,7 +235,7 @@ class ShowFragment: Fragment() {
 
                         Glide.with(this)
                             .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
-                            .into(binding.youtubePlayerView)
+                            .into(binding.imgPoster)
                         binding.tvTitle.text = it.data.name
                         binding.tvYear.text = it.data.first_air_date
                         binding.tvOverview.text = it.data.overview

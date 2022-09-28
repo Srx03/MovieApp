@@ -15,17 +15,14 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.adapter.show.ActorShowAdapter
 import com.example.movieapp.adapter.show.SimilarAdapter
-import com.example.movieapp.data.firebase.MovieFirebase
-import com.example.movieapp.data.firebase.User
+import com.example.movieapp.data.firebase.movie.WatchList
+import com.example.movieapp.data.firebase.tv.TvWatchList
 import com.example.movieapp.databinding.FragmentShowBinding
-import com.example.movieapp.models.genres.GenreX
 import com.example.movieapp.ui.viewmodel.ShowViewModel
 import com.example.movieapp.util.Resource
 import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class ShowFragment: Fragment() {
@@ -37,13 +34,13 @@ class ShowFragment: Fragment() {
     private lateinit var similarAdapter: SimilarAdapter
     private val  viewModel: ShowViewModel by activityViewModels()
 
-    val arrayList: ArrayList<String> = ArrayList()
-
     private lateinit var id: String
     private lateinit var idTv: String
     private lateinit var isMovie: String
     private var isClicked: Boolean = false
     private var isMovieHelp: Boolean = false
+
+    private lateinit var posterPath: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,11 +62,24 @@ class ShowFragment: Fragment() {
             btnAddToWatchlist.setOnClickListener{
 
                 if (isMovie == "0"){
-                    viewModel.saveMovie(id)
+
+                    val movieWatchList = WatchList(
+                    id,
+                    posterPath,
+                    binding.tvTitle.text.toString(),
+                    binding.tvRating.text.toString()
+                    )
+                    viewModel.saveMovie(movieWatchList)
 
                 }
                 if (isMovie == "1"){
-                    viewModel.saveTv(idTv)
+                    val tvWatchList = TvWatchList(
+                        idTv,
+                        posterPath,
+                        binding.tvTitle.text.toString(),
+                        binding.tvRating.text.toString()
+                    )
+                    viewModel.saveTv(tvWatchList)
 
                 }
 
@@ -91,7 +101,7 @@ class ShowFragment: Fragment() {
 
                     is Resource.Success ->{
                         binding. btnAddToWatchlist.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -178,11 +188,13 @@ class ShowFragment: Fragment() {
                         Glide.with(this)
                             .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
                             .into(binding.imgPoster)
+                        posterPath = it.data.poster_path
                         binding.tvTitle.text = it.data.title
                         binding.tvYear.text = it.data.release_date
                         binding.tvOverview.text = it.data.overview
                         binding.tvRating.text = String.format("%.1f", it.data.vote_average)
                         binding.tvGenres.text = it.data.genres.joinToString("  /  ") { it.name }
+
                     }
                     else -> Unit
                 }

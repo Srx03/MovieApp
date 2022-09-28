@@ -220,6 +220,10 @@ class ProfileViewModel @Inject constructor(
             }
     }
 
+    fun logOut(){
+        firebaseAuth.signOut()
+    }
+
 
 
 

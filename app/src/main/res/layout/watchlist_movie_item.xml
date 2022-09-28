@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:textAlignment="center"
-        android:maxLines="2"
+        android:maxLines="10"
         android:ellipsize="end"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/myfont"

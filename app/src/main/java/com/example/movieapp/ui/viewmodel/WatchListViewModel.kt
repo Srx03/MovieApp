@@ -2,11 +2,22 @@ package com.example.movieapp.ui.viewmodel
 
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.firebase.movie.MovieFirebase
+import com.example.movieapp.data.firebase.movie.WatchList
+import com.example.movieapp.data.firebase.tv.TvFirebase
+import com.example.movieapp.data.firebase.tv.TvWatchList
+import com.example.movieapp.data.remote.RetrofitRepostory
+import com.example.movieapp.models.movie.MovieDetail
+import com.example.movieapp.models.tv.TvDetail
+import com.example.movieapp.util.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,63 +33,71 @@ class WatchListViewModel @Inject constructor(
     private val _errorState = MutableLiveData<String>()
     val errorState = _errorState
 
+    private  var _movieList = MutableLiveData<ArrayList<WatchList>>()
+    val movieList = _movieList
 
-    private var _movieWatchList: ArrayList<String>? = null
-    val movieWatchList: ArrayList<String>? = _movieWatchList
+    private val _loadingStateTv = MutableLiveData<Boolean>()
+    val loadingStateTv = _loadingStateTv
+    private val _errorStateTv = MutableLiveData<String>()
+    val errorStateTv = _errorStateTv
 
-
-    private var _tvWatchList: ArrayList<String>? = null
-    val tvWatchList: ArrayList<String>? = _tvWatchList
+    private  var _tvList = MutableLiveData<ArrayList<TvWatchList>>()
+    val tvList = _tvList
 
 
     fun getWatchListMovie(){
 
         _loadingState.value = true
 
-        firestore.collection("watchlist").whereEqualTo("uid", currentUid)
-            .addSnapshotListener{ snapshot, exeption ->
+        firestore.collection("watchlist").whereEqualTo("uid",currentUid)
+            .addSnapshotListener {snapshot, exeption ->
 
                 if (exeption != null){
                     _loadingState.value = false
                     _errorState.value = exeption.localizedMessage
 
                 }else{
-                    if (!snapshot!!.isEmpty){
-                        val documentList = snapshot.documents
 
-                        for (document in documentList) {
-                            _movieWatchList = document.get("movieId") as ArrayList<String>
-                        }
+                if (!snapshot!!.isEmpty){
+                    val documentList = snapshot.documents
+
+                    for (document in documentList) {
+                        val movieList: MovieFirebase? = document.toObject(MovieFirebase::class.java)
+
+                        _movieList.value = movieList!!.movie
+
+                        Log.d("dataRead", _movieList.toString())
+                     }
 
                     }
                 }
-
             }
     }
 
-
     fun getWatchListTv(){
+        _loadingStateTv.value = true
 
-        _loadingState.value = true
-
-        firestore.collection("watchlist").whereEqualTo("uid", currentUid)
-            .addSnapshotListener{ snapshot, exeption ->
+        firestore.collection("watchlist").whereEqualTo("uid",currentUid)
+            .addSnapshotListener {snapshot, exeption ->
 
                 if (exeption != null){
-                    _loadingState.value = false
-                    _errorState.value = exeption.localizedMessage
+                    _loadingStateTv.value = false
+                    _errorStateTv.value = exeption.localizedMessage
 
                 }else{
                     if (!snapshot!!.isEmpty){
                         val documentList = snapshot.documents
 
                         for (document in documentList) {
-                            _tvWatchList = document.get("tvId") as ArrayList<String>
+                            val tvList: TvFirebase? = document.toObject(TvFirebase::class.java)
+
+                            _tvList.value = tvList!!.tv
+
+                            Log.d("dataRead", _tvList.toString())
                         }
 
                     }
                 }
-
             }
     }
 

@@ -1,10 +1,11 @@
 package com.example.movieapp.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.firebase.tv.TvWatchList
+import com.example.movieapp.data.firebase.movie.WatchList
 
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.movie.Movie
@@ -15,11 +16,7 @@ import com.example.movieapp.models.tv.TvCredits
 import com.example.movieapp.models.tv.TvDetail
 import com.example.movieapp.util.Resource
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.database.*
 import com.google.firebase.firestore.*
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,11 +51,11 @@ class ShowViewModel@Inject constructor(
     val tvDetailList: LiveData<Resource<TvDetail>> = _tvDetailList
 
 
-    private val _watchlistMovie = MutableStateFlow<Resource<String>>(Resource.Unspecified())
-    val watchlistMovie : Flow<Resource<String>> = _watchlistMovie
+    private val _watchlistMovie = MutableStateFlow<Resource<WatchList>>(Resource.Unspecified())
+    val watchlistMovie : Flow<Resource<WatchList>> = _watchlistMovie
 
-    private val _watchlistTv = MutableStateFlow<Resource<String>>(Resource.Unspecified())
-    val watchlistTv : Flow<Resource<String>> = _watchlistTv
+    private val _watchlistTv = MutableStateFlow<Resource<TvWatchList>>(Resource.Unspecified())
+    val watchlistTv : Flow<Resource<TvWatchList>> = _watchlistTv
 
     val currentUid = firebaseAuth.currentUser?.uid.toString()
 
@@ -101,13 +98,21 @@ class ShowViewModel@Inject constructor(
 
 
 
-    fun saveMovie(movieId: String) {
+    fun saveMovie(movieWatchList: WatchList) {
+
+
+        val map = mutableMapOf<String, Any>()
+        map["movieId"] = movieWatchList.id
+        map["posterPath"] = movieWatchList.posterPath!!
+        map["title"] = movieWatchList.title!!
+        map["voteAverage"] = movieWatchList.voteAverage!!
+
 
         firestore.collection("watchlist")
             .document(currentUid)
-            .update("movieId", FieldValue.arrayUnion(movieId))
+            .update("movie", FieldValue.arrayUnion(map))
             .addOnSuccessListener {
-                _watchlistMovie.value = Resource.Success(movieId)
+                _watchlistMovie.value = Resource.Success(movieWatchList)
             }
             .addOnFailureListener{
                 _watchlistMovie.value = Resource.Error(it.message.toString())
@@ -117,16 +122,27 @@ class ShowViewModel@Inject constructor(
 
     }
 
-    fun saveTv(tvId: String) {
+    fun saveTv(tvWatchList: TvWatchList) {
+
+        val map = mutableMapOf<String, Any>()
+        map["tvId"] = tvWatchList.id
+        map["posterPath"] = tvWatchList.posterPath!!
+        map["title"] = tvWatchList.title!!
+        map["voteAverage"] = tvWatchList.voteAverage!!
+
+
         firestore.collection("watchlist")
             .document(currentUid)
-            .update("tvId", FieldValue.arrayUnion(tvId))
+            .update("tv", FieldValue.arrayUnion(map))
             .addOnSuccessListener {
-                _watchlistMovie.value = Resource.Success(tvId)
+                _watchlistTv.value = Resource.Success(tvWatchList)
             }
             .addOnFailureListener{
-                _watchlistMovie.value = Resource.Error(it.message.toString())
+                _watchlistTv.value = Resource.Error(it.message.toString())
             }
+
+
+
     }
 
 

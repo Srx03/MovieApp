@@ -32,8 +32,8 @@ android:background="@color/white"
                     android:id="@+id/imgProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
                     android:background="@drawable/ic_profile"
+                    android:scaleType="fitXY"
                     app:shapeAppearanceOverlay="@style/circleImageView"
                     app:strokeColor="@color/gold"
                     app:strokeWidth="@dimen/_10sdp" />
@@ -85,6 +85,7 @@ android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="-30dp"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:backgroundTint="@color/text_primary"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -103,7 +104,7 @@ android:background="@color/white"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_20sdp">
+            android:layout_marginTop="@dimen/_10sdp">
 
             <ImageView
                 android:id="@+id/btnSettings"
@@ -139,7 +140,7 @@ android:background="@color/white"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_marginTop="@dimen/_20sdp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
@@ -179,7 +180,9 @@ android:background="@color/white"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:textSize="15dp"
-                    android:fontFamily="@font/bold" />
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/myfont" />
 
             </LinearLayout>
             <LinearLayout
@@ -212,7 +215,9 @@ android:background="@color/white"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:textSize="15dp"
-                    android:fontFamily="@font/bold" />
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/myfont" />
 
             </LinearLayout>
             <LinearLayout
@@ -239,14 +244,16 @@ android:background="@color/white"
 
                 <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                     android:id="@+id/btnSaveUsername"
-                    android:background="@color/main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="save"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="15dp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@color/main"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/myfont"
+                    android:text="save"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/bold" />
+                    android:textSize="15dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -273,7 +280,8 @@ android:background="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/myfont"
+                    android:textStyle="bold"
                     android:text="Your Movie WatchList"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20sdp" />
@@ -299,10 +307,12 @@ android:background="@color/white"
                 android:layout_height="@dimen/_138sdp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/myfont"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:text="Add any Movie in your Watchlist"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"
                 android:visibility="gone" />
 
 
@@ -315,7 +325,7 @@ android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -328,7 +338,8 @@ android:background="@color/white"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:fontFamily="@font/bold"
+                        android:fontFamily="@font/myfont"
+                        android:textStyle="bold"
                         android:text="Your Tv WatchList"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp" />
@@ -354,10 +365,12 @@ android:background="@color/white"
                     android:layout_height="@dimen/_138sdp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/myfont"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:text="Add any Tv in your Watchlist"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18sdp"
                     android:visibility="gone" />
 
 

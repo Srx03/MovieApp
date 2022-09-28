@@ -1,7 +1,7 @@
 package com.example.movieapp.data.remote
 
 import com.example.movieapp.models.actor.ActorCredits
-import com.example.movieapp.data.local.entity.ActorDetail
+import com.example.movieapp.models.actor.ActorDetail
 import com.example.movieapp.models.actor.Actors
 import com.example.movieapp.models.movie.Movie
 import com.example.movieapp.models.movie.MovieCredits

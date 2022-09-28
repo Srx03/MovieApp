@@ -1,7 +1,7 @@
 package com.example.movieapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.data.firebase.User
+import com.example.movieapp.data.firebase.user.User
 import com.example.movieapp.util.*
 import com.example.movieapp.util.Constants.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
@@ -90,7 +90,7 @@ class RegisterViewModel @Inject constructor(
 
                 firestore.collection("watchlist")
                     .document(userUid)
-                    .update("tvId",FieldValue.arrayUnion(),"movieId", FieldValue.arrayUnion())
+                    .update("tv",FieldValue.arrayUnion(),"movie", FieldValue.arrayUnion())
 
             }
             .addOnFailureListener{

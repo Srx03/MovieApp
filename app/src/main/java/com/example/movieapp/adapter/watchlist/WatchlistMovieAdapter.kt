@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movieapp.data.firebase.movie.WatchList
 import com.example.movieapp.databinding.WatchlistMovieItemBinding
-import com.example.movieapp.databinding.WatchlistTvItemBinding
-import com.example.movieapp.models.tv.TVResults
+import com.example.movieapp.models.movie.MovieDetail
 
-class WatchlistMovieAdapter : RecyclerView.Adapter<WatchlistMovieAdapter.MovieViewHolder>() {
-
+class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieViewHolder>() {
 
 
-
-    private var liveData: List<TVResults>? = null
-    var onItemClick: ((TVResults) -> Unit)? = null
+    private var liveData: List<WatchList>? = null
+    var onItemClick: ((MovieDetail) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(liveData: List<TVResults>){
+    fun setList(liveData: List<WatchList>){
         this.liveData = liveData
         notifyDataSetChanged()
     }
@@ -32,10 +30,9 @@ class WatchlistMovieAdapter : RecyclerView.Adapter<WatchlistMovieAdapter.MovieVi
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].poster_path).into(holder.binding.imgMovie)
-        holder.itemView.setOnClickListener {
-            onItemClick!!.invoke(liveData!![position])
-        }
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].posterPath).into(holder.binding.imgMovie)
+        holder.binding.tvActorName.text = liveData!![position].title
+        holder.binding.tvRating.text =  liveData!![position].voteAverage
     }
 
     override fun getItemCount(): Int {
@@ -44,8 +41,8 @@ class WatchlistMovieAdapter : RecyclerView.Adapter<WatchlistMovieAdapter.MovieVi
 
     }
 
-    fun setOnPopularTvItemClick(tv: (TVResults) -> Unit) {
-        onItemClick = tv
+    fun setOnMovieItemClick(movie: (MovieDetail) -> Unit) {
+        onItemClick = movie
     }
 
 

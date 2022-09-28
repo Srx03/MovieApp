@@ -2,6 +2,7 @@ package com.example.movieapp.ui.fragments
 
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,12 +14,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.adapter.watchlist.WatchlistMovieAdapter
+import com.example.movieapp.adapter.watchlist.WatchlistTvAdapter
 import com.example.movieapp.databinding.FragmentProfileBinding
+import com.example.movieapp.ui.activitis.LogActivity
+import com.example.movieapp.ui.activitis.MainActivity
 import com.example.movieapp.ui.viewmodel.ProfileViewModel
+import com.example.movieapp.ui.viewmodel.WatchListViewModel
 import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
 import com.github.drjacky.imagepicker.ImagePicker
@@ -36,6 +43,10 @@ class ProfileFragment : Fragment() {
 
     private val  viewModel: ProfileViewModel by activityViewModels()
 
+    private val  viewModelWatchList: WatchListViewModel by activityViewModels()
+    private lateinit var watchlistMovieAdapter: WatchlistMovieAdapter
+    private lateinit var watchlistTvAdapter: WatchlistTvAdapter
+
 
 
     override fun onCreateView(
@@ -49,6 +60,52 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModelWatchList.getWatchListMovie()
+        viewModelWatchList.getWatchListTv()
+
+       viewModelWatchList.movieList.observe(viewLifecycleOwner){movieArrayList ->
+
+           if (movieArrayList.isNotEmpty()){
+               binding.rvWatchListMovie.isGone = false
+               binding.emptyWatchlistMovie.isGone = true
+               watchlistMovieAdapter.setList(movieArrayList)
+           }else{
+               binding.rvWatchListMovie.isGone = true
+               binding.emptyWatchlistMovie.isGone = false
+           }
+
+
+       }
+
+        viewModelWatchList.errorState.observe(viewLifecycleOwner) { error ->
+            Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+        }
+        viewModelWatchList.loadingState.observe(viewLifecycleOwner) { loading ->
+        }
+
+
+        viewModelWatchList.tvList.observe(viewLifecycleOwner){tvArrayList ->
+
+            if (tvArrayList.isNotEmpty()){
+                binding.rvWatchListTv.isGone = false
+                binding.emptyWatchlistTv.isGone = true
+                watchlistTvAdapter.setList(tvArrayList)
+            }else{
+                binding.rvWatchListTv.isGone = true
+                binding.emptyWatchlistTv.isGone = false
+            }
+
+
+        }
+
+        viewModelWatchList.errorStateTv.observe(viewLifecycleOwner) { error ->
+            Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+        }
+        viewModelWatchList.loadingStateTv.observe(viewLifecycleOwner) { loading ->
+        }
+
+
 
         viewModel.getDataFromFirebase()
         observeLiveData()
@@ -114,8 +171,6 @@ class ProfileFragment : Fragment() {
 
             }
 
-            this.cancel()
-
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -164,7 +219,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch  {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.editUsername.collect{
                 when(it){
                     is Resource.Loading ->{
@@ -188,10 +243,13 @@ class ProfileFragment : Fragment() {
         }
 
 
+
         onImageEdit()
         onSettingsButtonClick()
         onMovieButtonClick()
         onTvButtonClick()
+        setUpRecyclerView()
+        onLogOutClick()
 
   }
 
@@ -212,7 +270,7 @@ class ProfileFragment : Fragment() {
                 placeholder(R.drawable.ic_profile)
                 error(R.drawable.ic_profile)
                 crossfade(true)
-                crossfade(100)
+                crossfade(500)
             }
             viewModel.saveImage(profilePictureUri!!)
         }
@@ -261,6 +319,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun onMovieButtonClick(){
+
+
         binding.apply {
             btnMovieWatchList.setOnClickListener {
                 layoutEdit.isGone = true
@@ -277,6 +337,33 @@ class ProfileFragment : Fragment() {
                 layoutMovie.isGone = true
             }
         }
+    }
+
+    private fun onLogOutClick() {
+        binding.btnLogout.setOnClickListener {
+            viewModel.logOut()
+            Intent(requireActivity(), LogActivity::class.java).also { intent ->
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+    }
+
+
+    private fun setUpRecyclerView(){
+        watchlistMovieAdapter = WatchlistMovieAdapter()
+        watchlistTvAdapter = WatchlistTvAdapter()
+
+        binding.rvWatchListMovie.apply {
+            layoutManager = LinearLayoutManager(context,  LinearLayoutManager.HORIZONTAL, false)
+            adapter = watchlistMovieAdapter
+        }
+
+        binding.rvWatchListTv.apply {
+            layoutManager = LinearLayoutManager(context,  LinearLayoutManager.HORIZONTAL, false)
+            adapter = watchlistTvAdapter
+        }
+
     }
 
 

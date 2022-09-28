@@ -1,4 +1,4 @@
-package com.example.movieapp.data.local.entity
+package com.example.movieapp.models.actor
 
 data class ActorDetail(
     val adult: Boolean,

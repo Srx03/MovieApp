@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.movieapp.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,6 +14,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -121,15 +123,11 @@ class ProfileViewModel @Inject constructor(
     }
 
 
-    fun saveEditEmail(email: String) {
+    fun saveEditEmail(email: String) = viewModelScope.launch {
 
             if(checkValidationEmail(email)) {
 
-                runBlocking {
                     _editEmail.emit(Resource.Loading())
-                }
-
-
 
                 firestore.collection(Constants.USER_COLLECTION).document(currentUid)
                     .update(
@@ -148,22 +146,19 @@ class ProfileViewModel @Inject constructor(
                     validateEditEmail(email)
                 )
 
-                runBlocking {
-                    Log.d("like", emailFieldsState.toString())
-                    _validationEmail.send(emailFieldsState)
-                }
+                _validationEmail.send(emailFieldsState)
+
             }
 
     }
 
 
-    fun saveEditPassword(password: String) {
+    fun saveEditPassword(password: String) = viewModelScope.launch {
 
 
         if(checkValidationPassword(password)) {
-            runBlocking {
+
                 _editPassword.emit(Resource.Loading())
-            }
 
             firestore.collection(Constants.USER_COLLECTION).document(currentUid)
                 .update(
@@ -181,21 +176,19 @@ class ProfileViewModel @Inject constructor(
                 validateEditPassword(password)
             )
 
-            runBlocking {
-                Log.d("likepass", passwordFieldsState.toString())
                 _validationPassword.send(passwordFieldsState)
-            }
+
         }
     }
 
 
-    fun saveEditUser(userName: String) {
+    fun saveEditUser(userName: String) = viewModelScope.launch {
 
             if(checkValidationUsername(userName)) {
 
-                runBlocking {
+
                     _editUsername.emit(Resource.Loading())
-                }
+
 
                 firestore.collection(Constants.USER_COLLECTION).document(currentUid)
                     .update(
@@ -214,9 +207,9 @@ class ProfileViewModel @Inject constructor(
                     validateEditUser(userName)
                 )
 
-                runBlocking {
+
                     _validationUsername.send( usernameFieldsState)
-                }
+
             }
     }
 

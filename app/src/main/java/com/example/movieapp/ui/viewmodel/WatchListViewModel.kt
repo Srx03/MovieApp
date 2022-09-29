@@ -15,6 +15,7 @@ import com.example.movieapp.models.movie.MovieDetail
 import com.example.movieapp.models.tv.TvDetail
 import com.example.movieapp.util.Resource
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -64,7 +65,7 @@ class WatchListViewModel @Inject constructor(
                     for (document in documentList) {
                         val movieList: MovieFirebase? = document.toObject(MovieFirebase::class.java)
 
-                        _movieList.value = movieList!!.movie
+                        _movieList.value = movieList?.movie
 
                         Log.d("dataRead", _movieList.toString())
                      }
@@ -91,14 +92,25 @@ class WatchListViewModel @Inject constructor(
                         for (document in documentList) {
                             val tvList: TvFirebase? = document.toObject(TvFirebase::class.java)
 
-                            _tvList.value = tvList!!.tv
+                            _tvList.value = tvList?.tv
 
-                            Log.d("dataRead", _tvList.toString())
                         }
 
                     }
                 }
             }
+    }
+
+    fun deleteTv(itemId: Int){
+        val array: String = "tv/$itemId"
+        firestore.collection("watchlist").document(currentUid).update("tv", FieldValue.arrayRemove(array))
+    }
+
+    fun deleteMovie(itemId: Int){
+        val array: String = "movie/$itemId"
+        firestore.collection("watchlist").document(currentUid).update("movie", FieldValue.arrayRemove(array))
+        Log.d("test",itemId.toString())
+
     }
 
 

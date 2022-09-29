@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.firebase.user.User
 import com.example.movieapp.util.*
 import com.example.movieapp.util.Constants.USER_COLLECTION
@@ -12,7 +13,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 import javax.inject.Inject
 
@@ -35,14 +38,11 @@ class RegisterViewModel @Inject constructor(
 
 
 
-    fun createAccountWithEmailAndPassword(user: User){
+    fun createAccountWithEmailAndPassword(user: User) = viewModelScope.launch{
 
         if (checkValidation(user)) {
-
-
-            runBlocking {
                 _register.emit(Resource.Loading())
-            }
+
             firebaseAuth.createUserWithEmailAndPassword(user.email, user.password)
                 .addOnSuccessListener {
                     it.user?.let {
@@ -60,9 +60,8 @@ class RegisterViewModel @Inject constructor(
                 validateUser(user.userName)
             )
 
-            runBlocking {
                 _validation.send(registerFieldsState)
-            }
+
 
         }
     }

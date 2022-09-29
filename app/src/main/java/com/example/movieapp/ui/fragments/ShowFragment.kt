@@ -248,6 +248,7 @@ class ShowFragment: Fragment() {
                         Glide.with(this)
                             .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
                             .into(binding.imgPoster)
+                        posterPath = it.data.poster_path
                         binding.tvTitle.text = it.data.name
                         binding.tvYear.text = it.data.first_air_date
                         binding.tvOverview.text = it.data.overview

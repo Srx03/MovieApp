@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.fragmentContainerView).navigate(R.id.homeFragment)
         setupTabBar()
 
+
     }
 
     private fun setupTabBar(){

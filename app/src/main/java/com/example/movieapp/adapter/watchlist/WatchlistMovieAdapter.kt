@@ -1,6 +1,7 @@
 package com.example.movieapp.adapter.watchlist
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieVie
 
 
     private var liveData: List<WatchList>? = null
-    var onItemClick: ((MovieDetail) -> Unit)? = null
+    var onItemClick: ((Int) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<WatchList>){
@@ -33,6 +34,11 @@ class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieVie
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].posterPath).into(holder.binding.imgMovie)
         holder.binding.tvActorName.text = liveData!![position].title
         holder.binding.tvRating.text =  liveData!![position].voteAverage
+        holder.itemView.setOnLongClickListener {
+            onItemClick!!.invoke(position)
+            true
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +47,7 @@ class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieVie
 
     }
 
-    fun setOnMovieItemClick(movie: (MovieDetail) -> Unit) {
+    fun deleteWatchlistMovieItemClick(movie: (Int) -> Unit) {
         onItemClick = movie
     }
 

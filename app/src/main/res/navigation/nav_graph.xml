@@ -30,11 +30,6 @@
             app:destination="@id/actorFragment" />
     </fragment>
     <fragment
-        android:id="@+id/watchListFragment"
-        android:name="com.example.movieapp.ui.fragments.WatchListFragment"
-        android:label="fragment_watch_list"
-        tools:layout="@layout/fragment_watch_list" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.movieapp.ui.fragments.ProfileFragment"
         android:label="fragment_profile"

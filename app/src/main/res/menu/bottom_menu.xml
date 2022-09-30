@@ -2,33 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
+        android:enabled="true"
         android:title="Home"
-        app:cnb_iconColor="@color/main"/>
+        android:iconTint="@color/white"/>
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
         android:title="Search"
-        app:cnb_iconColor="@color/main" />
+        android:enabled="true"
+        android:iconTint="@color/white"/>
 
     <item
-    android:id="@+id/comingSoon"
+    android:id="@+id/comingSoonFragment"
     android:icon="@drawable/ic_comingsoon"
     android:title="Coming Soon"
-    app:cnb_iconColor="@color/main" />
+        android:enabled="true"
+        android:iconTint="@color/white"/>
 
     <item
-        android:id="@+id/watchlist"
-        android:icon="@drawable/ic_list"
-        android:title="Watchlist"
-        app:cnb_iconColor="@color/main" />
-    <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
-        android:title="Settings"
-        app:cnb_iconColor="@color/main" />
+        android:title="Profile"
+        android:enabled="true"
+        android:iconTint="@color/white"/>
 
 
 </menu>

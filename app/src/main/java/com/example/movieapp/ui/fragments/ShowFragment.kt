@@ -43,6 +43,8 @@ class ShowFragment: Fragment() {
 
     private lateinit var posterPath: String
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +57,8 @@ class ShowFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         getOnPopularClickData()
 

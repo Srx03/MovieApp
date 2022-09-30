@@ -93,8 +93,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    //Navigation 2
-    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
+
 
     //comming soon
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.5'

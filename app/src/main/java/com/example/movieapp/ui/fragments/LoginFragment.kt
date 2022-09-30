@@ -31,6 +31,8 @@ class LoginFragment : Fragment() {
 
     private val  viewModel: LoginViewModel by activityViewModels()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +43,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+
 
         binding.apply {
             btnLogin.setOnClickListener{

@@ -234,7 +234,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Success ->{
                         binding.btnSaveUsername.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_LONG).show()
 
                     }
                     else -> Unit

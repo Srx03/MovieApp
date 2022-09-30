@@ -27,6 +27,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="@dimen/_25sdp"
         android:src="@drawable/loginuse" />
+
     <ImageView
         android:id="@+id/poprcorn"
         android:layout_width="@dimen/_200sdp"

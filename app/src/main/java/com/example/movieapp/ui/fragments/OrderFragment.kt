@@ -143,8 +143,8 @@ class OrderFragment : Fragment() {
         // Setting up genres option list Recyclerview
         genresAdapter = GenreAdapter(
             selectedStrokeColor = ContextCompat.getColor(requireContext(), R.color.main),
-            unSelectedStrokeColor = ContextCompat.getColor(requireContext(), R.color.divider),
-            cardBgColor = ContextCompat.getColor(requireContext(), R.color.text_primary),
+            unSelectedStrokeColor = ContextCompat.getColor(requireContext(), R.color.text_primary),
+            cardBgColor = ContextCompat.getColor(requireContext(), R.color.transparent),
             selectGenreItemClick = { genre: GenreX ->
                 if (!selectedGenresList.contains(genre))
                     selectedGenresList.add(genre)

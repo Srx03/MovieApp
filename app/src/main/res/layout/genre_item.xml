@@ -16,10 +16,10 @@
     android:layout_marginBottom="@dimen/_3sdp"
     android:checkable="true"
     app:checkedIcon="@null"
-    app:cardBackgroundColor="@color/text_primary"
+    app:cardBackgroundColor="@color/transparent"
     app:cardCornerRadius="@dimen/_6sdp"
-    app:strokeColor="@color/divider"
-    app:strokeWidth="1dp">
+    app:strokeColor="@color/text_primary"
+    app:strokeWidth="2dp">
 
     <TextView
         android:id="@+id/tvGenres"
@@ -29,7 +29,7 @@
         android:fontFamily="@font/bold"
         android:paddingHorizontal="@dimen/_14sdp"
         android:paddingVertical="@dimen/_4sdp"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/text_primary"
         tools:text="Action" />
 
 </com.google.android.material.card.MaterialCardView>

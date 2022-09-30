@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,6 +98,7 @@ class ShowFragment: Fragment() {
                     is Resource.Error ->{
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                         binding.btnAddToWatchlist.revertAnimation()
+
                     }
 
                     is Resource.Success ->{

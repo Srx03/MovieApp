@@ -42,9 +42,11 @@ class SimilarAdapter(
         if(isMoive == "0" ){
             Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveDataMovie!![position].poster_path).into(holder.binding.imgMovie)
             holder.binding.tvRating.text =  String.format("%.1f", liveDataMovie!![position].vote_average)
+            holder.binding.tvActorName.text = liveDataMovie!![position].title
         }else{
             Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveDataTv!![position].poster_path).into(holder.binding.imgMovie)
             holder.binding.tvRating.text =  String.format("%.1f", liveDataTv!![position].vote_average)
+            holder.binding.tvActorName.text = liveDataTv!![position].name
         }
     }
 

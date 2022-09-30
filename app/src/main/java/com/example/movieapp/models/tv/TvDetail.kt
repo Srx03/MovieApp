@@ -1,6 +1,5 @@
 package com.example.movieapp.models.tv
 
-import com.example.movieapp.data.local.dao.*
 import com.example.movieapp.models.genres.GenreX
 
 data class TvDetail(

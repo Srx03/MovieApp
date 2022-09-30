@@ -1,4 +1,4 @@
-package com.example.movieapp.data.local.dao
+package com.example.movieapp.models.tv
 
 data class Network(
     val id: Int,

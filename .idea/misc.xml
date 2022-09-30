@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable-v24/stroke.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/bt_corner.xml" value="0.2645" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/bt_uisquare.xml" value="0.2645" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/circle.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_comingsoon.xml" value="0.19" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_home.xml" value="0.19" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_profile.xml" value="0.19" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_settings.xml" value="0.1355" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/poster_bg.xml" value="0.2145" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/rating_bg.xml" value="0.1965" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/search_box_bckgrnd.xml" value="0.1915" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/font/hind.xml" value="0.28229166666666666" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/activity_log.xml" value="0.25" />
@@ -27,7 +30,7 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_show.xml" value="0.26132246376811596" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_watch_list.xml" value="0.13903985507246377" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_watch_list.xml" value="0.21" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/genre_item.xml" value="0.67" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/order_item.xml" value="0.2346014492753623" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/popular_movie_item.xml" value="0.25" />
@@ -44,6 +47,10 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_actor_item.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_movie_item.xml" value="0.22395833333333334" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/trending_tv_item.xml" value="0.225" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/watchlistTv_item.xml" value="0.24456521739130435" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/watchlist_item.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/watchlist_movie_item.xml" value="0.24456521739130435" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/watchlist_tv_item.xml" value="0.24456521739130435" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/menu/bottom_menu.xml" value="0.20555555555555555" />
       </map>
     </option>

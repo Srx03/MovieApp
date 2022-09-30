@@ -1,4 +1,4 @@
-package com.example.movieapp.data.local.dao
+package com.example.movieapp.models.tv
 
 data class Season(
     val air_date: Any,

@@ -2,6 +2,7 @@ package com.example.movieapp.ui.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,10 @@ class ComingSoonFragment : Fragment() {
     private lateinit var genreAdapter: ComingSoonGenreAdapter
     private var onTabSelectedListener: TabLayout.OnTabSelectedListener? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onFirstLoadTab = false
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -132,9 +137,9 @@ class ComingSoonFragment : Fragment() {
         )
         binding.comingSoonRecyclerView.apply {
             adapter = comingSoonMovieAdapter
-            set3DItem(false)
+            setHasFixedSize(true)
+            set3DItem(true)
             setAlpha(true)
-            setInfinite(true)
         }
         binding.genresRv.apply {
             // Setting Genre Recyclerview
@@ -150,8 +155,8 @@ class ComingSoonFragment : Fragment() {
                             title.text = movieResult.title
                             // Setting the Genre List
                             tvRelaseDate.formatUpcomingDate(movieResult.release_date)
-                                genreAdapter.setList(Genres.Genres.getMovieGenreListFromIds(movieResult.genre_ids))
-                                overview.text = movieResult.overview
+                            genreAdapter.setList(Genres.Genres.getMovieGenreListFromIds(movieResult.genre_ids))
+                            overview.text = movieResult.overview
                         }
                     }
                 })
@@ -175,9 +180,9 @@ class ComingSoonFragment : Fragment() {
         )
         binding.comingSoonRecyclerView.apply {
             adapter = comingSoonTvAdapter
-            set3DItem(false)
+            setHasFixedSize(true)
+            set3DItem(true)
             setAlpha(true)
-            setInfinite(true)
 
         }
         binding.genresRv.apply {

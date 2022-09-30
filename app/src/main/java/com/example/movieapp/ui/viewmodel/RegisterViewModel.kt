@@ -1,18 +1,21 @@
 package com.example.movieapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.data.firebase.entities.User
+import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.firebase.user.User
 import com.example.movieapp.util.*
 import com.example.movieapp.util.Constants.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 import javax.inject.Inject
 
@@ -35,14 +38,11 @@ class RegisterViewModel @Inject constructor(
 
 
 
-    fun createAccountWithEmailAndPassword(user: User){
+    fun createAccountWithEmailAndPassword(user: User) = viewModelScope.launch{
 
         if (checkValidation(user)) {
-
-
-            runBlocking {
                 _register.emit(Resource.Loading())
-            }
+
             firebaseAuth.createUserWithEmailAndPassword(user.email, user.password)
                 .addOnSuccessListener {
                     it.user?.let {
@@ -60,9 +60,8 @@ class RegisterViewModel @Inject constructor(
                 validateUser(user.userName)
             )
 
-            runBlocking {
                 _validation.send(registerFieldsState)
-            }
+
 
         }
     }
@@ -76,15 +75,28 @@ class RegisterViewModel @Inject constructor(
         hashMap["uid"] = userUid
         hashMap["password"] = user.password
 
+        val hashMapWatchList = hashMapOf<String, Any>()
+        hashMapWatchList["uid"] = userUid
+
         firestore.collection(USER_COLLECTION)
             .document(userUid)
             .set(hashMap)
             .addOnSuccessListener {
                  _register.value = Resource.Success(user)
+                firestore.collection("watchlist")
+                    .document(userUid)
+                    .set(hashMapWatchList)
+
+                firestore.collection("watchlist")
+                    .document(userUid)
+                    .update("tv",FieldValue.arrayUnion(),"movie", FieldValue.arrayUnion())
+
             }
             .addOnFailureListener{
                 _register.value = Resource.Error(it.message.toString())
             }
+
+
     }
 
     private fun checkValidation(user: User): Boolean {

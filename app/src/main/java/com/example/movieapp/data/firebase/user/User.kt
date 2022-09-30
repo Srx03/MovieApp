@@ -1,4 +1,4 @@
-package com.example.movieapp.data.firebase.entities
+package com.example.movieapp.data.firebase.user
 
 data class User (
     val email: String,

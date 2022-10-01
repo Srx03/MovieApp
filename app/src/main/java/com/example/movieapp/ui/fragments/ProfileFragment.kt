@@ -29,6 +29,7 @@ import com.example.movieapp.ui.viewmodel.ProfileViewModel
 import com.example.movieapp.ui.viewmodel.WatchListViewModel
 import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -101,7 +102,7 @@ class ProfileFragment : Fragment() {
         }
 
         viewModelWatchList.errorStateTv.observe(viewLifecycleOwner) { error ->
-            Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+            showSnackBar(message = error)
         }
         viewModelWatchList.loadingStateTv.observe(viewLifecycleOwner) { loading ->
         }
@@ -183,7 +184,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSaveEmail.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                     }
 
                     is Resource.Success ->{
@@ -206,7 +207,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSavePassword.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                     }
 
                     is Resource.Success ->{
@@ -229,7 +230,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSaveUsername.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                     }
 
                     is Resource.Success ->{
@@ -265,15 +266,8 @@ class ProfileFragment : Fragment() {
         if (it.resultCode == Activity.RESULT_OK) {
 
             profilePictureUri = it.data?.data!!
-
-            binding.imgProfile.load(profilePictureUri) {
-                transformations(CircleCropTransformation())
-                placeholder(R.drawable.ic_profile)
-                error(R.drawable.ic_profile)
-                crossfade(true)
-                crossfade(500)
-            }
             viewModel.saveImage(profilePictureUri!!)
+            binding.imgProfile.load(profilePictureUri)
         }
 
     }

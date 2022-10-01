@@ -7,12 +7,6 @@ class Genres {
 
     object Genres {
 
-//    fun getGenresText(ids: List<Int>?): String? {
-//        if (ids == null) {
-//            return null
-//        }
-//        return getGenreListFromIds(ids).joinToString(" • ") { it.name }
-//    }
 
         fun getMovieGenreListFromIds(ids: List<Int>?): List<GenreX> {
             if (ids == null) {

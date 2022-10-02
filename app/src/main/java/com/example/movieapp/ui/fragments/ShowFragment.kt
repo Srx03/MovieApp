@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
@@ -100,7 +99,7 @@ class ShowFragment: Fragment() {
                     }
 
                     is Resource.Error ->{
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message!!)
                         binding.btnAddToWatchlist.revertAnimation()
 
                     }
@@ -125,7 +124,7 @@ class ShowFragment: Fragment() {
                     }
 
                     is Resource.Error ->{
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        showSnackBar(message = it.message!!)
                         binding.btnAddToWatchlist.revertAnimation()
                     }
 
@@ -191,10 +190,19 @@ class ShowFragment: Fragment() {
 
                     is Resource.Success -> {
 
-                        Glide.with(this)
-                            .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
-                            .into(binding.imgPoster)
-                        posterPath = it.data.poster_path
+                        if(it.data!!.poster_path != null) {
+                            Glide.with(this)
+                                .load("https://image.tmdb.org/t/p/w500/" + it.data.poster_path)
+                                .into(binding.imgPoster)
+                            posterPath = it.data.poster_path
+                        }
+                        else{
+                            posterPath = ""
+                            Glide.with(this)
+                                .load(R.drawable.noimage)
+                                .into(binding.imgPoster)
+                        }
+
                         binding.tvTitle.text = it.data.title
                         binding.tvYear.text = it.data.release_date
                         binding.tvOverview.text = it.data.overview
@@ -254,7 +262,10 @@ class ShowFragment: Fragment() {
                         Glide.with(this)
                             .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
                             .into(binding.imgPoster)
-                        posterPath = it.data.poster_path
+                        if(it.data.poster_path != null)
+                            posterPath = it.data.poster_path
+                        else
+                            posterPath = ""
                         binding.tvTitle.text = it.data.name
                         binding.tvYear.text = it.data.first_air_date
                         binding.tvOverview.text = it.data.overview

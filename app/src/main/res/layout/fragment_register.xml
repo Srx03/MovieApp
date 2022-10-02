@@ -12,163 +12,138 @@
         android:id="@+id/tvDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_150sdp"
+        android:fontFamily="@font/OpenSans"
         android:text="Welcome to SrxMovie"
+        android:textAlignment="center"
         android:textColor="@color/main"
-        android:fontFamily="@font/bold"
         android:textSize="@dimen/_50sdp"
-        android:textAlignment="center"/>
-
-    <ImageView
-        android:id="@+id/png"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_200sdp"
-        android:layout_below="@+id/tvDesc"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/_25sdp"
-        android:src="@drawable/loginuse" />
-
-    <ImageView
-        android:id="@+id/poprcorn"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_below="@+id/tvDesc"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/_38sdp"
-        android:src="@drawable/ic_movie" />
-
+        android:textStyle="bold" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/png"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDesc"
         android:gravity="center_vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_310sdp"
-            android:layout_margin="20dp"
-            android:background="@color/text_primary"
-            app:cardCornerRadius="@dimen/_30sdp"
-            app:cardElevation="4dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/myfont"
-                    android:text="E-Mail"
-                    android:textColor="@color/main"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvEmail"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:drawableRight="@drawable/ic_email"
-                    android:drawablePadding="30dp"
-                    android:inputType="textEmailAddress"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:id="@+id/tvPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/etEmail"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/myfont"
-                    android:text="Password"
-                    android:textColor="@color/main"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvPassword"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:drawableRight="@drawable/ic_lock"
-                    android:drawablePadding="30dp"
-                    android:inputType="textPassword"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:id="@+id/tvPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/etPassword"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/myfont"
-                    android:text="Username"
-                    android:textColor="@color/main"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvPhone"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:drawableRight="@drawable/ic_profile"
-                    android:drawablePadding="30dp"
-                    android:inputType="text"
-                    android:padding="10dp" />
-
-                <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                    android:id="@+id/btnRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/etPhone"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@color/main"
-                    android:gravity="center"
-                    android:text="Register"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:spinning_bar_color="@color/white" />
-
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/mLogin"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="You already have an accunt?"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:textColor="@color/white" />
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="5dp"
+            android:hint="Email"
+            android:orientation="vertical"
+            android:textColorHint="#c1c2c4"
+            app:boxBackgroundColor="#323232">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/email_img"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:inputType="textEmailAddress"
+                android:outlineAmbientShadowColor="@color/white"
+                android:outlineSpotShadowColor="@color/white"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailInputLayout"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12sp"
+            android:layout_marginEnd="24dp"
+            android:elevation="5dp"
+            android:hint="Password"
+            android:orientation="vertical"
+            android:textColorHint="#c1c2c4"
+            app:boxBackgroundColor="#323232">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/pass_img"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:inputType="textPassword"
+                android:outlineAmbientShadowColor="@color/white"
+                android:outlineSpotShadowColor="@color/white"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordInputLayout"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12sp"
+            android:layout_marginEnd="24dp"
+            android:elevation="5dp"
+            android:hint="Username"
+            android:orientation="vertical"
+            android:textColorHint="#c1c2c4"
+            app:boxBackgroundColor="#323232"
+          >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/pass_img"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:inputType="text"
+                android:outlineAmbientShadowColor="@color/white"
+                android:outlineSpotShadowColor="@color/white"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@id/usernameInputLayout"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/btnbackground"
+            android:fontFamily="@font/opensanslow"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:spinning_bar_color="@color/white" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/mLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:fontFamily="@font/opensanslow"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="You already have account? Login"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/white" />
+
 
 </RelativeLayout>

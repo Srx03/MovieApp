@@ -50,8 +50,8 @@ class LoginFragment : Fragment() {
 
         binding.apply {
             btnLogin.setOnClickListener{
-                val email = etEmail.text.toString().trim()
-                val password = etPassword.text.toString()
+                val email = emailEditText.text.toString().trim()
+                val password = passwordEditText.text.toString()
                 viewModel.login(email, password)
             }
         }
@@ -87,7 +87,7 @@ class LoginFragment : Fragment() {
             viewModel.validation.collect{ validation ->
                 if (validation.email is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){
-                        binding.etEmail.apply {
+                        binding.emailEditText.apply {
                             requestFocus()
                             error = validation.email.message
                         }
@@ -96,7 +96,7 @@ class LoginFragment : Fragment() {
 
                 if (validation.password is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){
-                        binding.etPassword.apply {
+                        binding.passwordEditText.apply {
                             requestFocus()
                             error = validation.password.message
                         }

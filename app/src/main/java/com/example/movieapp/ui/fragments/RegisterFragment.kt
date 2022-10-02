@@ -45,9 +45,9 @@ class RegisterFragment : Fragment() {
         binding.apply {
             btnRegister.setOnClickListener{
                 val user = User(
-                    etEmail.text.toString().trim(),
-                    etPassword.text.toString(),
-                    etPhone.text.toString().trim()
+                   emailEditText.text.toString().trim(),
+                    passwordEditText.text.toString(),
+                    usernameEditText.text.toString().trim()
                 )
                 viewModel.createAccountWithEmailAndPassword(user)
             }
@@ -83,7 +83,7 @@ class RegisterFragment : Fragment() {
             viewModel.validation.collect{ validation ->
                 if (validation.email is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){
-                        binding.etEmail.apply {
+                        binding.emailEditText.apply {
                             requestFocus()
                             error = validation.email.message
                         }
@@ -92,7 +92,7 @@ class RegisterFragment : Fragment() {
 
                 if (validation.password is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){
-                        binding.etPassword.apply {
+                        binding.passwordEditText.apply {
                             requestFocus()
                             error = validation.password.message
                         }
@@ -101,7 +101,7 @@ class RegisterFragment : Fragment() {
 
                 if (validation.userName is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){
-                        binding.etPhone.apply {
+                        binding.usernameEditText.apply {
                             requestFocus()
                             error = validation.userName.message
                         }

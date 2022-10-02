@@ -18,6 +18,7 @@ import com.example.movieapp.models.genres.GenreX
 import com.example.movieapp.ui.viewmodel.OrderViewModel
 import com.example.movieapp.util.Genres
 import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -73,6 +74,7 @@ class OrderFragment : Fragment() {
 
                             is Resource.Error -> {
                                 binding.btnFindResult.revertAnimation()
+                                showSnackBar(message = it.message!!)
                             }
 
                             is Resource.Success ->{
@@ -95,6 +97,7 @@ class OrderFragment : Fragment() {
 
                             is Resource.Error -> {
                                 binding.btnFindResult.revertAnimation()
+                                showSnackBar(message = it.message!!)
                             }
 
                             is Resource.Success ->{

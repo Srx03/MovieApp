@@ -67,7 +67,7 @@
                             android:fontFamily="@font/bold"
                             android:paddingHorizontal="@dimen/_6sdp"
                             android:textColor="@color/main"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_17sdp"
                             tools:text="Action / Adventure / Comedy / Scifi" />
 
 
@@ -80,8 +80,8 @@
                             android:paddingHorizontal="@dimen/_6sdp">
 
                             <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
                                 android:src="@drawable/ic_date"
                                 app:tint="@color/main" />
 
@@ -92,21 +92,21 @@
                                 android:fontFamily="@font/bold"
                                 android:layout_marginStart="@dimen/_2sdp"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_15sdp"
                                 tools:text="2016" />
 
 
                             <LinearLayout
                                 android:id="@+id/rating_ll"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="50dp"
+                                android:layout_height="20dp"
                                 android:layout_marginStart="7dp"
                                 android:gravity="center"
                                 android:orientation="horizontal">
 
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:src="@drawable/ic_rate"
                                     app:tint="@color/main" />
 
@@ -118,9 +118,8 @@
                                     android:layout_marginEnd="@dimen/_2sdp"
                                     android:fontFamily="@font/bold"
                                     android:textColor="@color/text_secondary"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="@dimen/_15sdp"
                                     tools:text="8.8" />
-
 
 
                             </LinearLayout>
@@ -168,7 +167,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
                         android:background="@color/black_light"
                         android:orientation="vertical"
                         android:paddingVertical="@dimen/_8sdp">
@@ -210,8 +208,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16sdp"
-
                         android:background="@color/black_light"
                         android:orientation="vertical"
                         android:paddingVertical="@dimen/_8sdp">

@@ -3,7 +3,7 @@ package com.example.movieapp.data.firebase.movie
 
 
 data class WatchList (
-    val id: String,
+    val movieId: String?,
     val posterPath: String?,
     val title: String?,
     val voteAverage: String?

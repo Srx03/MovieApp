@@ -71,10 +71,12 @@ class ProfileFragment : Fragment() {
            if (movieArrayList.isNotEmpty()){
                binding.rvWatchListMovie.isGone = false
                binding.emptyWatchlistMovie.isGone = true
+               binding.tvMovieDelete.isGone = false
                watchlistMovieAdapter.setList(movieArrayList)
            }else{
                binding.rvWatchListMovie.isGone = true
                binding.emptyWatchlistMovie.isGone = false
+               binding.tvMovieDelete.isGone = true
            }
 
 
@@ -92,10 +94,12 @@ class ProfileFragment : Fragment() {
             if (tvArrayList.isNotEmpty()){
                 binding.rvWatchListTv.isGone = false
                 binding.emptyWatchlistTv.isGone = true
+                binding.tvTvDelete.isGone = false
                 watchlistTvAdapter.setList(tvArrayList)
             }else{
                 binding.rvWatchListTv.isGone = true
                 binding.emptyWatchlistTv.isGone = false
+                binding.tvTvDelete.isGone = true
             }
 
 
@@ -243,6 +247,46 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+
+
+            viewModelWatchList.movieDelete.observe(viewLifecycleOwner){
+                when(it){
+                    is Resource.Loading ->{
+                    }
+
+                    is Resource.Error ->{
+                        showSnackBar(message = it.message!!)
+                    }
+
+                    is Resource.Success ->{
+                        Log.d("testovka", it.data.toString())
+                        Toast.makeText(requireContext(),"Succesfully deleted", Toast.LENGTH_SHORT).show()
+
+                    }
+                    else -> Unit
+
+                }
+            }
+
+        viewModelWatchList.tvDelete.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading ->{
+                }
+
+                is Resource.Error ->{
+                    showSnackBar(message = it.message!!)
+                }
+
+                is Resource.Success ->{
+                    Log.d("testovka", it.data.toString())
+                    Toast.makeText(requireContext(),"Succesfully deleted", Toast.LENGTH_SHORT).show()
+
+                }
+                else -> Unit
+
+            }
+        }
+
 
         onImageEdit()
         onSettingsButtonClick()

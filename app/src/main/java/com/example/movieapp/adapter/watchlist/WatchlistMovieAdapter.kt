@@ -14,7 +14,7 @@ class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieVie
 
 
     private var liveData: List<WatchList>? = null
-    var onItemClick: ((Int) -> Unit)? = null
+    var onItemClick: ((WatchList) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(liveData: List<WatchList>){
@@ -35,7 +35,7 @@ class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieVie
         holder.binding.tvActorName.text = liveData!![position].title
         holder.binding.tvRating.text =  liveData!![position].voteAverage
         holder.itemView.setOnLongClickListener {
-            onItemClick!!.invoke(position)
+            onItemClick!!.invoke(liveData!![position])
             true
 
         }
@@ -47,7 +47,7 @@ class WatchlistMovieAdapter: RecyclerView.Adapter<WatchlistMovieAdapter.MovieVie
 
     }
 
-    fun deleteWatchlistMovieItemClick(movie: (Int) -> Unit) {
+    fun deleteWatchlistMovieItemClick(movie: (WatchList) -> Unit) {
         onItemClick = movie
     }
 

@@ -102,7 +102,7 @@ class ShowViewModel@Inject constructor(
 
 
         val map = mutableMapOf<String, Any>()
-        map["movieId"] = movieWatchList.id
+        map["movieId"] = movieWatchList.movieId!!
         map["posterPath"] = movieWatchList.posterPath!!
         map["title"] = movieWatchList.title!!
         map["voteAverage"] = movieWatchList.voteAverage!!
@@ -125,7 +125,7 @@ class ShowViewModel@Inject constructor(
     fun saveTv(tvWatchList: TvWatchList) {
 
         val map = mutableMapOf<String, Any>()
-        map["tvId"] = tvWatchList.id
+        map["tvId"] = tvWatchList.tvId!!
         map["posterPath"] = tvWatchList.posterPath!!
         map["title"] = tvWatchList.title!!
         map["voteAverage"] = tvWatchList.voteAverage!!

@@ -18,6 +18,7 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/poster_bg.xml" value="0.2145" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/rating_bg.xml" value="0.1965" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/search_box_bckgrnd.xml" value="0.1915" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/user_img.xml" value="0.1995" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/font/didact_gothic.xml" value="0.2574074074074074" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/font/hind.xml" value="0.28229166666666666" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/activity_log.xml" value="0.25" />
@@ -31,7 +32,7 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_order.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.45048543689320386" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_show.xml" value="0.26132246376811596" />

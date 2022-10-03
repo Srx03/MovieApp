@@ -47,24 +47,38 @@
                         android:orientation="vertical"
                         android:paddingVertical="@dimen/_8sdp">
 
-
-                        <TextView
-                            android:id="@+id/tvTitle"
+                        <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:fontFamily="@font/bold"
-                            android:paddingHorizontal="@dimen/_6sdp"
-                            android:textColor="@color/text_primary"
-                            android:textSize="@dimen/_25sdp"
-                            android:textStyle="bold"
-                            tools:text="Vratice se rode" />
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/btnAddToWatchlist"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:backgroundTint="@android:color/transparent"
+                                android:src="@drawable/plus" />
+
+                            <TextView
+                                android:id="@+id/tvTitle"
+                                android:layout_width="@dimen/_350sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:fontFamily="@font/opensansbold"
+                                android:paddingHorizontal="@dimen/_6sdp"
+                                android:textColor="@color/text_primary"
+                                android:textSize="@dimen/_25sdp"
+                                android:textStyle="bold"
+                                tools:text="Vratice se rode" />
+                        </RelativeLayout>
 
                         <TextView
                             android:id="@+id/tvGenres"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/bold"
+                            android:fontFamily="@font/opensansnormal"
                             android:paddingHorizontal="@dimen/_6sdp"
                             android:textColor="@color/main"
                             android:textSize="@dimen/_17sdp"
@@ -89,7 +103,7 @@
                                 android:id="@+id/tvYear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/bold"
+                                android:fontFamily="@font/opensansbold"
                                 android:layout_marginStart="@dimen/_2sdp"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="@dimen/_15sdp"
@@ -116,7 +130,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_2sdp"
                                     android:layout_marginEnd="@dimen/_2sdp"
-                                    android:fontFamily="@font/bold"
+                                    android:fontFamily="@font/opensansbold"
                                     android:textColor="@color/text_secondary"
                                     android:textSize="@dimen/_15sdp"
                                     tools:text="8.8" />
@@ -128,21 +142,7 @@
                         </LinearLayout>
 
 
-                        <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                            android:id="@+id/btnAddToWatchlist"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textSize="@dimen/_20sdp"
-                            android:background="@color/main"
-                            android:text="Add to your watch list"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_10sdp"
 
-                            app:spinning_bar_color="@color/white" />
 
 
                         <TextView
@@ -151,13 +151,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:ellipsize="end"
-                            android:fontFamily="@font/myfont"
+                            android:fontFamily="@font/opensansnormal"
                             android:justificationMode="inter_word"
-                            android:textStyle="bold"
                             android:maxLines="4"
                             android:paddingHorizontal="@dimen/_6sdp"
                             android:textColor="@color/text_primary"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_15sdp"
                             tools:text="In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages." />
 
 
@@ -183,7 +182,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:fontFamily="@font/bold"
+                                android:fontFamily="@font/opensansbold"
                                 android:text="Top Cast"
                                 android:textColor="@color/text_primary"
                                 android:textSize="@dimen/_14sdp" />
@@ -225,7 +224,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:fontFamily="@font/bold"
+                                android:fontFamily="@font/opensansbold"
                                 android:text="Similar"
                                 android:textColor="@color/text_primary"
                                 android:textSize="@dimen/_20sdp" />

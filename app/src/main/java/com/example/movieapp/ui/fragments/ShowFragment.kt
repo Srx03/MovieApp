@@ -95,17 +95,17 @@ class ShowFragment: Fragment() {
             viewModel.watchlistMovie.collect{
                 when(it){
                     is Resource.Loading ->{
-                        binding.btnAddToWatchlist.startAnimation()
+                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Error ->{
                         showSnackBar(message = it.message!!)
-                        binding.btnAddToWatchlist.revertAnimation()
+                        binding.btnAddToWatchlist.animate()
 
                     }
 
                     is Resource.Success ->{
-                        binding. btnAddToWatchlist.revertAnimation()
+                        binding. btnAddToWatchlist.animate()
                         Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_SHORT).show()
 
                     }
@@ -120,16 +120,16 @@ class ShowFragment: Fragment() {
             viewModel.watchlistTv.collect{
                 when(it){
                     is Resource.Loading ->{
-                        binding.btnAddToWatchlist.startAnimation()
+                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Error ->{
                         showSnackBar(message = it.message!!)
-                        binding.btnAddToWatchlist.revertAnimation()
+                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Success ->{
-                        binding. btnAddToWatchlist.revertAnimation()
+                        binding. btnAddToWatchlist.animate()
                         Toast.makeText(context,"Succesfully saved", Toast.LENGTH_SHORT).show()
 
                     }

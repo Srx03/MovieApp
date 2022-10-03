@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_170sdp"
-        android:fontFamily="op"
+        android:fontFamily="@font/opensansbold"
         android:text="Welcome to SrxMovie"
         android:textAlignment="center"
         android:textColor="@color/main"
@@ -25,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvDesc"
+        android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center_vertical">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -66,6 +67,8 @@
             android:layout_marginEnd="24dp"
             android:elevation="5dp"
             android:hint="password"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#757474"
             android:orientation="vertical"
             android:textColorHint="#c1c2c4"
             app:boxBackgroundColor="#323232">
@@ -86,7 +89,7 @@
 
         <com.apachat.loadingbutton.core.customViews.CircularProgressButton
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_300sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_below="@id/passwordInputLayout"
             android:layout_centerInParent="true"
@@ -95,9 +98,10 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/btnbackground"
-            android:fontFamily="@font/opensanslow"
+            android:fontFamily="@font/opensansnormal"
             android:text="Login"
             android:textAllCaps="false"
+            android:textSize="@dimen/_15sdp"
             android:textColor="@color/white"
             app:spinning_bar_color="@color/white" />
 
@@ -109,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:fontFamily="@font/opensanslow"
+        android:fontFamily="@font/opensansnormal"
         android:gravity="center"
         android:padding="10dp"
         android:text="You don't have account? Register"

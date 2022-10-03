@@ -83,7 +83,7 @@ class ProfileFragment : Fragment() {
        }
 
         viewModelWatchList.errorState.observe(viewLifecycleOwner) { error ->
-            Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+            showSnackBar(message = error)
         }
         viewModelWatchList.loadingState.observe(viewLifecycleOwner) { loading ->
         }

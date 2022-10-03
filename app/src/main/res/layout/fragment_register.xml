@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_150sdp"
-        android:fontFamily="@font/OpenSans"
+        android:fontFamily="@font/opensansbold"
         android:text="Welcome to SrxMovie"
         android:textAlignment="center"
         android:textColor="@color/main"
@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvDesc"
+        android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center_vertical">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -96,14 +97,13 @@
             android:hint="Username"
             android:orientation="vertical"
             android:textColorHint="#c1c2c4"
-            app:boxBackgroundColor="#323232"
-          >
+            app:boxBackgroundColor="#323232">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/pass_img"
+                android:drawableStart="@drawable/user_img"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/white"
                 android:inputType="text"
@@ -115,7 +115,7 @@
 
         <com.apachat.loadingbutton.core.customViews.CircularProgressButton
             android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_300sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_below="@id/usernameInputLayout"
             android:layout_centerInParent="true"
@@ -124,10 +124,11 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/btnbackground"
-            android:fontFamily="@font/opensanslow"
+            android:fontFamily="@font/opensansnormal"
             android:text="Register"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
             app:spinning_bar_color="@color/white" />
 
     </RelativeLayout>
@@ -138,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:fontFamily="@font/opensanslow"
+        android:fontFamily="@font/opensansnormal"
         android:gravity="center"
         android:padding="10dp"
         android:text="You already have account? Login"

@@ -18,9 +18,9 @@
         <LinearLayout
             android:id="@+id/lySearch"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_28sdp">
 
                 <EditText
@@ -30,26 +30,13 @@
                     android:layout_weight="1"
                     android:background="@drawable/search_box_bckgrnd"
                     android:hint="Search..."
-                    android:textColor="@color/white"
+                    android:textColor="@color/divider"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp" />
 
 
 
-                  <TextView
-                    android:id="@+id/tvSearch"
-                      android:layout_width="wrap_content"
-                      android:layout_height="match_parent"
-                      android:layout_alignParentEnd="true"
-                      android:text="Trending Search"
-                      android:textColor="@color/main"
-                      android:textSize="@dimen/_18sdp"
-                      android:textStyle="bold"
-                      android:fontFamily="@font/myfont"
-                      android:layout_marginStart="@dimen/_12sdp"
-                      android:layout_gravity="center_vertical"
-                      android:gravity="center_vertical"
-                     />
+
 
 
 

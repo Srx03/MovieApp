@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 app:backgroundTint="@color/main"
             android:textColor="@color/white"
+                android:fontFamily="@font/opensansnormal"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:text="Order by genres"
                 android:layout_gravity="bottom|right" />
@@ -65,7 +66,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansbold"
                     android:gravity="center"
                     android:text="Popular Movies"
                     android:textColor="@color/white"
@@ -101,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansnormal"
                     android:text="Recent Movies"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
@@ -141,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansnormal"
                     android:text="Popular Tv Shows"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
@@ -180,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansnormal"
                     android:text="Top Rated Movies"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
@@ -219,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansnormal"
                     android:text="Top Rated Tv Shows"
                     android:textColor="@color/white"
                     android:textSize="15sp" />

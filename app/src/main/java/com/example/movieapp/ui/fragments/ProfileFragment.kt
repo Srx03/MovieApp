@@ -29,6 +29,7 @@ import com.example.movieapp.ui.viewmodel.ProfileViewModel
 import com.example.movieapp.ui.viewmodel.WatchListViewModel
 import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,17 +71,19 @@ class ProfileFragment : Fragment() {
            if (movieArrayList.isNotEmpty()){
                binding.rvWatchListMovie.isGone = false
                binding.emptyWatchlistMovie.isGone = true
+               binding.tvMovieDelete.isGone = false
                watchlistMovieAdapter.setList(movieArrayList)
            }else{
                binding.rvWatchListMovie.isGone = true
                binding.emptyWatchlistMovie.isGone = false
+               binding.tvMovieDelete.isGone = true
            }
 
 
        }
 
         viewModelWatchList.errorState.observe(viewLifecycleOwner) { error ->
-            Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+            showSnackBar(message = error)
         }
         viewModelWatchList.loadingState.observe(viewLifecycleOwner) { loading ->
         }
@@ -91,17 +94,19 @@ class ProfileFragment : Fragment() {
             if (tvArrayList.isNotEmpty()){
                 binding.rvWatchListTv.isGone = false
                 binding.emptyWatchlistTv.isGone = true
+                binding.tvTvDelete.isGone = false
                 watchlistTvAdapter.setList(tvArrayList)
             }else{
                 binding.rvWatchListTv.isGone = true
                 binding.emptyWatchlistTv.isGone = false
+                binding.tvTvDelete.isGone = true
             }
 
 
         }
 
         viewModelWatchList.errorStateTv.observe(viewLifecycleOwner) { error ->
-            Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+            showSnackBar(message = error)
         }
         viewModelWatchList.loadingStateTv.observe(viewLifecycleOwner) { loading ->
         }
@@ -183,7 +188,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSaveEmail.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                     }
 
                     is Resource.Success ->{
@@ -206,7 +211,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSavePassword.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                     }
 
                     is Resource.Success ->{
@@ -229,12 +234,12 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error ->{
                         binding.btnSaveUsername.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                     }
 
                     is Resource.Success ->{
                         binding.btnSaveUsername.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_LONG).show()
 
                     }
                     else -> Unit
@@ -242,6 +247,54 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+
+
+        viewModel.errorStateEdit.observe(viewLifecycleOwner) { error ->
+            showSnackBar(message = error)
+        }
+        viewModel.loadingStateEdit.observe(viewLifecycleOwner) { loading ->
+        }
+
+
+
+            viewModelWatchList.movieDelete.observe(viewLifecycleOwner){
+                when(it){
+                    is Resource.Loading ->{
+                    }
+
+                    is Resource.Error ->{
+                        showSnackBar(message = it.message!!)
+                    }
+
+                    is Resource.Success ->{
+                        Log.d("testovka", it.data.toString())
+                        Toast.makeText(requireContext(),"Succesfully deleted", Toast.LENGTH_SHORT).show()
+
+                    }
+                    else -> Unit
+
+                }
+            }
+
+        viewModelWatchList.tvDelete.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading ->{
+                }
+
+                is Resource.Error ->{
+                    showSnackBar(message = it.message!!)
+                }
+
+                is Resource.Success ->{
+                    Log.d("testovka", it.data.toString())
+                    Toast.makeText(requireContext(),"Succesfully deleted", Toast.LENGTH_SHORT).show()
+
+                }
+                else -> Unit
+
+            }
+        }
+
 
         onImageEdit()
         onSettingsButtonClick()
@@ -265,15 +318,8 @@ class ProfileFragment : Fragment() {
         if (it.resultCode == Activity.RESULT_OK) {
 
             profilePictureUri = it.data?.data!!
-
-            binding.imgProfile.load(profilePictureUri) {
-                transformations(CircleCropTransformation())
-                placeholder(R.drawable.ic_profile)
-                error(R.drawable.ic_profile)
-                crossfade(true)
-                crossfade(500)
-            }
             viewModel.saveImage(profilePictureUri!!)
+            binding.imgProfile.load(profilePictureUri)
         }
 
     }

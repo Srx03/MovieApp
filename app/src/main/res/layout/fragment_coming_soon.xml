@@ -94,7 +94,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_toStartOf="@id/btnAdd"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansbold"
                     android:text="TextView"
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/_18sdp"
@@ -117,10 +117,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/genresRv"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/opensansbold"
                     android:paddingTop="@dimen/_2sdp"
                     android:textColor="@color/main"
-                    android:textStyle="bold"
+
                     tools:text="Coming on August 21" />
 
                 <TextView
@@ -130,7 +130,7 @@
                     android:layout_below="@id/tvRelaseDate"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/myfont"
+                    android:fontFamily="@font/opensansnormal"
                     android:justificationMode="inter_word"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingTop="@dimen/_8sdp"

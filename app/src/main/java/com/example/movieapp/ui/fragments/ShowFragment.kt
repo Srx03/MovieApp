@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
@@ -22,7 +22,9 @@ import com.example.movieapp.ui.viewmodel.ShowViewModel
 import com.example.movieapp.util.Resource
 import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 
 @AndroidEntryPoint
 class ShowFragment: Fragment() {
@@ -42,6 +44,8 @@ class ShowFragment: Fragment() {
 
     private lateinit var posterPath: String
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,6 +58,8 @@ class ShowFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         getOnPopularClickData()
 
@@ -91,16 +97,17 @@ class ShowFragment: Fragment() {
             viewModel.watchlistMovie.collect{
                 when(it){
                     is Resource.Loading ->{
-                        binding.btnAddToWatchlist.startAnimation()
+                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Error ->{
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                        binding.btnAddToWatchlist.revertAnimation()
+                        showSnackBar(message = it.message!!)
+                        binding.btnAddToWatchlist.animate()
+
                     }
 
                     is Resource.Success ->{
-                        binding. btnAddToWatchlist.revertAnimation()
+                        binding. btnAddToWatchlist.animate()
                         Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_SHORT).show()
 
                     }
@@ -115,17 +122,17 @@ class ShowFragment: Fragment() {
             viewModel.watchlistTv.collect{
                 when(it){
                     is Resource.Loading ->{
-                        binding.btnAddToWatchlist.startAnimation()
+                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Error ->{
-                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                        binding.btnAddToWatchlist.revertAnimation()
+                        showSnackBar(message = it.message!!)
+                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Success ->{
-                        binding. btnAddToWatchlist.revertAnimation()
-                        Toast.makeText(context,"Succesfully saved", Toast.LENGTH_SHORT).show()
+                        binding. btnAddToWatchlist.animate()
+                        Toast.makeText(context,"Succesfully saved Tv", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -185,10 +192,19 @@ class ShowFragment: Fragment() {
 
                     is Resource.Success -> {
 
-                        Glide.with(this)
-                            .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
-                            .into(binding.imgPoster)
-                        posterPath = it.data.poster_path
+                        if(it.data!!.poster_path != null) {
+                            Glide.with(this)
+                                .load("https://image.tmdb.org/t/p/w500/" + it.data.poster_path)
+                                .into(binding.imgPoster)
+                            posterPath = it.data.poster_path
+                        }
+                        else{
+                            posterPath = ""
+                            Glide.with(this)
+                                .load(R.drawable.noimage)
+                                .into(binding.imgPoster)
+                        }
+
                         binding.tvTitle.text = it.data.title
                         binding.tvYear.text = it.data.release_date
                         binding.tvOverview.text = it.data.overview
@@ -248,7 +264,10 @@ class ShowFragment: Fragment() {
                         Glide.with(this)
                             .load("https://image.tmdb.org/t/p/w500/" + it.data!!.poster_path)
                             .into(binding.imgPoster)
-                        posterPath = it.data.poster_path
+                        if(it.data.poster_path != null)
+                            posterPath = it.data.poster_path
+                        else
+                            posterPath = ""
                         binding.tvTitle.text = it.data.name
                         binding.tvYear.text = it.data.first_air_date
                         binding.tvOverview.text = it.data.overview
@@ -269,10 +288,6 @@ class ShowFragment: Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 
     private fun getOnPopularClickData() {
@@ -348,6 +363,11 @@ class ShowFragment: Fragment() {
         }
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

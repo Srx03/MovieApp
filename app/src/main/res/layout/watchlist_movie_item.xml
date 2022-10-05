@@ -39,6 +39,8 @@
             android:textColor="@color/text_primary"
             android:textSize="@dimen/_15sdp" />
 
+
+
     </com.google.android.material.card.MaterialCardView>
 
     <TextView

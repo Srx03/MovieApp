@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-android:background="@color/white"
+    android:background="@drawable/profile_bcgr"
     tools:context=".ui.fragments.ProfileFragment">
 
     <RelativeLayout
@@ -16,7 +16,7 @@ android:background="@color/white"
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/profile_bcgr"
+            android:background="@color/transparent"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -46,10 +46,10 @@ android:background="@color/white"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:backgroundTint="@color/white"
-                android:fontFamily="@font/myfont"
+                android:fontFamily="@font/opensansbold"
                 android:text="Change image"
                 android:textColor="@color/main"
-                android:textSize="@dimen/_18sdp"
+                android:textSize="@dimen/_17sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,7 +58,7 @@ android:background="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/opensansbold"
                 android:text="Srx"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_23sdp"
@@ -70,12 +70,12 @@ android:background="@color/white"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_logout"
-            app:tint="@color/baby" />
+            app:tint="@color/blue" />
 
     </RelativeLayout>
 
@@ -99,163 +99,165 @@ android:background="@color/white"
             android:orientation="vertical"
             android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_10sdp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_10sdp">
 
-            <ImageView
-                android:id="@+id/btnSettings"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_marginEnd="@dimen/_35sdp"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/ic_settings" />
+                <ImageView
+                    android:id="@+id/btnSettings"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_settings" />
 
-            <ImageView
-                android:id="@+id/btnMovieWatchList"
-                android:focusable="true"
-                android:clickable="true"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:src="@drawable/popcornicon"
-                android:layout_marginEnd="@dimen/_35sdp"/>
+                <ImageView
+                    android:id="@+id/btnMovieWatchList"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/popcornicon"
+                    android:layout_marginEnd="@dimen/_35sdp"/>
 
-            <ImageView
-                android:id="@+id/btnTvWatchList"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/ic_tv" />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/btnTvWatchList"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_tv" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:visibility="gone">
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/layoutEdit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Edit your profile"
-                android:textSize="@dimen/_30sdp"
-                android:textStyle="bold"
-                android:fontFamily="@font/myfont"
-                android:textColor="@color/main"
-                android:gravity="center"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/ic_email"
-                    app:tint="@color/main" />
-                <EditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/main"
-                    android:textSize="18dp"
-                    android:paddingLeft="15dp"
-                    android:text="srdjan.djuric003@gmail.com"
-                    android:layout_gravity="center_vertical"/>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:visibility="visible">
 
-                <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                    android:id="@+id/btnSaveEmail"
-                    android:background="@color/main"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Edit your profile"
+                    android:textSize="@dimen/_30sdp"
+                    android:fontFamily="@font/opensansbold"
+                    android:textColor="@color/main"
+                    android:gravity="center"/>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="save"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15dp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/myfont" />
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/email_img"
+                        app:tint="@color/main" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main"
+                        android:textSize="18dp"
+                        android:paddingLeft="15dp"
+                        app:boxStrokeColor="@color/black"
+                        app:hintTextColor="@color/black"
+                        android:text="srdjan.djuric003@gmail.com"
+                        android:layout_gravity="center_vertical"/>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/ic_lock"
-                    app:tint="@color/main" />
+                    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                        android:id="@+id/btnSaveEmail"
+                        android:background="@drawable/btnbackground"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="save"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15dp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/myfont" />
 
-                <EditText
-                    android:id="@+id/etPassword"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:text="123456789"
-                    android:textColor="@color/main"
-                    android:textSize="18dp" />
-
-                <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                    android:id="@+id/btnSavePassword"
-                    android:background="@color/main"
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="save"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="15dp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/myfont" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                >
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/ic_profile"
-                    app:tint="@color/main" />
-                <EditText
-                    android:id="@+id/etUsername"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/main"
-                    android:textSize="18dp"
-                    android:paddingLeft="15dp"
-                    android:text="Srx"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:layout_gravity="center_vertical"/>
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/pass_img"
+                        app:tint="@color/main" />
 
-                <com.apachat.loadingbutton.core.customViews.CircularProgressButton
-                    android:id="@+id/btnSaveUsername"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:text="123456789"
+                        android:textColor="@color/main"
+                        android:textSize="18dp" />
+
+                    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                        android:id="@+id/btnSavePassword"
+                        android:background="@drawable/btnbackground"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="save"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15dp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/myfont" />
+
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:background="@color/main"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/myfont"
-                    android:text="save"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    >
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/user_img"
+                        app:tint="@color/main" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUsername"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main"
+                        android:textSize="18dp"
+                        android:paddingLeft="15dp"
+                        android:text="Srx"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"/>
+
+                    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+                        android:id="@+id/btnSaveUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/btnbackground"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/myfont"
+                        android:text="save"
+                        android:textColor="@color/white"
+                        android:textSize="15dp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
 
 
@@ -267,56 +269,68 @@ android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:visibility="visible">
+                android:visibility="gone">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/_8sdp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_8sdp">
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:fontFamily="@font/opensansbold"
+                        android:text="Your Movie WatchList"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvMovieDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/opensansnormal"
+                        android:text="Hold to delete"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
+
+
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvWatchListMovie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:visibility="visible"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/watchlist_movie_item" />
 
                 <TextView
+                    android:id="@+id/emptyWatchlistMovie"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/myfont"
+                    android:layout_height="@dimen/_138sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:fontFamily="@font/opensansnormal"
                     android:textStyle="bold"
-                    android:text="Your Movie WatchList"
+                    android:gravity="center"
+                    android:text="Add any Movie in your Watchlist"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_20sdp" />
+                    android:textSize="@dimen/_18sdp"
+                    android:visibility="gone" />
 
 
-
-            </RelativeLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvWatchListMovie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:visibility="visible"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/watchlist_movie_item" />
-
-            <TextView
-                android:id="@+id/emptyWatchlistMovie"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_138sdp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/myfont"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:text="Add any Movie in your Watchlist"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_18sdp"
-                android:visibility="gone" />
-
-
-        </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layoutTv"
@@ -338,11 +352,24 @@ android:background="@color/white"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:fontFamily="@font/myfont"
+                        android:fontFamily="@font/opensansbold"
                         android:textStyle="bold"
                         android:text="Your Tv WatchList"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp" />
+
+
+                    <TextView
+                        android:id="@+id/tvTvDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/opensansnormal"
+                        android:text="Hold to delete"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15sdp"
+                        android:textStyle="bold" />
 
 
 
@@ -365,8 +392,7 @@ android:background="@color/white"
                     android:layout_height="@dimen/_138sdp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/myfont"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/opensansnormal"
                     android:gravity="center"
                     android:text="Add any Tv in your Watchlist"
                     android:textColor="@color/black"
@@ -382,6 +408,7 @@ android:background="@color/white"
 
 
     </androidx.cardview.widget.CardView>
+
 
 
 

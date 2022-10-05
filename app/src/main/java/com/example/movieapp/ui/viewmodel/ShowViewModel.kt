@@ -1,9 +1,11 @@
 package com.example.movieapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.firebase.movie.MovieFirebase
 import com.example.movieapp.data.firebase.tv.TvWatchList
 import com.example.movieapp.data.firebase.movie.WatchList
 
@@ -59,8 +61,6 @@ class ShowViewModel@Inject constructor(
 
     val currentUid = firebaseAuth.currentUser?.uid.toString()
 
-    private val watchListMovieId: ArrayList<String> = ArrayList()
-    private val watchListTvId: ArrayList<String> = ArrayList()
 
 
 
@@ -101,23 +101,22 @@ class ShowViewModel@Inject constructor(
     fun saveMovie(movieWatchList: WatchList) {
 
 
-        val map = mutableMapOf<String, Any>()
-        map["movieId"] = movieWatchList.id
-        map["posterPath"] = movieWatchList.posterPath!!
-        map["title"] = movieWatchList.title!!
-        map["voteAverage"] = movieWatchList.voteAverage!!
+            val map = mutableMapOf<String, Any>()
+            map["movieId"] = movieWatchList.movieId!!
+            map["posterPath"] = movieWatchList.posterPath!!
+            map["title"] = movieWatchList.title!!
+            map["voteAverage"] = movieWatchList.voteAverage!!
 
 
-        firestore.collection("watchlist")
-            .document(currentUid)
-            .update("movie", FieldValue.arrayUnion(map))
-            .addOnSuccessListener {
-                _watchlistMovie.value = Resource.Success(movieWatchList)
-            }
-            .addOnFailureListener{
-                _watchlistMovie.value = Resource.Error(it.message.toString())
-            }
-
+            firestore.collection("watchlist")
+                .document(currentUid)
+                .update("movie", FieldValue.arrayUnion(map))
+                .addOnSuccessListener {
+                    _watchlistMovie.value = Resource.Success(movieWatchList)
+                }
+                .addOnFailureListener {
+                    _watchlistMovie.value = Resource.Error(it.message.toString())
+                }
 
 
     }
@@ -125,7 +124,7 @@ class ShowViewModel@Inject constructor(
     fun saveTv(tvWatchList: TvWatchList) {
 
         val map = mutableMapOf<String, Any>()
-        map["tvId"] = tvWatchList.id
+        map["tvId"] = tvWatchList.tvId!!
         map["posterPath"] = tvWatchList.posterPath!!
         map["title"] = tvWatchList.title!!
         map["voteAverage"] = tvWatchList.voteAverage!!
@@ -144,9 +143,6 @@ class ShowViewModel@Inject constructor(
 
 
     }
-
-
-
 
 
 }

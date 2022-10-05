@@ -2,23 +2,18 @@ package com.example.movieapp.ui.viewmodel
 
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.movieapp.data.firebase.movie.MovieFirebase
 import com.example.movieapp.data.firebase.movie.WatchList
 import com.example.movieapp.data.firebase.tv.TvFirebase
 import com.example.movieapp.data.firebase.tv.TvWatchList
-import com.example.movieapp.data.remote.RetrofitRepostory
-import com.example.movieapp.models.movie.MovieDetail
-import com.example.movieapp.models.tv.TvDetail
 import com.example.movieapp.util.Resource
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,6 +41,13 @@ class WatchListViewModel @Inject constructor(
     val tvList = _tvList
 
 
+    private  var _movieDelete = MutableLiveData<Resource<WatchList>>()
+    val movieDelete = _movieDelete
+
+    private  var _tvDelete = MutableLiveData<Resource<TvWatchList>>()
+    val tvDelete = _tvDelete
+
+
     fun getWatchListMovie(){
 
         _loadingState.value = true
@@ -67,7 +69,7 @@ class WatchListViewModel @Inject constructor(
 
                         _movieList.value = movieList?.movie
 
-                        Log.d("dataRead", _movieList.toString())
+                        Log.d("dataRead", _movieList.value.toString())
                      }
 
                     }
@@ -101,15 +103,52 @@ class WatchListViewModel @Inject constructor(
             }
     }
 
-    fun deleteTv(itemId: Int){
-        val array: String = "tv/$itemId"
-        firestore.collection("watchlist").document(currentUid).update("tv", FieldValue.arrayRemove(array))
+    fun deleteTv(tvWatchList: TvWatchList){
+
+        val map = mutableMapOf<String, Any>()
+        map["tvId"] = tvWatchList.tvId!!
+        map["posterPath"] = tvWatchList.posterPath!!
+        map["title"] = tvWatchList.title!!
+        map["voteAverage"] = tvWatchList.voteAverage!!
+
+
+        firestore.collection("watchlist")
+            .document(currentUid)
+            .update("tv",FieldValue.arrayRemove(map))
+            .addOnSuccessListener {
+                _tvDelete.value = Resource.Success(tvWatchList)
+                Log.d("succes",map.toString())
+            }
+            .addOnFailureListener{
+                _tvDelete.value = Resource.Error(it.message.toString())
+                Log.d("error",map.toString())
+            }
+        Log.d("test",map.toString())
     }
 
-    fun deleteMovie(itemId: Int){
-        val array: String = "movie/$itemId"
-        firestore.collection("watchlist").document(currentUid).update("movie", FieldValue.arrayRemove(array))
-        Log.d("test",itemId.toString())
+
+
+    fun deleteMovie(watchList: WatchList){
+
+        val map = mutableMapOf<String, Any>()
+        map["movieId"] = watchList.movieId!!
+        map["posterPath"] = watchList.posterPath!!
+        map["title"] = watchList.title!!
+        map["voteAverage"] = watchList.voteAverage!!
+
+
+        firestore.collection("watchlist")
+            .document(currentUid)
+            .update("movie",FieldValue.arrayRemove(map))
+            .addOnSuccessListener {
+                _movieDelete.value = Resource.Success(watchList)
+                Log.d("succes",map.toString())
+            }
+            .addOnFailureListener{
+                _movieDelete.value = Resource.Error(it.message.toString())
+                Log.d("error",map.toString())
+            }
+        Log.d("test",map.toString())
 
     }
 

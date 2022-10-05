@@ -135,7 +135,7 @@ class ProfileViewModel @Inject constructor(
                     )
                     .addOnSuccessListener {
                         _editEmail.value = Resource.Success(email)
-                        user!!.updateEmail(email)
+                        user?.updateEmail(email)
                     }
                     .addOnFailureListener{
                         _editEmail.value = Resource.Error(it.message.toString())

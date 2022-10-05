@@ -20,7 +20,7 @@
             android:layout_width="@dimen/_82sdp"
             android:layout_height="@dimen/_82sdp"
             android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@color/white" />
 
     </com.google.android.material.card.MaterialCardView>

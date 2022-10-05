@@ -57,7 +57,7 @@
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_7sdp"
                                 android:backgroundTint="@android:color/transparent"
                                 android:src="@drawable/plus" />
 

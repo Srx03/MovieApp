@@ -249,6 +249,14 @@ class ProfileFragment : Fragment() {
         }
 
 
+        viewModel.errorStateEdit.observe(viewLifecycleOwner) { error ->
+            showSnackBar(message = error)
+        }
+        viewModel.loadingStateEdit.observe(viewLifecycleOwner) { loading ->
+        }
+
+
+
             viewModelWatchList.movieDelete.observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Loading ->{

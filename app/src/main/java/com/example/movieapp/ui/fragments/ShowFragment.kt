@@ -22,7 +22,9 @@ import com.example.movieapp.ui.viewmodel.ShowViewModel
 import com.example.movieapp.util.Resource
 import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 
 @AndroidEntryPoint
 class ShowFragment: Fragment() {
@@ -130,7 +132,7 @@ class ShowFragment: Fragment() {
 
                     is Resource.Success ->{
                         binding. btnAddToWatchlist.animate()
-                        Toast.makeText(context,"Succesfully saved", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,"Succesfully saved Tv", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -286,10 +288,6 @@ class ShowFragment: Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 
     private fun getOnPopularClickData() {
@@ -365,6 +363,11 @@ class ShowFragment: Fragment() {
         }
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

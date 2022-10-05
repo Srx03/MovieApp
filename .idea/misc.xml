@@ -12,6 +12,7 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/email_img.xml" value="0.12" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_comingsoon.xml" value="0.19" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_home.xml" value="0.19" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_phone.xml" value="0.139" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_profile.xml" value="0.19" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/ic_settings.xml" value="0.1355" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/drawable/pass_img.xml" value="0.139" />
@@ -32,7 +33,7 @@
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_order.xml" value="0.25" />
-        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.45048543689320386" />
+        <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MovieApp/app/src/main/res/layout/fragment_show.xml" value="0.26132246376811596" />

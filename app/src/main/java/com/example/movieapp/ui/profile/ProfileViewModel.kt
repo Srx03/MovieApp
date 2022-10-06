@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.profile
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -50,14 +51,14 @@ class ProfileViewModel @Inject constructor(
     val validationUsername  = _validationUsername .receiveAsFlow()
 
 
-    private val _editEmail = MutableStateFlow<Resource<String>>(Resource.Unspecified())
-    val editEmail : Flow<Resource<String>> = _editEmail
+    private val _editEmail = MutableLiveData<Resource<String>>(Resource.Unspecified())
+    val editEmail : LiveData<Resource<String>> = _editEmail
 
-    private val _editPassword = MutableStateFlow<Resource<String>>(Resource.Unspecified())
-    val editPassword : Flow<Resource<String>> = _editPassword
+    private val _editPassword = MutableLiveData<Resource<String>>(Resource.Unspecified())
+    val editPassword : LiveData<Resource<String>> = _editPassword
 
-    private val _editUsername = MutableStateFlow<Resource<String>>(Resource.Unspecified())
-    val editUsername : Flow<Resource<String>> = _editUsername
+    private val _editUsername = MutableLiveData<Resource<String>>(Resource.Unspecified())
+    val editUsername : LiveData<Resource<String>> = _editUsername
 
 
     val currentUid = firebaseAuth.currentUser?.uid.toString()
@@ -125,7 +126,7 @@ class ProfileViewModel @Inject constructor(
 
             if(checkValidationEmail(email)) {
 
-                    _editEmail.emit(Resource.Loading())
+                    _editEmail.postValue(Resource.Loading())
 
                 firestore.collection(Constants.USER_COLLECTION).document(currentUid)
                     .update(
@@ -156,7 +157,7 @@ class ProfileViewModel @Inject constructor(
 
         if(checkValidationPassword(password)) {
 
-                _editPassword.emit(Resource.Loading())
+                _editPassword.postValue(Resource.Loading())
 
             firestore.collection(Constants.USER_COLLECTION).document(currentUid)
                 .update(
@@ -185,7 +186,7 @@ class ProfileViewModel @Inject constructor(
             if(checkValidationUsername(userName)) {
 
 
-                    _editUsername.emit(Resource.Loading())
+                    _editUsername.postValue(Resource.Loading())
 
 
                 firestore.collection(Constants.USER_COLLECTION).document(currentUid)

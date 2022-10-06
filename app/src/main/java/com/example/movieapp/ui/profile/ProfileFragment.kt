@@ -145,7 +145,6 @@ class ProfileFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-
             viewModel.validationPassword.collect { validation ->
                 if (validation.password is RegisterValidation.Failed) {
                     withContext(Dispatchers.Main) {
@@ -174,8 +173,7 @@ class ProfileFragment : Fragment() {
 
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.editEmail.collect{
+        viewModel.editEmail.observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Loading ->{
                         binding.btnSaveEmail.startAnimation()
@@ -195,10 +193,9 @@ class ProfileFragment : Fragment() {
 
                 }
             }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.editPassword.collect{
+
+        viewModel.editPassword.observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Loading ->{
                         binding.btnSavePassword.startAnimation()
@@ -218,10 +215,9 @@ class ProfileFragment : Fragment() {
 
                 }
             }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.editUsername.collect{
+
+        viewModel.editUsername.observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Loading ->{
                         binding.btnSaveUsername.startAnimation()
@@ -241,7 +237,6 @@ class ProfileFragment : Fragment() {
 
                 }
             }
-        }
 
 
         viewModel.errorStateEdit.observe(viewLifecycleOwner) { error ->

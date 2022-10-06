@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:context=".ui.fragments.ActorFragment">
+    tools:context=".ui.actor.ActorFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.movieapp.ui.fragments.HomeFragment"
+        android:name="com.example.movieapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.movieapp.ui.fragments.SearchFragment"
+        android:name="com.example.movieapp.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -31,17 +31,17 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.movieapp.ui.fragments.ProfileFragment"
+        android:name="com.example.movieapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/comingSoonFragment"
-        android:name="com.example.movieapp.ui.fragments.ComingSoonFragment"
+        android:name="com.example.movieapp.ui.comingsoon.ComingSoonFragment"
         android:label="fragment_coming_soon"
         tools:layout="@layout/fragment_coming_soon" />
     <fragment
         android:id="@+id/showFragment"
-        android:name="com.example.movieapp.ui.fragments.ShowFragment"
+        android:name="com.example.movieapp.ui.show.ShowFragment"
         tools:layout="@layout/fragment_show"
         android:label="ShowFragment" >
         <action
@@ -50,12 +50,12 @@
     </fragment>
     <dialog
         android:id="@+id/actorFragment"
-        android:name="com.example.movieapp.ui.fragments.ActorFragment"
+        android:name="com.example.movieapp.ui.actor.ActorFragment"
         tools:layout="@layout/fragment_actor"
         android:label="ActorFragment" />
     <fragment
         android:id="@+id/orderFragment"
-        android:name="com.example.movieapp.ui.fragments.OrderFragment"
+        android:name="com.example.movieapp.ui.order.OrderFragment"
         tools:layout="@layout/fragment_order"
         android:label="OrderFragment" />
 </navigation>

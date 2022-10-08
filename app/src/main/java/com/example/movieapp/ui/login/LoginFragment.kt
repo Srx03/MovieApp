@@ -88,7 +88,7 @@ class LoginFragment : Fragment() {
                     withContext(Dispatchers.Main){
                         binding.emailEditText.apply {
                             requestFocus()
-                            error = validation.email.message
+                            binding.emailInputLayout.helperText = validation.email.message
                         }
                     }
                 }
@@ -97,7 +97,7 @@ class LoginFragment : Fragment() {
                     withContext(Dispatchers.Main){
                         binding.passwordEditText.apply {
                             requestFocus()
-                            error = validation.password.message
+                            binding.passwordInputLayout.helperText = validation.password.message
                         }
                     }
                 }

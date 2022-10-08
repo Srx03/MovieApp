@@ -1,11 +1,14 @@
 package com.example.movieapp.ui.show
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.data.firebase.movie.MovieFirebase
 import com.example.movieapp.data.firebase.tv.TvWatchList
 import com.example.movieapp.data.firebase.movie.WatchList
+import com.example.movieapp.data.firebase.tv.TvFirebase
 
 import com.example.movieapp.data.remote.RetrofitRepostory
 import com.example.movieapp.models.movie.Movie
@@ -56,7 +59,19 @@ class ShowViewModel@Inject constructor(
     private val _watchlistTv = MutableStateFlow<Resource<TvWatchList>>(Resource.Unspecified())
     val watchlistTv : Flow<Resource<TvWatchList>> = _watchlistTv
 
+    private  var _movieExist = MutableLiveData<Boolean>()
+    val movieExist = _movieExist
+
+    private  var _tvExist = MutableLiveData<Boolean>()
+    val tvExist = _tvExist
+
     val currentUid = firebaseAuth.currentUser?.uid.toString()
+
+
+    private var movieArrayList: ArrayList<WatchList>? = null
+    private var tvArrayList: ArrayList<TvWatchList>? = null
+
+
 
 
 
@@ -97,7 +112,16 @@ class ShowViewModel@Inject constructor(
 
     fun saveMovie(movieWatchList: WatchList) {
 
+        if (checkIfMovieExist(movieWatchList)){
 
+            _movieExist.value = true
+
+            Log.d("movieExist","already in your watchlist")
+
+        }else {
+
+            _movieExist.value = false
+            Log.d("movieExist","Added in your watchlist")
             val map = mutableMapOf<String, Any>()
             map["movieId"] = movieWatchList.movieId!!
             map["posterPath"] = movieWatchList.posterPath!!
@@ -115,31 +139,120 @@ class ShowViewModel@Inject constructor(
                     _watchlistMovie.value = Resource.Error(it.message.toString())
                 }
 
+        }
+    }
+
+
+    fun checkIfMovieExist(movieWatchList: WatchList): Boolean{
+
+        firestore.collection("watchlist").whereEqualTo("uid",currentUid)
+            .addSnapshotListener {snapshot, _ ->
+
+                    if (!snapshot!!.isEmpty){
+                        val documentList = snapshot.documents
+
+                        for (document in documentList) {
+                            val movieList: MovieFirebase? = document.toObject(MovieFirebase::class.java)
+
+                            movieArrayList = movieList?.movie
+
+                            Log.d("dataRead1",  movieArrayList.toString())
+
+                        }
+                    }
+            }
+
+        if (movieArrayList.isNullOrEmpty()){
+            return false
+        }else{
+
+            for (movieLoopCheck in movieArrayList!!){
+
+                if (movieWatchList.movieId == movieLoopCheck.movieId) {
+                   return true
+                }
+            }
+        }
+
+        return false
 
     }
+
+
+
+
 
     fun saveTv(tvWatchList: TvWatchList) {
 
-        val map = mutableMapOf<String, Any>()
-        map["tvId"] = tvWatchList.tvId!!
-        map["posterPath"] = tvWatchList.posterPath!!
-        map["title"] = tvWatchList.title!!
-        map["voteAverage"] = tvWatchList.voteAverage!!
+
+        if (checkIfTvExist(tvWatchList)) {
+
+            _tvExist.value = true
+
+            Log.d("movieExist", "already in your watchlist")
+
+        } else {
+
+            _tvExist.value = false
+
+            val map = mutableMapOf<String, Any>()
+            map["tvId"] = tvWatchList.tvId!!
+            map["posterPath"] = tvWatchList.posterPath!!
+            map["title"] = tvWatchList.title!!
+            map["voteAverage"] = tvWatchList.voteAverage!!
 
 
-        firestore.collection("watchlist")
-            .document(currentUid)
-            .update("tv", FieldValue.arrayUnion(map))
-            .addOnSuccessListener {
-                _watchlistTv.value = Resource.Success(tvWatchList)
-            }
-            .addOnFailureListener{
-                _watchlistTv.value = Resource.Error(it.message.toString())
-            }
-
+            firestore.collection("watchlist")
+                .document(currentUid)
+                .update("tv", FieldValue.arrayUnion(map))
+                .addOnSuccessListener {
+                    _watchlistTv.value = Resource.Success(tvWatchList)
+                }
+                .addOnFailureListener {
+                    _watchlistTv.value = Resource.Error(it.message.toString())
+                }
+        }
 
 
     }
+
+
+    fun checkIfTvExist(tvWatchList: TvWatchList): Boolean{
+
+        firestore.collection("watchlist").whereEqualTo("uid",currentUid)
+            .addSnapshotListener {snapshot, _ ->
+
+                if (!snapshot!!.isEmpty){
+                    val documentList = snapshot.documents
+
+                    for (document in documentList) {
+                        val tvList: TvFirebase? = document.toObject(TvFirebase::class.java)
+
+                        tvArrayList = tvList?.tv
+
+                        Log.d("dataRead1",  tvArrayList.toString())
+
+                    }
+                }
+            }
+
+        if (tvArrayList.isNullOrEmpty()){
+            return false
+        }else{
+
+            for (tvLoopCheck in tvArrayList!!){
+
+                if (tvWatchList.tvId == tvLoopCheck.tvId) {
+                    return true
+                }
+            }
+        }
+
+        return false
+
+    }
+
+
 
 
 }

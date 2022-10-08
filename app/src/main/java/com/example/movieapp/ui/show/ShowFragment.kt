@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.show
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,13 +106,28 @@ class ShowFragment: Fragment() {
                     is Resource.Success ->{
                         binding. btnAddToWatchlist.animate()
                         Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_SHORT).show()
-
+                        Log.d("movieee","already in your watchlist")
                     }
                     else -> Unit
 
                 }
             }
         }
+
+        viewModel.movieExist.observe(viewLifecycleOwner){
+
+            if (it == true)
+                Toast.makeText(context,"Movie already in you watchlist", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.tvExist.observe(viewLifecycleOwner){
+
+            if (it == true)
+                Toast.makeText(context,"Tv already in you watchlist", Toast.LENGTH_SHORT).show()
+        }
+
+
+
 
 
         viewLifecycleOwner.lifecycleScope.launch {

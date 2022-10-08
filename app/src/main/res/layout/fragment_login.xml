@@ -37,6 +37,8 @@
             android:layout_marginEnd="24dp"
             android:elevation="5dp"
             android:hint="email"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
             android:orientation="vertical"
             android:textColorHint="#c1c2c4"
             app:boxBackgroundColor="#323232">
@@ -67,6 +69,8 @@
             android:layout_marginEnd="24dp"
             android:elevation="5dp"
             android:hint="password"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
             app:endIconMode="password_toggle"
             app:endIconTint="#757474"
             android:orientation="vertical"
@@ -94,15 +98,15 @@
             android:layout_below="@id/passwordInputLayout"
             android:layout_centerInParent="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="29dp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/btnbackground"
             android:fontFamily="@font/opensansnormal"
             android:text="Login"
             android:textAllCaps="false"
-            android:textSize="@dimen/_15sdp"
             android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
             app:spinning_bar_color="@color/white" />
 
     </RelativeLayout>

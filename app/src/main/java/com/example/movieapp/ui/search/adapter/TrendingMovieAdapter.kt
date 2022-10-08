@@ -29,7 +29,7 @@ class TrendingMovieAdapter: RecyclerView.Adapter<TrendingMovieAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].poster_path).into(holder.binding.imgMovie)
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/w500/" + liveData!![position].backdrop_path).into(holder.binding.imgMovie)
         holder.binding.tvTitle.text = liveData!![position].title
 
         holder.itemView.setOnClickListener {

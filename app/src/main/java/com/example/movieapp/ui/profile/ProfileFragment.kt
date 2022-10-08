@@ -336,7 +336,7 @@ class ProfileFragment : Fragment() {
                 .into(imageView)
         }
         viewModel.errorState.observe(viewLifecycleOwner) { error ->
-             Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
+            showSnackBar(message = error)
         }
         viewModel.loadingState.observe(viewLifecycleOwner) { loading ->
         }

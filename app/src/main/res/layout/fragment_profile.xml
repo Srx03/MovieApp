@@ -140,23 +140,25 @@
                                 android:textSize="@dimen/_30sdp" />
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:orientation="horizontal">
 
                                 <ImageView
-                                    android:layout_width="45dp"
+                                    android:layout_width="43dp"
                                     android:layout_height="45dp"
                                     android:src="@drawable/email_img"
                                     app:tint="@color/main" />
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/etEmail"
-                                    android:layout_width="@dimen/_250sdp"
+                                    android:layout_width="@dimen/_240sdp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:paddingLeft="15dp"
-                                    android:text="srdjan.djuric003@gmail.com"
+                                    android:paddingLeft="10dp"
+                                    android:text="srdjan003@gmail.com"
                                     android:textColor="@color/main"
                                     android:textSize="18dp"
                                     app:boxStrokeColor="@color/black"
@@ -164,10 +166,10 @@
 
                                 <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                                     android:id="@+id/btnSaveEmail"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
                                     android:background="@drawable/btnbackground"
                                     android:fontFamily="@font/myfont"
                                     android:text="save"
@@ -178,9 +180,11 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_marginTop="20dp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -191,20 +195,20 @@
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/etPassword"
-                                    android:layout_width="@dimen/_250sdp"
+                                    android:layout_width="@dimen/_240sdp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:paddingLeft="15dp"
+                                    android:paddingLeft="10dp"
                                     android:text="123456789"
                                     android:textColor="@color/main"
                                     android:textSize="18dp" />
 
                                 <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                                     android:id="@+id/btnSavePassword"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
                                     android:background="@drawable/btnbackground"
                                     android:fontFamily="@font/myfont"
                                     android:text="save"
@@ -215,9 +219,12 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_marginTop="20dp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_marginBottom="20dp"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -228,21 +235,20 @@
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/etUsername"
-                                    android:layout_width="@dimen/_250sdp"
+                                    android:layout_width="@dimen/_240sdp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_marginBottom="@dimen/_20sdp"
-                                    android:paddingLeft="15dp"
+                                    android:paddingLeft="10dp"
                                     android:text="Srx"
                                     android:textColor="@color/main"
                                     android:textSize="18dp" />
 
                                 <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                                     android:id="@+id/btnSaveUsername"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
                                     android:background="@drawable/btnbackground"
                                     android:fontFamily="@font/myfont"
                                     android:text="save"
@@ -410,7 +416,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_logout"
-            app:tint="@color/blue" />
+            app:tint="@color/main" />
 
 
 

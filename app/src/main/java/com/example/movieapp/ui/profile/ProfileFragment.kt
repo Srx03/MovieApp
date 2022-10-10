@@ -12,12 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.bumptech.glide.Glide
+import com.example.movieapp.R
 import com.example.movieapp.ui.profile.adapter.WatchlistMovieAdapter
 import com.example.movieapp.ui.profile.adapter.WatchlistTvAdapter
 import com.example.movieapp.databinding.FragmentProfileBinding
@@ -44,6 +46,12 @@ class ProfileFragment : Fragment() {
     private lateinit var watchlistMovieAdapter: WatchlistMovieAdapter
     private lateinit var watchlistTvAdapter: WatchlistTvAdapter
 
+    private var toastHelperEmail: Boolean = false
+    private var toastHelperPassword: Boolean = false
+    private var toastHelperUsername: Boolean = false
+    private var toastHelperMovieDelete: Boolean = false
+    private var toastHelperTvDelete: Boolean = false
+
 
 
     override fun onCreateView(
@@ -57,6 +65,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        toastHelperEmail = false
+        toastHelperPassword = false
+        toastHelperUsername = false
+        toastHelperMovieDelete = false
+        toastHelperTvDelete = false
 
         viewModelWatchList.getWatchListMovie()
         viewModelWatchList.getWatchListTv()
@@ -113,16 +128,25 @@ class ProfileFragment : Fragment() {
 
         binding.apply {
             btnSaveEmail.setOnClickListener{
+
+                toastHelperEmail = true
+
                 val email = etEmail.text.toString().trim()
                 viewModel.saveEditEmail(email)
             }
 
             btnSavePassword.setOnClickListener {
+
+                toastHelperPassword = true
+
                 val password = etPassword.text.toString()
                 viewModel.saveEditPassword(password)
             }
 
             btnSaveUsername.setOnClickListener {
+
+                toastHelperUsername = true
+
                 val userName = etUsername.text.toString().trim()
                 viewModel.saveEditUser(userName)
             }
@@ -182,11 +206,16 @@ class ProfileFragment : Fragment() {
                     is Resource.Error ->{
                         binding.btnSaveEmail.revertAnimation()
                         showSnackBar(message = it.message)
+                        binding.btnSaveEmail.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }
 
                     is Resource.Success ->{
+                        if(toastHelperEmail){
+                            Toast.makeText(requireContext(),"Succesfully Changed Email", Toast.LENGTH_SHORT).show()
+                        }
                         binding.btnSaveEmail.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully Changed Email", Toast.LENGTH_SHORT).show()
+                        binding.btnSaveEmail.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
+
 
                     }
                     else -> Unit
@@ -204,11 +233,15 @@ class ProfileFragment : Fragment() {
                     is Resource.Error ->{
                         binding.btnSavePassword.revertAnimation()
                         showSnackBar(message = it.message)
+                        binding.btnSavePassword.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }
 
                     is Resource.Success ->{
+                        if(toastHelperPassword){
+                            Toast.makeText(requireContext(),"Succesfully Changed Password", Toast.LENGTH_SHORT).show()
+                        }
                         binding.btnSavePassword.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully Changed Password", Toast.LENGTH_SHORT).show()
+                        binding.btnSavePassword.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
 
                     }
                     else -> Unit
@@ -226,11 +259,15 @@ class ProfileFragment : Fragment() {
                     is Resource.Error ->{
                         binding.btnSaveUsername.revertAnimation()
                         showSnackBar(message = it.message)
+                        binding.btnSaveUsername.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }
 
                     is Resource.Success ->{
+                        if(toastHelperUsername){
+                            Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_LONG).show()
+                        }
                         binding.btnSaveUsername.revertAnimation()
-                        Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_LONG).show()
+                        binding.btnSaveUsername.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
 
                     }
                     else -> Unit
@@ -257,8 +294,8 @@ class ProfileFragment : Fragment() {
                     }
 
                     is Resource.Success ->{
-                        Log.d("testovka", it.data.toString())
-                        Toast.makeText(requireContext(),"Succesfully deleted", Toast.LENGTH_SHORT).show()
+                        if(toastHelperMovieDelete)
+                        Toast.makeText(requireContext(),"Succesfully deleted movie", Toast.LENGTH_SHORT).show()
 
                     }
                     else -> Unit
@@ -276,8 +313,8 @@ class ProfileFragment : Fragment() {
                 }
 
                 is Resource.Success ->{
-                    Log.d("testovka", it.data.toString())
-                    Toast.makeText(requireContext(),"Succesfully deleted", Toast.LENGTH_SHORT).show()
+                    if (toastHelperTvDelete)
+                    Toast.makeText(requireContext(),"Succesfully deleted tv", Toast.LENGTH_SHORT).show()
 
                 }
                 else -> Unit
@@ -406,6 +443,7 @@ class ProfileFragment : Fragment() {
     fun deleteTv(){
         watchlistTvAdapter.deleteWatchlistTvItemClick {
 
+            toastHelperTvDelete = true
             viewModelWatchList.deleteTv(it)
         }
     }
@@ -413,8 +451,8 @@ class ProfileFragment : Fragment() {
     fun deleteMovie(){
         watchlistMovieAdapter.deleteWatchlistMovieItemClick {
 
+            toastHelperMovieDelete = true
             viewModelWatchList.deleteMovie(it)
-            Log.d("test1",it.toString())
         }
     }
 

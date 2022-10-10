@@ -74,11 +74,13 @@ class OrderFragment : Fragment() {
                             is Resource.Error -> {
                                 binding.btnFindResult.revertAnimation()
                                 showSnackBar(message = it.message!!)
+                                binding.btnFindResult.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                             }
 
                             is Resource.Success ->{
                                 binding.btnFindResult.revertAnimation()
                                 orderAdpater.setList(it.data!!.results)
+                                binding.btnFindResult.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                             }
 
                             else -> Unit
@@ -97,11 +99,13 @@ class OrderFragment : Fragment() {
                             is Resource.Error -> {
                                 binding.btnFindResult.revertAnimation()
                                 showSnackBar(message = it.message!!)
+                                binding.btnFindResult.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                             }
 
                             is Resource.Success ->{
                                 binding.btnFindResult.revertAnimation()
                                 orderAdpater.setListTv(it.data!!.results)
+                                binding.btnFindResult.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                             }
 
                             else -> Unit

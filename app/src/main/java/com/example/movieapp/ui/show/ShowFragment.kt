@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.show
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,8 @@ class ShowFragment: Fragment() {
     private lateinit var isMovie: String
     private var isClicked: Boolean = false
     private var isMovieHelp: Boolean = false
+    private var toastHelper: Boolean = false
+    private var toastHelperSecond: Boolean = false
 
     private lateinit var posterPath: String
 
@@ -55,13 +58,17 @@ class ShowFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        toastHelper = false
+        toastHelperSecond = false
 
         getOnPopularClickData()
 
 
         binding.apply {
             btnAddToWatchlist.setOnClickListener{
+
+                toastHelper = true
+                toastHelperSecond = true
 
                 if (isMovie == "0"){
 
@@ -93,17 +100,16 @@ class ShowFragment: Fragment() {
             viewModel.watchlistMovie.collect{
                 when(it){
                     is Resource.Loading ->{
-                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Error ->{
                         showSnackBar(message = it.message!!)
-                        binding.btnAddToWatchlist.animate()
 
                     }
 
                     is Resource.Success ->{
-                        binding. btnAddToWatchlist.animate()
+
+                        if(toastHelper)
                         Toast.makeText(requireContext(),"Succesfully saved", Toast.LENGTH_SHORT).show()
 
                     }
@@ -113,21 +119,39 @@ class ShowFragment: Fragment() {
             }
         }
 
+        viewModel.movieExist.observe(viewLifecycleOwner){
+
+            if (it == true) {
+                if (toastHelperSecond)
+                Toast.makeText(context, "Movie already in you watchlist", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.tvExist.observe(viewLifecycleOwner){
+
+            if (it == true) {
+                if (toastHelperSecond)
+                Toast.makeText(context, "Tv already in you watchlist", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.watchlistTv.collect{
                 when(it){
                     is Resource.Loading ->{
-                        binding.btnAddToWatchlist.animate()
                     }
 
                     is Resource.Error ->{
                         showSnackBar(message = it.message!!)
-                        binding.btnAddToWatchlist.animate()
+
                     }
 
                     is Resource.Success ->{
-                        binding. btnAddToWatchlist.animate()
+                        if (toastHelper)
                         Toast.makeText(context,"Succesfully saved Tv", Toast.LENGTH_SHORT).show()
 
                     }

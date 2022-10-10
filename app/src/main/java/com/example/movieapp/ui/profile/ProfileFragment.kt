@@ -12,12 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.bumptech.glide.Glide
+import com.example.movieapp.R
 import com.example.movieapp.ui.profile.adapter.WatchlistMovieAdapter
 import com.example.movieapp.ui.profile.adapter.WatchlistTvAdapter
 import com.example.movieapp.databinding.FragmentProfileBinding
@@ -182,11 +184,13 @@ class ProfileFragment : Fragment() {
                     is Resource.Error ->{
                         binding.btnSaveEmail.revertAnimation()
                         showSnackBar(message = it.message)
+                        binding.btnSaveEmail.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }
 
                     is Resource.Success ->{
                         binding.btnSaveEmail.revertAnimation()
                         Toast.makeText(requireContext(),"Succesfully Changed Email", Toast.LENGTH_SHORT).show()
+                        binding.btnSaveEmail.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
 
                     }
                     else -> Unit
@@ -204,11 +208,13 @@ class ProfileFragment : Fragment() {
                     is Resource.Error ->{
                         binding.btnSavePassword.revertAnimation()
                         showSnackBar(message = it.message)
+                        binding.btnSavePassword.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }
 
                     is Resource.Success ->{
                         binding.btnSavePassword.revertAnimation()
                         Toast.makeText(requireContext(),"Succesfully Changed Password", Toast.LENGTH_SHORT).show()
+                        binding.btnSavePassword.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
 
                     }
                     else -> Unit
@@ -226,11 +232,13 @@ class ProfileFragment : Fragment() {
                     is Resource.Error ->{
                         binding.btnSaveUsername.revertAnimation()
                         showSnackBar(message = it.message)
+                        binding.btnSaveUsername.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }
 
                     is Resource.Success ->{
                         binding.btnSaveUsername.revertAnimation()
                         Toast.makeText(requireContext(),"Succesfully Changed Username", Toast.LENGTH_LONG).show()
+                        binding.btnSaveUsername.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
 
                     }
                     else -> Unit

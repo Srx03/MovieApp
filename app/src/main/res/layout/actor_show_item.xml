@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/imgActorShow"
             android:layout_width="@dimen/_82sdp"
-            android:layout_height="@dimen/_82sdp"
+            android:layout_height="@dimen/_90sdp"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
             android:src="@color/white" />

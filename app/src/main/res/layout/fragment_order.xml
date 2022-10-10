@@ -63,9 +63,9 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_250sdp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+
                 app:tabBackground="@color/black"
                 app:tabIndicatorColor="@color/main"
                 app:tabSelectedTextColor="@color/main"
@@ -87,15 +87,16 @@
             <com.apachat.loadingbutton.core.customViews.CircularProgressButton
                 android:id="@+id/btnFindResult"
                 android:background="@drawable/btnbackground"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_37sdp"
-                android:layout_weight="1"
                 android:text="Find"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:fontFamily="@font/opensansbold"
                 android:textSize="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
                 app:spinning_bar_color="@color/white"
                 app:iconTint="@color/black" />
 

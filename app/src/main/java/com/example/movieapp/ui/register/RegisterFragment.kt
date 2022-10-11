@@ -17,6 +17,7 @@ import com.example.movieapp.databinding.FragmentRegisterBinding
 import com.example.movieapp.ui.activitis.MainActivity
 import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ class RegisterFragment : Fragment() {
                     }
 
                     is Resource.Error ->{
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                         binding.btnRegister.revertAnimation()
                         binding.btnRegister.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }

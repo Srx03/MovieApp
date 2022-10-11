@@ -33,6 +33,19 @@ fun TextView.formatUpcomingTv(inputTime: String?) = if (!inputTime.isNullOrEmpty
     this.text = "Unknown"
 
 
+fun TextView.formatShowDate(inputTime: String?) = if (!inputTime.isNullOrEmpty()) {
+    // Making SDF object by giving input time pattern
+    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    // Parsing inputTime
+    val parsedDate: Date? = sdf.parse(inputTime)
+    // Formatting parsed input time/date
+    val formattedTime = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(parsedDate)
+    // Setting time to this textview
+    this.text = "$formattedTime"
+} else
+    this.text = "Unknown"
+
+
 fun View.showSnackBar(
     message: String,
     length: Int = Snackbar.LENGTH_LONG,

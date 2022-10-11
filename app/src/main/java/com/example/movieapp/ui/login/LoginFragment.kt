@@ -19,6 +19,7 @@ import com.example.movieapp.databinding.FragmentLoginBinding
 import com.example.movieapp.ui.activitis.MainActivity
 import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
+import com.example.movieapp.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -68,7 +69,7 @@ class LoginFragment : Fragment() {
                     is Resource.Error -> {
                         Log.d("Error",it.message!!)
 
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                        showSnackBar(message = it.message)
                         binding.btnLogin.revertAnimation()
                         binding.btnLogin.background = ContextCompat.getDrawable(requireContext(), R.drawable.btnbackground)
                     }

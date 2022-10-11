@@ -1,7 +1,6 @@
 package com.example.movieapp.ui.show
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,7 @@ import com.example.movieapp.data.firebase.tv.TvWatchList
 import com.example.movieapp.databinding.FragmentShowBinding
 import com.example.movieapp.util.Resource
 import com.example.movieapp.util.showSnackBar
+import com.example.movieapp.util.formatShowDate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -226,7 +226,7 @@ class ShowFragment: Fragment() {
                         }
 
                         binding.tvTitle.text = it.data.title
-                        binding.tvYear.text = it.data.release_date
+                        binding.tvYear.formatShowDate(it.data.release_date)
                         binding.tvOverview.text = it.data.overview
                         binding.tvRating.text = String.format("%.1f", it.data.vote_average)
                         binding.tvGenres.text = it.data.genres.joinToString("  /  ") { it.name }
@@ -289,7 +289,7 @@ class ShowFragment: Fragment() {
                         else
                             posterPath = ""
                         binding.tvTitle.text = it.data.name
-                        binding.tvYear.text = it.data.first_air_date
+                        binding.tvYear.formatShowDate(it.data.first_air_date)
                         binding.tvOverview.text = it.data.overview
                         binding.tvRating.text = String.format("%.1f", it.data.vote_average)
                         binding.tvGenres.text = it.data.genres.joinToString("  /  ") { it.name }

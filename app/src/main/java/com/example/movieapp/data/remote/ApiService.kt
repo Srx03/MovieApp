@@ -70,7 +70,7 @@ interface ApiService {
     @GET("3/search/tv?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getSearchTvData(@Query("query") query: String) : Response<Tv>
 
-    @GET("3/tv/popular?api_key=0d78a49b1a3056a1df36e1de7787fcda")
+    @GET("3/tv/on_the_air?api_key=0d78a49b1a3056a1df36e1de7787fcda")
     suspend fun getUpcomingTv() : Response<Tv>
 
     @GET("3/tv/{tvId}/similar?api_key=0d78a49b1a3056a1df36e1de7787fcda")

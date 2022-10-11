@@ -54,10 +54,11 @@
                             <ImageView
                                 android:id="@+id/btnAddToWatchlist"
                                 android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_height="@dimen/_35sdp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="@dimen/_2sdp"
                                 android:layout_marginEnd="@dimen/_7sdp"
+
                                 android:backgroundTint="@android:color/transparent"
                                 android:src="@drawable/plus" />
 
@@ -80,9 +81,10 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensansnormal"
                             android:paddingHorizontal="@dimen/_6sdp"
+
                             android:textColor="@color/main"
                             android:textSize="@dimen/_17sdp"
-                            tools:text="Action / Adventure / Comedy / Scifi" />
+                            tools:text="Action / Adventure / Comedy / iiiiiiiiiiiiiiiiiiiiiiii" />
 
 
                         <LinearLayout

@@ -28,6 +28,7 @@ import com.example.movieapp.util.RegisterValidation
 import com.example.movieapp.util.Resource
 import com.example.movieapp.util.showSnackBar
 import com.github.drjacky.imagepicker.ImagePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -95,7 +96,7 @@ class ProfileFragment : Fragment() {
         viewModelWatchList.errorState.observe(viewLifecycleOwner) { error ->
             showSnackBar(message = error)
         }
-        viewModelWatchList.loadingState.observe(viewLifecycleOwner) { loading ->
+        viewModelWatchList.loadingState.observe(viewLifecycleOwner) {
         }
 
 
@@ -118,7 +119,7 @@ class ProfileFragment : Fragment() {
         viewModelWatchList.errorStateTv.observe(viewLifecycleOwner) { error ->
             showSnackBar(message = error)
         }
-        viewModelWatchList.loadingStateTv.observe(viewLifecycleOwner) { loading ->
+        viewModelWatchList.loadingStateTv.observe(viewLifecycleOwner) {
         }
 
 
@@ -129,26 +130,51 @@ class ProfileFragment : Fragment() {
         binding.apply {
             btnSaveEmail.setOnClickListener{
 
-                toastHelperEmail = true
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage("Are you sure you want to change email?")
+                    .setPositiveButton("Edit") { _, _ ->
 
-                val email = etEmail.text.toString().trim()
-                viewModel.saveEditEmail(email)
+                        toastHelperEmail = true
+                        val email = etEmail.text.toString().trim()
+                        viewModel.saveEditEmail(email)
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+
             }
 
             btnSavePassword.setOnClickListener {
 
-                toastHelperPassword = true
-
-                val password = etPassword.text.toString()
-                viewModel.saveEditPassword(password)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage("Are you sure you want to change password?")
+                    .setPositiveButton("Edit") { _, _ ->
+                        toastHelperPassword = true
+                        val password = etPassword.text.toString()
+                        viewModel.saveEditPassword(password)
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
             }
 
             btnSaveUsername.setOnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage("Are you sure you want to change username?")
+                    .setPositiveButton("Edit") { _, _ ->
+                        toastHelperUsername = true
 
-                toastHelperUsername = true
+                        val userName = etUsername.text.toString().trim()
+                        viewModel.saveEditUser(userName)
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
 
-                val userName = etUsername.text.toString().trim()
-                viewModel.saveEditUser(userName)
+
             }
 
         }
@@ -279,7 +305,7 @@ class ProfileFragment : Fragment() {
         viewModel.errorStateEdit.observe(viewLifecycleOwner) { error ->
             showSnackBar(message = error)
         }
-        viewModel.loadingStateEdit.observe(viewLifecycleOwner) { loading ->
+        viewModel.loadingStateEdit.observe(viewLifecycleOwner) {
         }
 
 
@@ -294,6 +320,7 @@ class ProfileFragment : Fragment() {
                     }
 
                     is Resource.Success ->{
+
                         if(toastHelperMovieDelete)
                         Toast.makeText(requireContext(),"Succesfully deleted movie", Toast.LENGTH_SHORT).show()
 
@@ -375,7 +402,7 @@ class ProfileFragment : Fragment() {
         viewModel.errorState.observe(viewLifecycleOwner) { error ->
             showSnackBar(message = error)
         }
-        viewModel.loadingState.observe(viewLifecycleOwner) { loading ->
+        viewModel.loadingState.observe(viewLifecycleOwner) {
         }
 
 

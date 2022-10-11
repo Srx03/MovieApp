@@ -4,7 +4,7 @@ Small app for movie and tv series presentation created in Android Studio with Ko
 
 
 
-![login](https://user-images.githubusercontent.com/108412332/194271821-b12d9e16-67f1-4129-b72b-d74dfff26304.jpg)
+![login](https://user-images.githubusercontent.com/108412332/195095994-f140e615-96bb-46dd-a50b-4435c7944e72.jpg)
 ![home](https://user-images.githubusercontent.com/108412332/194168663-f3b04c41-9910-4098-871d-e21febbad613.jpg)
 ![order](https://user-images.githubusercontent.com/108412332/194168684-10358a2e-4097-42af-834d-934e3b38d77d.jpg)
 ![search](https://user-images.githubusercontent.com/108412332/194168692-244401cb-ff26-4885-8751-8e1641acf3b7.jpg)

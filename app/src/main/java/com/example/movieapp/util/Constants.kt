@@ -9,7 +9,6 @@ object Constants {
 
 
     const val USER_COLLECTION = "user"
-    const val REQUEST_CODE_IMAGE_PICK = 0
 
 
 }

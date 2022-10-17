@@ -3,8 +3,8 @@
 Small app for movie and tv series presentation created in Android Studio with Kotlin, Coroutines, MVVM, Dagger-Hilt, Retrofit, Firebase, TMDB API
 
 
+![login](https://user-images.githubusercontent.com/108412332/196303649-299a0c60-2d06-48ae-af3b-70429e444627.jpg)
 
-![login](https://user-images.githubusercontent.com/108412332/196303254-55db66a9-5bef-4ce6-b973-1e2264742846.jpg)
 
 ![home](https://user-images.githubusercontent.com/108412332/196303265-71a75e20-c864-4d6f-8bb5-a2593fa9c7c2.jpg)
 

@@ -20,4 +20,9 @@
         <item name="cornerSize">25%</item>
     </style>
 
+    <style name="circleMain" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
 </resources>

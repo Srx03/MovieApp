@@ -55,13 +55,5 @@ class AppModule {
     fun provideFirebaseStorage() = FirebaseStorage.getInstance()
 
 
-    /*@Singleton
-    @Provides
-    fun provideAppDatabase(@ApplicationContext appContext:  Context): LocalDatabase = Room.databaseBuilder(
-        appContext,
-        LocalDatabase::class.java,
-        "movie.db"
-    ).fallbackToDestructiveMigration().build()*/
-
 
 }

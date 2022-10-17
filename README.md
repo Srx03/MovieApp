@@ -4,10 +4,9 @@ Small app for movie and tv series presentation created in Android Studio with Ko
 
 
 
-![login](https://user-images.githubusercontent.com/108412332/195095994-f140e615-96bb-46dd-a50b-4435c7944e72.jpg)
-![home](https://user-images.githubusercontent.com/108412332/194168663-f3b04c41-9910-4098-871d-e21febbad613.jpg)
-![order](https://user-images.githubusercontent.com/108412332/194168684-10358a2e-4097-42af-834d-934e3b38d77d.jpg)
-![search](https://user-images.githubusercontent.com/108412332/194168692-244401cb-ff26-4885-8751-8e1641acf3b7.jpg)
-![comingsoon](https://user-images.githubusercontent.com/108412332/194168699-63551311-1858-40ea-b05c-fcb3b6d131f8.jpg)
-![show](https://user-images.githubusercontent.com/108412332/194168718-be6179c2-c488-43b6-bb00-ee854879fde0.jpg)
-![profile](https://user-images.githubusercontent.com/108412332/194701897-f05cb14d-65d4-44df-a4dd-f1487636f80d.jpg)
+![login](https://user-images.githubusercontent.com/108412332/196303254-55db66a9-5bef-4ce6-b973-1e2264742846.jpg)
+![home](https://user-images.githubusercontent.com/108412332/196303265-71a75e20-c864-4d6f-8bb5-a2593fa9c7c2.jpg)
+![search](https://user-images.githubusercontent.com/108412332/196303273-dbb47973-d815-40bd-80d2-0d98aacb430d.jpg)
+![upcoming](https://user-images.githubusercontent.com/108412332/196303277-d4d15295-9752-44b8-9b73-daabfc07baeb.jpg)
+![show](https://user-images.githubusercontent.com/108412332/196303357-a45e063d-d948-4f50-888a-b4c063715cf0.jpg)
+![order](https://user-images.githubusercontent.com/108412332/196303365-ab42cd61-b12b-472b-a544-c4030ad0581a.jpg)

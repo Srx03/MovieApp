@@ -12,18 +12,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginStart="@dimen/_3sdp"
         app:cardBackgroundColor="@color/dark_gray"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="@dimen/_25sdp">
+        app:cardCornerRadius="@dimen/_10sdp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgMovie"
             android:layout_width="@dimen/_94sdp"
             android:layout_height="@dimen/_138sdp"
-
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@color/main" />
+            android:src="@color/main"
+            app:shapeAppearanceOverlay="@style/circleMain"
+            app:strokeColor="@color/divider"
+            app:strokeWidth="@dimen/_10sdp" />
 
         <TextView
             android:id="@+id/tvRating"
@@ -47,7 +50,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:textAlignment="center"
-        android:maxLines="2"
         android:ellipsize="end"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/myfont"

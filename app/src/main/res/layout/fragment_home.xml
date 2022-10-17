@@ -123,7 +123,9 @@
                 android:id="@+id/recentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/recent_movie_item"/>
 
 
 
@@ -164,6 +166,8 @@
                 android:id="@+id/popularTvRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:listitem="@layout/popular_tv_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <LinearLayout
@@ -203,6 +207,8 @@
                 android:id="@+id/topRatedMoviesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:listitem="@layout/toprated_movie_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <LinearLayout
@@ -241,6 +247,8 @@
                 android:id="@+id/topRatedTvRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:listitem="@layout/toprated_tv_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
